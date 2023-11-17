@@ -1,0 +1,7 @@
+/**
+ * User
+ */
+public class User {
+
+    
+}
