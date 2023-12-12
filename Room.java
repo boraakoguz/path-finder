@@ -1,7 +1,6 @@
 public class Room extends Space{
-    public Room(String name,Space parent){
-        this.name = name;
-        this.parent = parent;
+    public Room(String name) {
+        super(name);
     }
 
     @Override

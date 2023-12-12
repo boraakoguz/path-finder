@@ -1,13 +1,18 @@
 import java.util.ArrayList;
 
-public abstract class Space {
-    protected ArrayList<Space> contents;
-    protected Space parent;
+public abstract class Space {  
+    protected transient Space parent;
     protected int[] xPoints;
     protected int[] yPoints;
     protected String name;
     protected int mapShowCaseRatio = 1;
-
+    protected ArrayList<Space> contents;
+   
+    public Space(String name){
+        this.name = name;
+        this.parent = null;
+        this.contents = new ArrayList<Space>();
+    }
     public String getDirections(){
         Space temp = this;
         ArrayList<String> direction = new ArrayList<String>();
@@ -37,6 +42,9 @@ public abstract class Space {
     }
     public void addSpace(Space other){
         this.contents.add(other);
+    }
+    public void addParent(Space parent){
+        this.parent = parent;
     }
     public boolean equals(Space other){
         if(this.name == other.name){
