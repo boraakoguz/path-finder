@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Search {
     final SearchNode root = new SearchNode("");
     public Search(Space map){
@@ -33,9 +36,30 @@ public class Search {
                 start = start.getChildren().get(substring);
             }
             else{
+                System.out.printf("Recomended for:%s \n%s",name,recommendations(start).toString());
                 return null;
             }
         }
+        System.out.printf("Recomended for:%s \n%s",name,recommendations(start).toString());
         return start.getSpace();
+    }
+    public ArrayList<Space> recommendations(SearchNode node){
+        ArrayList<Space> recommendations = new ArrayList<Space>();
+        ArrayList<SearchNode> queue = new ArrayList<SearchNode>();
+        queue.add(node);
+        while(!queue.isEmpty()){
+            SearchNode current = queue.remove(0);
+            if(current.hasSpace()){
+                recommendations.add(current.getSpace());
+                if(recommendations.size() >= 3){
+                    return recommendations;
+                }
+            }
+            HashMap<String,SearchNode> nextValues = current.getChildren();
+            for (SearchNode nextNodes : nextValues.values()) {
+                queue.add(nextNodes);
+            }
+        }
+        return recommendations;
     }
 }

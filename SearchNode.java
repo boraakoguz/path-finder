@@ -25,6 +25,9 @@ public class SearchNode {
     public HashMap<String,SearchNode> getChildren(){
         return this.children;
     }
+    public boolean hasSpace(){
+        return this.space != null;
+    }
     public void addSpace(Space other){
         this.space = other;
     }
