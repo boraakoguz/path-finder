@@ -23,6 +23,9 @@ public class Main {
         Map loaded = loadSave.load();
         System.out.println(loaded);
         System.out.println(loaded.contents.get(0).contents.get(0).getDirections());
+        Search search = new Search(loaded);
+        System.out.println(search.search("B102").getDirections());
+        System.out.println(search.search("B Buildings"));
         
         
     }

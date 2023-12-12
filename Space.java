@@ -40,9 +40,16 @@ public abstract class Space {
         }
         return null;
     }
+    
     public void addSpace(Space other){
         this.contents.add(other);
         other.parent = this;
+    }
+    public ArrayList<Space> getContents(){
+        return this.contents;
+    }
+    public String getName(){
+        return this.name;
     }
     public void addParent(Space parent){
         this.parent = parent;
