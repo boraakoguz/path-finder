@@ -17,12 +17,12 @@ public class Main {
         System.out.println(B1_103.getDirections());
         System.out.println(b1Hallway.getDirections());
         System.out.println(B1_201.getDirections());
-        LoadSave loadSave = new LoadSave("a");
+        LoadSave loadSave = new LoadSave("save.json");
         loadSave.save(map);
         System.out.println(map);
         Map loaded = loadSave.load();
         System.out.println(loaded);
-        System.out.println(loaded.contents.get(0).contents);
+        System.out.println(loaded.contents.get(0).contents.get(0).getDirections());
         
         
     }

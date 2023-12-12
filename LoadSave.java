@@ -18,33 +18,28 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.stream.JsonReader;
 public class LoadSave {
-
+    private String fileName;
     public LoadSave(String loadFileName){
-
-        /* 
-        try {
-            BufferedReader data = new BufferedReader(new File("/saves/save.json"));
-        } catch (Exception e) {
-            
-        }
-        */
+        this.fileName = loadFileName;
     }
     public Map load(){
         JsonReader jsonReader;
+        Map loadedMap = null;
         try {
-            jsonReader = new JsonReader(new FileReader("save.json"));
-
+            jsonReader = new JsonReader(new FileReader(fileName));
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
             Gson gson = gsonBuilder.create();
-            return gson.fromJson(jsonReader, Map.class);
+            loadedMap = gson.fromJson(jsonReader, Map.class);
+            createRelationsToLoadedMap(loadedMap);
+
         } catch (FileNotFoundException e) {
         }
-        return null;
+        return loadedMap;
     }
     public void save(Space map){
         try {
-            Writer writer = new FileWriter("save.json");
+            Writer writer = new FileWriter(fileName);
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
             Gson gson = gsonBuilder.create();
@@ -52,6 +47,12 @@ public class LoadSave {
             writer.flush();
             writer.close();
         } catch (Exception e) {
+        }
+    }
+    public void createRelationsToLoadedMap(Space map){
+        for (Space space : map.contents) {
+            space.addParent(map);
+            createRelationsToLoadedMap(space);
         }
     }
 }

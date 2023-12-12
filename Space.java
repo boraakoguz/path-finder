@@ -42,6 +42,7 @@ public abstract class Space {
     }
     public void addSpace(Space other){
         this.contents.add(other);
+        other.parent = this;
     }
     public void addParent(Space parent){
         this.parent = parent;
