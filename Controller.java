@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Controller {
     LoadSave loadSave;
@@ -33,5 +34,38 @@ public class Controller {
         return mapNames;
     }
     
-
+    public Space search(String name){
+        return this.search.search(name);
+    }
+    /**
+     * Returns the arraylist of Space objects needed to be visited
+     * in order to reach to destination from target
+     * @param start A space object, start
+     * @param target A space object, destination
+     * @return
+     */
+    public ArrayList<Space> getDirections(Space start, Space target){
+        ArrayList<Space> result = new ArrayList<Space>();
+        ArrayList<Space> startPath = start.getDirections();
+        ArrayList<Space> targetPath = target.getDirections();
+        ArrayList<Space> tempSecondPartOfPath = new ArrayList<Space>();
+        int i = 0;
+        int j = 0;
+        while(i<startPath.size()){
+            j = 0;
+            result.add(startPath.get(i));
+            tempSecondPartOfPath.clear();
+            while(j<targetPath.size()){            
+                if(startPath.get(i).equals(targetPath.get(j))){
+                    Collections.reverse(tempSecondPartOfPath);
+                    result.addAll(tempSecondPartOfPath);
+                    return result;
+                }
+                tempSecondPartOfPath.add(targetPath.get(j));
+                j++;
+            }
+            i++;
+        }
+        return null;
+    }
 }

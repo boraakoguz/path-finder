@@ -15,15 +15,22 @@ public class Main {
         Bbuilding.addSpace(Bfirst);
         Bbuilding.addSpace(Bsecond);
         Bfirst.addSpace(B1_102);
+        Bsecond.addSpace(B1_201);
         LoadSave loadSave = new LoadSave();
         loadSave.save(map);
         ArrayList<Map> loadedMaps = loadSave.loadSaves();
-        Map loaded = loadedMaps.get(1);
-        System.out.println(loaded.getName());
-        System.out.println("Loaded map data \n" + loaded.contents.get(0).contents.get(0).getDirections());
+        Map loaded = loadedMaps.get(0);
+        //System.out.println(loaded.getName());
+        //System.out.println("Loaded map data \n" + loaded.contents.get(0).contents.get(0).getDirections());
         Search search = new Search();
         search.initializeSearchTree(loaded);
+        Controller controller = new Controller();
+        controller.setCurrentMap("Bilkent");
+        Space start = controller.search("B102");
+        Space destination = controller.search("B201");
+        System.out.println("///////////////////////////////////////////////////////////");
+        System.out.println(controller.getDirections(start,destination));
         //System.out.println(search.search("B102").getDirections());
-        System.out.println("\nSearch result: " + search.search("B"));
+        //System.out.println("\nSearch result: " + search.search("B"));
     }
 }

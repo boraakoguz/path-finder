@@ -19,10 +19,12 @@
                   "data": {
                     "name": "B102",
                     "mapShowCaseRatio": 1,
-                    "contents": []
+                    "contents": [],
+                    "isHighlighted": false
                   }
                 }
-              ]
+              ],
+              "isHighlighted": false
             }
           },
           {
@@ -30,11 +32,24 @@
             "data": {
               "name": "Second Floor",
               "mapShowCaseRatio": 1,
-              "contents": []
+              "contents": [
+                {
+                  "type": "Room",
+                  "data": {
+                    "name": "B201",
+                    "mapShowCaseRatio": 1,
+                    "contents": [],
+                    "isHighlighted": false
+                  }
+                }
+              ],
+              "isHighlighted": false
             }
           }
-        ]
+        ],
+        "isHighlighted": false
       }
     }
-  ]
+  ],
+  "isHighlighted": false
 }

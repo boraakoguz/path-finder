@@ -7,17 +7,27 @@ public abstract class Space {
     protected String name;
     protected int mapShowCaseRatio = 1;
     protected ArrayList<Space> contents;
+    protected boolean isHighlighted = false;
    
     public Space(String name){
         this.name = name;
         this.parent = null;
         this.contents = new ArrayList<Space>();
     }
-    public String getDirections(){
+    public ArrayList<Space> getDirections(){
+        Space temp = this;
+        ArrayList<Space> path = new ArrayList<Space>();
+        while(temp!=null){
+            path.add(temp);
+            temp = temp.parent;
+        }
+        return path;
+    }
+    public String getDirectionsAsString(){
         Space temp = this;
         ArrayList<String> direction = new ArrayList<String>();
         while(temp!=null){
-            direction.add(temp.name);
+            direction.add(temp.getName());
             temp = temp.parent;
         }
         String result = "";
@@ -44,6 +54,12 @@ public abstract class Space {
     public void addSpace(Space other){
         this.contents.add(other);
         other.parent = this;
+    }
+    public boolean getIsHıghlighted(){
+        return this.isHighlighted;
+    }
+    public void setIsHighlighted(boolean newValue){
+        this.isHighlighted = newValue;
     }
     public ArrayList<Space> getContents(){
         return this.contents;
