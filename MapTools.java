@@ -6,13 +6,13 @@ import javax.swing.event.MouseInputListener;
 
 public class MapTools implements MouseInputListener {
     Controller controller = new Controller();
-    JFrame settingsFrame;
+    //JFrame settingsFrame;
     JFrame drawFrame;
     public MapTools() {
-        settingsFrame = new JFrame();
+        //settingsFrame = new JFrame();
         drawFrame = new JFrame();
-        settingsFrame.setVisible(true);
-        settingsFrame.setSize(100, 300);
+        //settingsFrame.setVisible(true);
+        //settingsFrame.setSize(100, 300);
 
         drawFrame.setVisible(true);
         drawFrame.setLocationRelativeTo(null);

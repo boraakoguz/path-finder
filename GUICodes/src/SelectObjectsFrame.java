@@ -93,4 +93,8 @@ public class SelectObjectsFrame extends JFrame{
         }
     }
     
+    public static void main(String[] args) {
+        SelectObjectsFrame sdhfgn = new SelectObjectsFrame();
+        sdhfgn.setVisible(true);
+    }
 }

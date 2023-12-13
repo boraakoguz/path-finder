@@ -28,6 +28,7 @@ public class Main {
         controller.setCurrentMap("Bilkent");
         Space start = controller.search("B102");
         Space destination = controller.search("B201");
+        Space a = controller.search("B");
         System.out.println("///////////////////////////////////////////////////////////");
         System.out.println(controller.getDirections(start,destination));
         //System.out.println(search.search("B102").getDirections());
