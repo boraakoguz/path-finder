@@ -33,7 +33,11 @@ public class Controller {
         }
         return mapNames;
     }
-    
+    /**
+     * Searches the given object in the current map
+     * @param name String name of the target
+     * @return Space object, null if not found.
+     */
     public Space search(String name){
         return this.search.search(name);
     }
