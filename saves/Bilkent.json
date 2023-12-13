@@ -1,0 +1,40 @@
+{
+  "name": "Bilkent",
+  "mapShowCaseRatio": 1,
+  "contents": [
+    {
+      "type": "Building",
+      "data": {
+        "name": "B Building",
+        "mapShowCaseRatio": 1,
+        "contents": [
+          {
+            "type": "Floor",
+            "data": {
+              "name": "First Floor",
+              "mapShowCaseRatio": 1,
+              "contents": [
+                {
+                  "type": "Room",
+                  "data": {
+                    "name": "B102",
+                    "mapShowCaseRatio": 1,
+                    "contents": []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "Floor",
+            "data": {
+              "name": "Second Floor",
+              "mapShowCaseRatio": 1,
+              "contents": []
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

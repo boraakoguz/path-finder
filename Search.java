@@ -3,13 +3,13 @@ import java.util.HashMap;
 
 public class Search {
     final SearchNode root = new SearchNode("");
-    public Search(Space map){
-        iterateSearchTree(map);
+    public Search(){
     }
-    public void iterateSearchTree(Space map){
+
+    public void initializeSearchTree(Space map){
         fillSearchTree(map);
         for (Space children : map.getContents()) {
-            iterateSearchTree(children);
+            initializeSearchTree(children);
         }
     }
     public void fillSearchTree(Space map){
@@ -61,5 +61,8 @@ public class Search {
             }
         }
         return recommendations;
+    }
+    public void emptySearchTree(){
+        this.root.children.clear();
     }
 }

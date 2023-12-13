@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,15 +19,28 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.stream.JsonReader;
 public class LoadSave {
-    private String fileName;
-    public LoadSave(String loadFileName){
-        this.fileName = loadFileName;
+    private String workingDirectory;
+    public LoadSave(){
+        String currentDir = System.getProperty("user.dir");
+        this.workingDirectory = currentDir + "/saves";
+        
     }
-    public Map load(){
+    public ArrayList<Map> loadSaves(){
+        ArrayList<Map> loadedMaps = new ArrayList<Map>();
+        File dir = new File(this.workingDirectory);
+        File[] directoryListing = dir.listFiles();
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                loadedMaps.add(load(child));
+            }
+        }
+        return loadedMaps;
+    }
+    public Map load(File file){
         JsonReader jsonReader;
         Map loadedMap = null;
         try {
-            jsonReader = new JsonReader(new FileReader(fileName));
+            jsonReader = new JsonReader(new FileReader(file));
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
             Gson gson = gsonBuilder.create();
@@ -39,7 +53,7 @@ public class LoadSave {
     }
     public void save(Space map){
         try {
-            Writer writer = new FileWriter(fileName);
+            Writer writer = new FileWriter(new File(this.workingDirectory, map.getName() + ".json"));
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
             Gson gson = gsonBuilder.create();
@@ -50,7 +64,7 @@ public class LoadSave {
         }
     }
     public void createRelationsToLoadedMap(Space map){
-        for (Space space : map.contents) {
+        for (Space space : map.getContents()) {
             space.addParent(map);
             createRelationsToLoadedMap(space);
         }
@@ -58,8 +72,7 @@ public class LoadSave {
 }
 final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T> {
     public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context) {
-        final JsonObject wrapper = new JsonObject();
-        
+        final JsonObject wrapper = new JsonObject(); 
         wrapper.addProperty("type", object.getClass().getName());
         wrapper.add("data", context.serialize(object));
         

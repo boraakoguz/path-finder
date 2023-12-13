@@ -36,7 +36,7 @@ public class Path_Finder_Frame extends JFrame {
     JComboBox roomCombo;
 
     public Path_Finder_Frame(){
-        backGroundpink=backGroundpink.decode("#dd96b8"); //color adjusment
+        backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(MAXIMIZED_BOTH);//maximasing the frame
