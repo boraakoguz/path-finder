@@ -1,3 +1,4 @@
+package Building;
 import java.util.HashMap;
 
 public class SearchNode {

@@ -1,10 +1,17 @@
+package UI;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import Building.LoadSave;
+import Building.Map;
+import Building.Search;
+import Building.Space;
 
 public class Controller {
     LoadSave loadSave;
     Search search;
     ArrayList<Map> maps;
+    private int authLevel = 0; // 0-> User, 1 -> Editor, 2-> Admin
     public Controller(){
         this.loadSave = new LoadSave();
         this.search = new Search();

@@ -1,7 +1,0 @@
-/**
- * User
- */
-public class User {
-
-    
-}

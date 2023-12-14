@@ -1,3 +1,4 @@
+package Building;
 /**
  * @author Mehmet Emre Şahin
  * The object class for the objects that are intractable such as vending machines.

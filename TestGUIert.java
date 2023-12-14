@@ -3,8 +3,10 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import UI.LeftScreenPanel;
+
 public class TestGUIert {
-    public static void main(String[] args) {
+    public TestGUIert(){
         JFrame frame = new JFrame();
         
         frame.setSize(400,400);

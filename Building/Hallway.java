@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-
+package Building;
 public class Hallway extends Space{
 
     public Hallway(String name) {

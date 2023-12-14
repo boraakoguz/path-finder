@@ -3,19 +3,19 @@
   "mapShowCaseRatio": 1,
   "contents": [
     {
-      "type": "Building",
+      "type": "Building.Building",
       "data": {
         "name": "B Building",
         "mapShowCaseRatio": 1,
         "contents": [
           {
-            "type": "Floor",
+            "type": "Building.Floor",
             "data": {
               "name": "First Floor",
               "mapShowCaseRatio": 1,
               "contents": [
                 {
-                  "type": "Room",
+                  "type": "Building.Room",
                   "data": {
                     "name": "B102",
                     "mapShowCaseRatio": 1,
@@ -28,13 +28,13 @@
             }
           },
           {
-            "type": "Floor",
+            "type": "Building.Floor",
             "data": {
               "name": "Second Floor",
               "mapShowCaseRatio": 1,
               "contents": [
                 {
-                  "type": "Room",
+                  "type": "Building.Room",
                   "data": {
                     "name": "B201",
                     "mapShowCaseRatio": 1,
