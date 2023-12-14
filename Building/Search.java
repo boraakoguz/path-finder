@@ -46,7 +46,7 @@ public class Search {
     }
     public Space searchNearestMapObject(Space currentLocation){
         return null;
-        //TODO: impleement
+        //TODO: implement
     }
     public ArrayList<Space> recommendations(SearchNode node){
         ArrayList<Space> recommendations = new ArrayList<Space>();
