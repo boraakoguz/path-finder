@@ -44,6 +44,10 @@ public class Search {
         System.out.printf("Recomended for:%s \n%s",name,recommendations(start).toString());
         return start.getSpace();
     }
+    public Space searchNearestMapObject(Space currentLocation){
+        return null;
+        //TODO: impleement
+    }
     public ArrayList<Space> recommendations(SearchNode node){
         ArrayList<Space> recommendations = new ArrayList<Space>();
         ArrayList<SearchNode> queue = new ArrayList<SearchNode>();
