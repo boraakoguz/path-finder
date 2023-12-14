@@ -10,7 +10,7 @@ import Building.Search;
 import Building.Space;
 import UI.Controller;
 
-public class Main {
+public class boratest {
     public static void main(String[] args) {
         Map map = new Map("Bilkent");
         Building Bbuilding = new Building("B Building");
