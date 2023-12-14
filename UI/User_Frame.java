@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+//this class runs all actions that user type user can do. basically there are 3 panels; left,middle and right. things happens by changin these panels features. 
 public class User_Frame extends JFrame {
     //creating variables
     protected Path_Finder_Frame controller;
@@ -88,6 +89,7 @@ public class User_Frame extends JFrame {
         //comboBoxs();
     }
 
+    //these set methods sets panels to default versions 
     protected void setLeftPanel(Color c){
         leftPanel.removeAll();
         leftPanel.setBackground(c);
@@ -124,12 +126,12 @@ public class User_Frame extends JFrame {
         repaint();
     }
     
+    //this method opens the menu
     protected void right1(){
         setRightPanel(backGroundpink);
 
         logBut.addActionListener(new ButAction("log"));
         logBut.setBounds(0, 60, 100, 40);
-        logBut.add(new JLabel("Login"));
         logBut.setFocusable(false);
         logBut.setBackground(backGroundpink);
         logBut.setIcon(new ImageIcon("image (22).png"));
@@ -137,7 +139,6 @@ public class User_Frame extends JFrame {
 
         feedBut.addActionListener(new ButAction("feed"));
         feedBut.setBounds(10, 120, 150, 40);
-        feedBut.add(new JLabel("Create Feedback"));
         feedBut.setFocusable(false);
         feedBut.setBackground(backGroundpink);
         feedBut.setIcon(new ImageIcon("image (9).png"));
@@ -146,7 +147,7 @@ public class User_Frame extends JFrame {
         rightPanel.add(logBut);
         rightPanel.add(feedBut);
     }
-    
+    //this method creates "where are you panel"
     protected void left1(){
         //button adjusments
         nextBut.addActionListener(new ButAction("next1"));
@@ -205,6 +206,7 @@ public class User_Frame extends JFrame {
         leftPanel.add(nextBut);
         leftPanel.add(fOBut);
     }
+    //this method crates "where do you want to go panel"
     protected void left2(){
         //button adjusments
         goBut.addActionListener(new ButAction("go"));
@@ -248,6 +250,7 @@ public class User_Frame extends JFrame {
         // Adding buttons to Frame  
         leftPanel.add(goBut);
     }
+    //this method will show the directions this method is where backend should be added
     protected void middle1(){
         setMiddlePanel(Color.WHITE);
         JLabel lab=new JLabel("Directions....");
@@ -308,15 +311,19 @@ public class User_Frame extends JFrame {
                 setLeftPanel(backGroundpink);
                 left2();
             }
+
             else if((butType.equals("wat"))||(butType.equals("vend"))){
                 isMenuchange[1]=true;
                 middle1();
+                // the path directions of objects should be added here 
             }
 
             else if(butType.equals("go")){
                 isMenuchange[1]=true;
                 middle1();
+                // the path directions of space to space should be added here 
             }
+
             else if(butType.equals("log")){
                 controller.changeFrame(1);
             }

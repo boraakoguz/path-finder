@@ -7,7 +7,7 @@ public class App {
 
     public App(){
         Path_Finder_Frame f=new Path_Finder_Frame();
-        f.setVisible(true);
+        
     }
     
     public void changeFrame(int a){

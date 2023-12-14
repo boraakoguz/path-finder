@@ -1,6 +1,9 @@
 package UI;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,9 +22,9 @@ public class Login_Frame extends JFrame{
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1200,700);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		
 
@@ -56,10 +59,12 @@ public class Login_Frame extends JFrame{
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
+		
 		textField_1 = new JTextField();
 		textField_1.setBounds(227, 424, 300, 58);
 		panel_1.add(textField_1);
 		textField_1.setColumns(10);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Please Enter Your Email");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -73,9 +78,47 @@ public class Login_Frame extends JFrame{
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnNewButton.setBackground(new Color(0, 0, 255));
-		btnNewButton.setBounds(311, 530, 160, 50);
+		btnNewButton.setBackground(new Color(0, 0, 0));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBounds(210, 530, 140, 50);
+		btnNewButton.addActionListener(new textListener("login"));
 		panel_1.add(btnNewButton);
+
+		JButton cancelbut = new JButton("Cancel");
+		cancelbut.setFont(new Font("Arial", Font.PLAIN, 16));
+		cancelbut.setBackground(new Color(0, 0, 0));
+		cancelbut.setForeground(Color.WHITE);
+		cancelbut.setBounds(400, 530, 140, 50);
+		cancelbut.addActionListener(new textListener("cancel"));
+		panel_1.add(cancelbut);
     }
 
+	public class textListener implements ActionListener {
+		String mail;
+		String password;
+		String butType;
+		public textListener(String s){
+			butType=s;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//if user enters something and clicks to login app will automatically directed to admin or editor welcome page
+			//if user clicks cancel button then the app wiil goes back to main page
+			if(butType.equals("login")){
+				mail=textField.getText();
+				password=textField_1.getText();
+				if((mail.equals("editor"))&&(password.equals("editor"))){
+					controller.changeFrame(4);
+				}
+				if((mail.equals("admin"))&&(password.equals("admin"))){
+					controller.changeFrame(3);
+				}
+			}
+			else if(butType.equals("cancel")){
+				controller.changeFrame(0);
+			}
+		}
+	
+		
+	}
 }

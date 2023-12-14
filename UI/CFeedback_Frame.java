@@ -2,6 +2,8 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -125,6 +127,18 @@ public class CFeedback_Frame extends JFrame {
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setBounds(727, 601, 138, 29);
+		btnNewButton.addActionListener(new feedListener());
 		contentPane.add(btnNewButton);
     }
+
+	public class feedListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//after feedback submited app goes back to main page
+			controller.changeFrame(0);
+		}
+	
+		
+	}
 }
