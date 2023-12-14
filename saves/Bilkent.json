@@ -15,16 +15,50 @@
               "mapShowCaseRatio": 1,
               "contents": [
                 {
-                  "type": "Building.Room",
+                  "type": "Building.Hallway",
                   "data": {
-                    "name": "B102",
+                    "name": "Main Hall",
                     "mapShowCaseRatio": 1,
-                    "contents": [],
-                    "isHighlighted": false
+                    "contents": [
+                      {
+                        "type": "Building.Room",
+                        "data": {
+                          "name": "B102",
+                          "mapShowCaseRatio": 1,
+                          "contents": []
+                        }
+                      },
+                      {
+                        "type": "Building.MapObject",
+                        "data": {
+                          "type": 0,
+                          "functional": true,
+                          "name": "B First Floor Vending Machine",
+                          "mapShowCaseRatio": 1,
+                          "contents": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "Building.Hallway",
+                  "data": {
+                    "name": "Main Hall",
+                    "mapShowCaseRatio": 1,
+                    "contents": [
+                      {
+                        "type": "Building.Room",
+                        "data": {
+                          "name": "B103",
+                          "mapShowCaseRatio": 1,
+                          "contents": []
+                        }
+                      }
+                    ]
                   }
                 }
-              ],
-              "isHighlighted": false
+              ]
             }
           },
           {
@@ -38,18 +72,14 @@
                   "data": {
                     "name": "B201",
                     "mapShowCaseRatio": 1,
-                    "contents": [],
-                    "isHighlighted": false
+                    "contents": []
                   }
                 }
-              ],
-              "isHighlighted": false
+              ]
             }
           }
-        ],
-        "isHighlighted": false
+        ]
       }
     }
-  ],
-  "isHighlighted": false
+  ]
 }

@@ -8,7 +8,7 @@ public abstract class Space {
     protected String name;
     protected int mapShowCaseRatio = 1;
     protected ArrayList<Space> contents;
-    protected boolean isHighlighted = false;
+    protected transient boolean isHighlighted = false;
    
     public Space(String name){
         this.name = name;
