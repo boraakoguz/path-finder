@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -62,7 +63,10 @@ public class Admin_Welcome_Page extends JFrame {
 		btnNewButton.setBounds(101, 342, 239, 47);
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(Color.BLACK);
+        btnNewButton.setOpaque(true);
+		btnNewButton.setBorderPainted(false);
         btnNewButton.addActionListener(new adminListener("map"));
+        btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton);
 		
 		JButton btnAddUser = new JButton("Add User");
@@ -70,7 +74,10 @@ public class Admin_Welcome_Page extends JFrame {
 		btnAddUser.setBounds(101, 429, 239, 47);
         btnAddUser.setForeground(Color.WHITE);
         btnAddUser.setBackground(Color.BLACK);
+        btnAddUser.setOpaque(true);
+		btnAddUser.setBorderPainted(false);
         btnAddUser.addActionListener(new adminListener("adduser"));
+        btnAddUser.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnAddUser);
 		
 		JButton btnUserList = new JButton("User List");
@@ -78,7 +85,10 @@ public class Admin_Welcome_Page extends JFrame {
 		btnUserList.setBounds(101, 521, 239, 47);
         btnUserList.setForeground(Color.WHITE);
         btnUserList.setBackground(Color.BLACK);
+        btnUserList.setOpaque(true);
+		btnUserList.setBorderPainted(false);
         btnUserList.addActionListener(new adminListener("userlist"));
+        btnUserList.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnUserList);
 		
 		JLabel lblNewLabel_1 = new JLabel("Welcome Admin X");
@@ -96,7 +106,10 @@ public class Admin_Welcome_Page extends JFrame {
 		btnNewButton_1.setBounds(1037, 584, 112, 39);
         btnNewButton_1.setForeground(Color.WHITE);
         btnNewButton_1.setBackground(Color.BLACK);
+        btnNewButton_1.setOpaque(true);
+		btnNewButton_1.setBorderPainted(false);
         btnNewButton_1.addActionListener(new adminListener("out"));
+        btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_1);
     }
     public class adminListener implements ActionListener {

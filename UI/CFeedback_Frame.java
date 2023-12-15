@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -128,6 +129,7 @@ public class CFeedback_Frame extends JFrame {
         btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setBounds(727, 601, 138, 29);
 		btnNewButton.addActionListener(new feedListener());
+		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton);
     }
 

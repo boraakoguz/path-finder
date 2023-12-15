@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -92,6 +93,7 @@ public class Admin_AddUser_Frame extends JFrame{
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(new Color(0, 0, 0));
         btnNewButton.addActionListener(new addListener("add"));
+        btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton);
 
         JButton btnNewButton1 = new JButton("Cancel");
@@ -100,6 +102,7 @@ public class Admin_AddUser_Frame extends JFrame{
         btnNewButton1.setForeground(Color.WHITE);
         btnNewButton1.setBackground(new Color(0, 0, 0));
         btnNewButton1.addActionListener(new addListener("cancel"));
+        btnNewButton1.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton1);
     }
 

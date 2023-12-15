@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,6 +85,7 @@ public class Login_Frame extends JFrame{
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBounds(210, 530, 140, 50);
 		btnNewButton.addActionListener(new textListener("login"));
+		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		panel_1.add(btnNewButton);
 
 		JButton cancelbut = new JButton("Cancel");
@@ -94,6 +96,7 @@ public class Login_Frame extends JFrame{
 		cancelbut.setForeground(Color.WHITE);
 		cancelbut.setBounds(400, 530, 140, 50);
 		cancelbut.addActionListener(new textListener("cancel"));
+		cancelbut.setBorder(BorderFactory.createEmptyBorder());
 		panel_1.add(cancelbut);
     }
 

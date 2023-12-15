@@ -77,6 +77,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.addActionListener(new ButAction("feed"));
+		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton);
 		
 		JButton btnSeeFeedback = new JButton("See Feedback");
@@ -87,6 +88,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         btnSeeFeedback.setForeground(Color.WHITE);
         btnSeeFeedback.setBackground(Color.BLACK);
         btnSeeFeedback.addActionListener(new ButAction("feed"));
+		btnSeeFeedback.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnSeeFeedback);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Fujitsu Cafe");
@@ -105,6 +107,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         btnNewButton_2.setForeground(Color.WHITE);
         btnNewButton_2.setBackground(Color.BLACK);
         btnNewButton_2.addActionListener(new ButAction("feed"));
+		btnNewButton_2.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("G-Building");
@@ -150,7 +153,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
                 //if user clicks to back button the app will be directed to editor welcome page
             }
             if(butType.equals("feed")){
-                System.out.println("in progress");
+				//the app will be directed to detailed feedback page
                 controller.changeFrame(10);
             }
         }

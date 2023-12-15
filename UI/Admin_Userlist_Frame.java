@@ -75,6 +75,7 @@ public class Admin_Userlist_Frame extends JFrame {
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.addActionListener(new ButAction("remove"));
+        btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("REMOVE");
@@ -83,6 +84,7 @@ public class Admin_Userlist_Frame extends JFrame {
         btnNewButton_1.setForeground(Color.WHITE);
         btnNewButton_1.setBackground(Color.BLACK);
         btnNewButton_1.addActionListener(new ButAction("remove"));
+        btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Admin");
@@ -101,6 +103,7 @@ public class Admin_Userlist_Frame extends JFrame {
         btnNewButton_2.setForeground(Color.WHITE);
         btnNewButton_2.setBackground(Color.BLACK);
         btnNewButton_2.addActionListener(new ButAction("remove"));
+        btnNewButton_2.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("Editor");

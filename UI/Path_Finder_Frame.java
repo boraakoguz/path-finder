@@ -10,6 +10,7 @@ public class Path_Finder_Frame{
     Admin_Userlist_Frame userlist;
     Admin_AddUser_Frame adduser;
     Editor_SeeFeedback_Frame seefeed;
+    Editor_DeatiledFeedback_Frame detailFeed;
 
     Path_Finder_Frame(){
         user=new User_Frame(this);
@@ -20,6 +21,7 @@ public class Path_Finder_Frame{
         edWelcome=new Editor_Welcome_Page(this);
         userlist=new Admin_Userlist_Frame(this);
         seefeed=new Editor_SeeFeedback_Frame(this);
+        detailFeed=new Editor_DeatiledFeedback_Frame(this);
         user.setVisible(true);
     }
     protected void changeFrame(int i){
@@ -32,6 +34,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going back to main page
         }
         if(i==1){
@@ -43,6 +46,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to login page
         }
         if(i==2){
@@ -54,6 +58,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to create feedback page
         }
         if(i==3){
@@ -65,6 +70,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             // goint to admin welcome page
         }
         if(i==4){
@@ -76,6 +82,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             // going to editor welcome page
         }
         if(i==5){
@@ -87,6 +94,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(true);
+            detailFeed.setVisible(false);
             //going to add user page
         }
         if(i==6){
@@ -98,6 +106,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(true);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to userlist page
         }
         if(i==7){
@@ -109,6 +118,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to admin map tools page 
             //Admin map tools should be added
         }
@@ -121,6 +131,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(true);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to editors' seefeedback page
         }
         if(i==9){
@@ -132,6 +143,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(false);
             //going to editor map tools page
             //Editor Maptools should be added
         }
@@ -144,6 +156,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
+            detailFeed.setVisible(true);
             //going to chosen feedback in order to read it detailed 
             //Editor seefeedback page should be added
         }
