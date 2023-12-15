@@ -18,7 +18,7 @@ import UI.User_Frame.ButAction;
 import Utilities.Feedback;
 
 public class Editor_SeeFeedback_Frame extends JFrame {
-
+	protected ArrayList<Feedback> feedbackList;
     protected JButton backBut=new JButton();
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
@@ -64,18 +64,21 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         contentPane.add(backBut);
 		
 		JPanel feedbacksPanel = new JPanel();
-		
-		feedbacksPanel.setBackground(Color.BLACK);
-		feedbacksPanel.setBounds( 20, 40, 600,600);
+
+		JLabel lblNewLabel_3 = new JLabel("Editor Account");
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 18));
+		lblNewLabel_3.setBounds(981, 10, 195, 46);
+		contentPane.add(lblNewLabel_3);
+
+		feedbacksPanel.setBounds( 60, 170, 900,400);
 		Controller cnt = new Controller();
 		cnt.setCurrentMap("Bilkent");
-		ArrayList<Feedback> feedbackList = cnt.getFeedBackList();
+		feedbackList = cnt.getFeedBackList();
 		feedbacksPanel.setLayout(new GridLayout(feedbackList.size(),1));
 		for (Feedback feedback : feedbackList) {
-			FeedBackMenuObject menuObj = new FeedBackMenuObject(feedback);
+			FeedBackMenuObject menuObj = new FeedBackMenuObject(feedback,new ButAction("feed"));
 			feedbacksPanel.add(menuObj);
 		}
-		feedbacksPanel.setVisible(true);
 		/* 
 		JLabel lblNewLabel_1 = new JLabel("Bilkent Map");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -138,10 +141,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 		lblNewLabel_1_2.setBounds(86, 351, 200, 62);
 		contentPane.add(lblNewLabel_1_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Editor Account");
-		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblNewLabel_3.setBounds(981, 10, 195, 46);
-		contentPane.add(lblNewLabel_3);
+		
 		
 		JLabel lblNewLabel_2_3 = new JLabel("1st Flour");
 		lblNewLabel_2_3.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -163,8 +163,13 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 
     public class ButAction implements ActionListener {
         String butType;
+		int index;
         public ButAction(String s){
             butType=s;
+        }
+		public ButAction(String s,int i){
+            butType=s;
+			index=i;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -174,9 +179,13 @@ public class Editor_SeeFeedback_Frame extends JFrame {
             }
             if(butType.equals("feed")){
 				//the app will be directed to detailed feedback page
-                controller.changeFrame(10);
+                controller.changeFrame(10,feedbackList.get(index));
             }
         }
     }
+	public static void main(String[] args) {
+		Editor_SeeFeedback_Frame f=new Editor_SeeFeedback_Frame(null);
+		f.setVisible(true);
+	}
 
 }

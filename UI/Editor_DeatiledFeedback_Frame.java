@@ -14,14 +14,17 @@ import javax.swing.JPanel;
 
 import UI.Editor_Welcome_Page.editorListener;
 import UI.User_Frame.ButAction;
+import Utilities.Feedback;
 
 public class Editor_DeatiledFeedback_Frame extends JFrame {
     Path_Finder_Frame controller;
     protected Color backGroundpink; //backgroud color
     protected JPanel contentPane=new JPanel();
-    
-    public Editor_DeatiledFeedback_Frame(Path_Finder_Frame c){
+    protected Feedback feed;
+	
+    public Editor_DeatiledFeedback_Frame(Path_Finder_Frame c,Feedback f){
         controller=c;
+		feed=f;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
 		setSize(1200,700);
@@ -31,7 +34,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
         setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setBackground(backGroundpink);
-		JLabel lblNewLabel = new JLabel("MapX/ BuildingX/ FlourX/ RoomX");
+		JLabel lblNewLabel = new JLabel("FeedBack");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		lblNewLabel.setBounds(150, 40, 488, 73);
 		contentPane.add(lblNewLabel);
@@ -81,7 +84,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
 		contentPane.add(btnNewButton);
 
 		
-		JLabel lblNewLabel_2 = new JLabel("FeedbackX");
+		JLabel lblNewLabel_2 = new JLabel(feed.getFeedBack());
 		lblNewLabel_2.setBounds(335, 169, 786, 408);
 		contentPane.add(lblNewLabel_2);
 
@@ -104,17 +107,17 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
 		lblNewLabel_1_3.setBounds(10, 249, 170, 27);
 		contentPane.add(lblNewLabel_1_3);
 		
-		JLabel lblNewLabel_1_3_1 = new JLabel("Map: X");
+		JLabel lblNewLabel_1_3_1 = new JLabel("Map: "+feed.getMap());
 		lblNewLabel_1_3_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_3_1.setBounds(10, 382, 170, 27);
 		contentPane.add(lblNewLabel_1_3_1);
 		
-		JLabel lblNewLabel_1_3_2 = new JLabel("Building: X");
+		JLabel lblNewLabel_1_3_2 = new JLabel("Building: "+feed.getBuilding());
 		lblNewLabel_1_3_2.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_3_2.setBounds(10, 419, 170, 27);
 		contentPane.add(lblNewLabel_1_3_2);
 		
-		JLabel lblNewLabel_1_3_3 = new JLabel("Floor: X");
+		JLabel lblNewLabel_1_3_3 = new JLabel("Floor: "+feed.getFloor());
 		lblNewLabel_1_3_3.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_3_3.setBounds(10, 459, 170, 27);
 		contentPane.add(lblNewLabel_1_3_3);

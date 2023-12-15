@@ -1,5 +1,7 @@
 package UI;
 
+import Utilities.Feedback;
+
 // this class is like a controller class. every frame changes happen here
 public class Path_Finder_Frame{
     User_Frame user;
@@ -21,8 +23,25 @@ public class Path_Finder_Frame{
         edWelcome=new Editor_Welcome_Page(this);
         userlist=new Admin_Userlist_Frame(this);
         seefeed=new Editor_SeeFeedback_Frame(this);
-        detailFeed=new Editor_DeatiledFeedback_Frame(this);
+        //detailFeed=new Editor_DeatiledFeedback_Frame(this,null);
         user.setVisible(true);
+    }
+    protected void changeFrame(int i, Feedback f){
+        if(i==10){
+            user.setVisible(false);
+            login.setVisible(false);
+            feedBack.setVisible(false);
+            adWelcome.setVisible(false);
+            edWelcome.setVisible(false);
+            userlist.setVisible(false);
+            seefeed.setVisible(false);
+            adduser.setVisible(false);
+            detailFeed=new Editor_DeatiledFeedback_Frame(this,f);
+            detailFeed.setVisible(true);
+
+            //going to chosen feedback in order to read it detailed 
+            //Editor seefeedback page should be added
+        }
     }
     protected void changeFrame(int i){
         if(i==0){
@@ -147,19 +166,7 @@ public class Path_Finder_Frame{
             //going to editor map tools page
             //Editor Maptools should be added
         }
-        if(i==10){
-            user.setVisible(false);
-            login.setVisible(false);
-            feedBack.setVisible(false);
-            adWelcome.setVisible(false);
-            edWelcome.setVisible(false);
-            userlist.setVisible(false);
-            seefeed.setVisible(false);
-            adduser.setVisible(false);
-            detailFeed.setVisible(true);
-            //going to chosen feedback in order to read it detailed 
-            //Editor seefeedback page should be added
-        }
+        
     }
     public static void main(String[] args) {
         Path_Finder_Frame f=new Path_Finder_Frame();
