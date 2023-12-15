@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import UI.User_Frame.ButAction;
+import Utilities.Feedback;
 
 public class Editor_SeeFeedback_Frame extends JFrame {
 
@@ -32,6 +34,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 
         setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		contentPane.setBackground(backGroundpink);
 		JLabel lblNewLabel = new JLabel("Feedback List");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -59,6 +62,17 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         contentPane.add(backBut);
 		
+		JPanel feedbacksPanel = new JPanel();
+		feedbacksPanel.setBackground(Color.BLACK);
+		Controller cnt = new Controller();
+		cnt.setCurrentMap("Bilkent");
+		ArrayList<Feedback> feedbackList = cnt.getFeedBackList();
+		for (Feedback feedback : feedbackList) {
+			FeedBackMenuObject menuObj = new FeedBackMenuObject(feedback);
+			feedbacksPanel.add(menuObj);
+		}
+		feedbacksPanel.setVisible(true);
+		/* 
 		JLabel lblNewLabel_1 = new JLabel("Bilkent Map");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 25));
 		lblNewLabel_1.setBounds(86, 184, 200, 62);
@@ -139,6 +153,8 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 		lblNewLabel_2_2_1.setFont(new Font("Arial", Font.PLAIN, 25));
 		lblNewLabel_2_2_1.setBounds(606, 351, 193, 62);
 		contentPane.add(lblNewLabel_2_2_1);
+		*/
+		contentPane.add(feedbacksPanel);
     }
 
     public class ButAction implements ActionListener {
