@@ -42,11 +42,15 @@ public class boratest {
         search.initializeSearchTree(loaded);
         Controller controller = new Controller();
         controller.setCurrentMap("Bilkent");
-        Space start = controller.search("B102");
-        Space destination = controller.search("B201");
-        Space a = controller.search("B");
+        ArrayList<Space> start = controller.search("B102");
+        ArrayList<Space> destination = controller.search("B201");
+        ArrayList<Space> a = controller.search("B");
         System.out.println("///////////////////////////////////////////////////////////");
-        System.out.println(controller.getDirections(start,destination));
+        System.out.println(controller.getDirections(start.get(0),destination.get(0)));
+        System.out.println(a);
+        System.out.println("///////////////////////////////////////////////////////////");
+        ArrayList<Space> found = controller.nearestMapObjects(a.get(1),0);
+        System.out.println(found);
         //System.out.println(search.search("B102").getDirections());
         //System.out.println("\nSearch result: " + search.search("B"));
     }

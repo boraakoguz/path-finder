@@ -45,8 +45,12 @@ public class Controller {
      * @param name String name of the target
      * @return Space object, null if not found.
      */
-    public Space search(String name){
+    public ArrayList<Space> search(String name){
         return this.search.search(name);
+    }
+    
+    public ArrayList<Space> nearestMapObjects(Space currentLocation, int objectType){
+        return this.search.nearestMapObject(currentLocation, objectType);
     }
     /**
      * Returns the arraylist of Space objects needed to be visited

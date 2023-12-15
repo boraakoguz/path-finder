@@ -6,9 +6,9 @@ public abstract class Space {
     protected int[] xPoints;
     protected int[] yPoints;
     protected String name;
-    protected int mapShowCaseRatio = 1;
+    private int mapShowCaseRatio = 1;
     protected ArrayList<Space> contents;
-    protected transient boolean isHighlighted = false;
+    transient private boolean isHighlighted = false;
    
     public Space(String name){
         this.name = name;
@@ -70,6 +70,12 @@ public abstract class Space {
     }
     public void addParent(Space parent){
         this.parent = parent;
+    }
+    public Space getParent(){
+        return this.parent;
+    }
+    public boolean hasParent(){
+        return this.parent != null;
     }
     public boolean equals(Space other){
         if(this.name == other.name){

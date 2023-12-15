@@ -29,7 +29,8 @@ public class Search {
         }
         start.addSpace(map);
     }
-    public Space search(String name){
+    public ArrayList<Space> search(String name){
+        ArrayList<Space> searchResults = new ArrayList<Space>();
         SearchNode start = this.root;
         for(int i = 1; i<=name.length();i++){
             String substring = name.substring(0, i);
@@ -37,16 +38,56 @@ public class Search {
                 start = start.getChildren().get(substring);
             }
             else{
-                System.out.printf("Recomended for:%s \n%s",name,recommendations(start).toString());
+                break;
+            }
+        }
+        searchResults.add(start.getSpace());
+        searchResults.addAll(recommendations(start));
+        return searchResults;
+    }
+    public ArrayList<Space> nearestMapObject(Space currentLocation, int type){
+        ArrayList<Space> results = new ArrayList<Space>();
+        ArrayList<Space> parentQueue = new ArrayList<Space>();
+        HashMap<Space,Boolean> alreadyChecked = new HashMap<Space,Boolean>();
+        parentQueue.add(currentLocation);
+        while(!parentQueue.isEmpty()){
+            Space current = parentQueue.remove(0);
+            if(current == null){
+                break;
+            }
+            ArrayList<Space> childrenQueue = new ArrayList<Space>();
+            childrenQueue.addAll(current.getContents());
+            while(!childrenQueue.isEmpty()){
+                Space child = childrenQueue.remove(0);
+                if(alreadyChecked.containsKey(child)){
+                    continue;
+                }
+                alreadyChecked.put(child, true);
+                if(child instanceof MapObject && ((MapObject)child).getType() == type){
+                    results.add(child);
+                    if(results.size()>2){
+                        return results;
+                    }
+                }
+                childrenQueue.addAll(child.getContents());
+            }
+            parentQueue.add(current.getParent());
+        }
+        return results;
+    }
+    public SearchNode getSearchNode(Space target){
+        SearchNode start = this.root;
+        String name = target.getName();
+        for(int i = 1; i<=name.length();i++){
+            String substring = name.substring(0, i);
+            if(start.getChildren().containsKey(substring)){
+                start = start.getChildren().get(substring);
+            }
+            else{
                 return null;
             }
         }
-        System.out.printf("Recomended for:%s \n%s",name,recommendations(start).toString());
-        return start.getSpace();
-    }
-    public Space searchNearestMapObject(Space currentLocation){
-        return null;
-        //TODO: implement
+        return start;
     }
     public ArrayList<Space> recommendations(SearchNode node){
         ArrayList<Space> recommendations = new ArrayList<Space>();

@@ -29,8 +29,8 @@ public class SearchNode {
     public boolean hasSpace(){
         return this.space != null;
     }
-    public boolean isObject(){
-        return this.space instanceof MapObject;
+    public boolean isObject(int type){
+        return this.space instanceof MapObject && ((MapObject)this.space).getType() == type;
     }
     public void addSpace(Space other){
         this.space = other;
