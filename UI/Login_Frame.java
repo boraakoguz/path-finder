@@ -78,7 +78,9 @@ public class Login_Frame extends JFrame{
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnNewButton.setBackground(new Color(0, 0, 0));
+		btnNewButton.setOpaque(true);
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBounds(210, 530, 140, 50);
 		btnNewButton.addActionListener(new textListener("login"));
@@ -86,7 +88,9 @@ public class Login_Frame extends JFrame{
 
 		JButton cancelbut = new JButton("Cancel");
 		cancelbut.setFont(new Font("Arial", Font.PLAIN, 16));
-		cancelbut.setBackground(new Color(0, 0, 0));
+		cancelbut.setOpaque(true);
+		cancelbut.setBorderPainted(false);
+		cancelbut.setBackground(Color.BLACK);
 		cancelbut.setForeground(Color.WHITE);
 		cancelbut.setBounds(400, 530, 140, 50);
 		cancelbut.addActionListener(new textListener("cancel"));

@@ -1,3 +1,4 @@
+package Utilities;
 /**
  * @author Mehmet Emre Şahin
  * The feedback class for the Path Finder app.
@@ -8,7 +9,10 @@ public class Feedback {
     private String content;
     //The status of the feedback: 'false' for unhandled feedbacks, 'true' for done ones.
     private boolean status;
-
+    public Feedback(String content, boolean status){
+        this.content = content;
+        this.status = status;
+    }
     //Getter and setter for feedback status.
 
     /**
@@ -28,4 +32,8 @@ public class Feedback {
      * @param feedback message.
      */
     public String getFeedBack() { return content; }
+
+    public String toString(){
+        return this.content + " Status: " + this.status;
+    }
 }

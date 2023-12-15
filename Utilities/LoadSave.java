@@ -1,4 +1,4 @@
-package Building;
+package Utilities;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,6 +17,9 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.stream.JsonReader;
+
+import Building.Map;
+import Building.Space;
 public class LoadSave {
     private String workingDirectory;
     public LoadSave(){

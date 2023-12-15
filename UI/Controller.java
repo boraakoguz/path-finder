@@ -2,15 +2,19 @@ package UI;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import Building.LoadSave;
 import Building.Map;
 import Building.Search;
 import Building.Space;
+import Utilities.Feedback;
+import Utilities.FeedbackContainer;
+import Utilities.LoadSave;
 
 public class Controller {
     LoadSave loadSave;
     Search search;
     ArrayList<Map> maps;
+    ArrayList<Feedback> feedBackList;
+    Map currentMap;
     private int authLevel = 0; // 0-> User, 1 -> Editor, 2-> Admin
     public Controller(){
         this.loadSave = new LoadSave();
@@ -26,6 +30,8 @@ public class Controller {
             if(space.getName().equals(mapName)){
                 this.search.emptySearchTree();
                 this.search.initializeSearchTree(space);
+                this.feedBackList = ((Map)space).getFeedbackContainer().getFeedBackList();
+                this.currentMap = (Map)space;
             }
         }
     }
@@ -41,6 +47,24 @@ public class Controller {
         return mapNames;
     }
     /**
+     * returns the feedback list of the selected map
+     * @return
+     */
+    public ArrayList<Feedback> getFeedBackList(){
+        return this.feedBackList;
+    }
+    /**
+     * adds a feedback to the current map, gets String input content of the feedback
+     * @param content
+     */
+    public void addFeedBack(String content){
+        Feedback newFeedback = new Feedback(content, true);
+        this.feedBackList.add(newFeedback);
+        FeedbackContainer container = this.currentMap.getFeedbackContainer();
+        container.addFeedBack(newFeedback);
+        this.currentMap.addFeedBackContainer(container);
+    }
+    /**
      * Searches the given object in the current map
      * @param name String name of the target
      * @return Space object, null if not found.
@@ -48,7 +72,12 @@ public class Controller {
     public ArrayList<Space> search(String name){
         return this.search.search(name);
     }
-    
+    /**
+     * searches nearest selected MapObject to your current location
+     * @param currentLocation
+     * @param objectType
+     * @return
+     */
     public ArrayList<Space> nearestMapObjects(Space currentLocation, int objectType){
         return this.search.nearestMapObject(currentLocation, objectType);
     }

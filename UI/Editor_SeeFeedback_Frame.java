@@ -72,6 +72,8 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 		JButton btnNewButton = new JButton("See Feedback");
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 25));
 		btnNewButton.setBounds(883, 199, 229, 39);
+		btnNewButton.setOpaque(true);
+		btnNewButton.setBorderPainted(false);
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.addActionListener(new ButAction("feed"));
@@ -80,6 +82,8 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 		JButton btnSeeFeedback = new JButton("See Feedback");
 		btnSeeFeedback.setFont(new Font("Arial", Font.PLAIN, 25));
 		btnSeeFeedback.setBounds(883, 286, 229, 39);
+		btnSeeFeedback.setOpaque(true);
+		btnSeeFeedback.setBorderPainted(false);
         btnSeeFeedback.setForeground(Color.WHITE);
         btnSeeFeedback.setBackground(Color.BLACK);
         btnSeeFeedback.addActionListener(new ButAction("feed"));

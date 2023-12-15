@@ -1,4 +1,24 @@
 {
+  "feedbackContainer": {
+    "feedBackList": [
+      {
+        "content": "xyz çalışmıyor",
+        "status": true
+      },
+      {
+        "content": "abc çalışmıyor",
+        "status": true
+      },
+      {
+        "content": "adsdad çalışmıyor",
+        "status": true
+      },
+      {
+        "content": "lan çalışmıyor",
+        "status": true
+      }
+    ]
+  },
   "name": "Bilkent",
   "mapShowCaseRatio": 1,
   "contents": [
