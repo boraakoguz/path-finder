@@ -1,6 +1,7 @@
 package UI;
 
 import Utilities.Feedback;
+import Utilities.Login;
 
 // this class is like a controller class. every frame changes happen here
 public class Path_Finder_Frame{
@@ -13,10 +14,12 @@ public class Path_Finder_Frame{
     Admin_AddUser_Frame adduser;
     Editor_SeeFeedback_Frame seefeed;
     Editor_DeatiledFeedback_Frame detailFeed;
+    Login log;
 
-    Path_Finder_Frame(){
+    Path_Finder_Frame(Login l){
+        log=l;
         user=new User_Frame(this);
-        login=new Login_Frame(this);
+        login=new Login_Frame(this,log);
         feedBack=new CFeedback_Frame(this);
         adWelcome=new Admin_Welcome_Page(this);
         adduser=new Admin_AddUser_Frame(this);
@@ -169,7 +172,7 @@ public class Path_Finder_Frame{
         
     }
     public static void main(String[] args) {
-        Path_Finder_Frame f=new Path_Finder_Frame();
+        Path_Finder_Frame f=new Path_Finder_Frame(null);
     }
     
 }
