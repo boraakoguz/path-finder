@@ -27,6 +27,6 @@ public class Login {
     }
     public boolean login(String username, String password, int auth) throws UnsupportedEncodingException, FirebaseException{
         FirebaseResponse response = firebase.get(username);
-        
+        return false;
     }
 }

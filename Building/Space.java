@@ -84,12 +84,6 @@ public abstract class Space {
         return false;
     }
     public String toString(){
-        String result = "******************************\n";
-        result += "Name: " + this.name + " \nContents\n";
-        for(int i = 0; i<contents.size();i++){
-            result += Integer.toString(i+1) + ": " + contents.get(i).name + " \n"; 
-        }
-        result += "******************************\n";
-        return result;
+        return this.getName();
     }
 }
