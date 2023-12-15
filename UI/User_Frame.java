@@ -8,6 +8,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,24 +54,20 @@ public class User_Frame extends JFrame{
     protected Color backGroundpink; //backgroud color
     protected JLabel firstLab=new JLabel( "Where Are You?");
     protected JLabel mapLab=new JLabel("Select Map");
-    protected DefaultListModel<Space> mapListModel = new DefaultListModel<Space>();
-    protected JList mapList = new JList(mapListModel);
-    protected JTextField mapText;
+    protected JComboBox<String> mapPickList = new JComboBox<String>();
+    protected DefaultListModel<Space> startSearchListModel = new DefaultListModel<Space>();
+    protected JList<Space> startSearchList = new JList<Space>(startSearchListModel);
+    protected JTextField startSearchTextField;
 
+    protected DefaultListModel<Space> targetSearchListModel = new DefaultListModel<Space>();
+    protected JList<Space> targetSearchList = new JList<Space>(targetSearchListModel);
+    protected JTextField targetSearchTextField;
+
+    protected Space startLocation;
+    protected Space targetLocation;
 
     protected JLabel first2Lab=new JLabel( "Where do You want to go?");
-    protected JLabel build2Lab=new JLabel("Select Building");
-    protected String[] builds2={"","",""};
-    protected JList build2List=new JList<>(builds2);
-    protected JTextField build2Combo;
-    protected JLabel flo2Lab=new JLabel("Selecet Floor");
-    protected String[] flos2={"","",""};
-    protected JList flo2List=new JList<>(flos2);
-    protected JTextField flo2Combo;
-    protected JLabel room2Lab=new JLabel("Select Room");
-    protected String[] rooms2={"","",""};
-    protected JList room2List=new JList<>(rooms2);
-    protected JTextField room2Combo;
+
 
     protected JComboBox<Space> searchBar = new JComboBox<Space>();
 
@@ -77,7 +75,6 @@ public class User_Frame extends JFrame{
     public User_Frame(Path_Finder_Frame c){
         controller=c;
         searcher=new Controller();
-        searcher.setCurrentMap("Bilkent");
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,10 +91,6 @@ public class User_Frame extends JFrame{
         contentPanel.add(middlePanel);
         contentPanel.add(rightPanel);
         left1();
-        
-
-        //buts();
-        //comboBoxs();
     }
 
     //these set methods sets panels to default versions 
@@ -179,21 +172,33 @@ public class User_Frame extends JFrame{
         firstLab.setFont(new Font("Arial", Font.BOLD, 28));
         firstLab.setBounds(20, 60, 250, 60); //labeling combobox
         
-        mapText=new JTextField();
-        mapText.addKeyListener(new comboClickListener("map"));
-        mapText.addFocusListener(new fListener("map"));
-        mapList.setBounds(20, 170, 250, 60);
-        mapList.setVisible(false);
+        
         mapLab.setBounds(20, 120, 100, 15);
-        mapText.setBounds(20, 140, 250, 30);
+        mapPickList.setBounds(20,140,250,30);
+        mapPickList.addActionListener(new comboBoxActionListener());
+        for (String map : searcher.getAvailableMaps()) {
+            mapPickList.addItem(map);
+        }
+
+        JLabel searchBarLabel = new JLabel("Search where you are");
+        searchBarLabel.setBounds(20,180,250,20);
+        startSearchTextField = new JTextField();
+        startSearchTextField.addKeyListener(new startSearch());
+        startSearchTextField.addFocusListener(new fListener("start"));
+        startSearchList.setBounds(20, 230, 250, 60);
+        startSearchList.setVisible(false);
+        startSearchList.addMouseListener(new startListActionListener());
+        startSearchTextField.setBounds(20, 200, 250, 30);
         
         
         // Adding comboboxes to Frame
         leftPanel.add(firstLab);
         leftPanel.add(searchBar);
         leftPanel.add(mapLab);
-        leftPanel.add(mapText);
-        leftPanel.add(mapList);
+        leftPanel.add(startSearchTextField);
+        leftPanel.add(startSearchList);
+        leftPanel.add(mapPickList);
+        leftPanel.add(searchBarLabel);
         // Adding buttons to Frame  
         leftPanel.add(nextBut);
         leftPanel.add(fOBut);
@@ -209,53 +214,31 @@ public class User_Frame extends JFrame{
         goBut.setBorder(BorderFactory.createEmptyBorder());
 
         //combobox adjusments
-        first2Lab.setFont(new Font("Arial", Font.BOLD, 20));
+        first2Lab.setFont(new Font("Arial", Font.BOLD, 19));
         first2Lab.setBounds(20, 90, 250, 60); //labeling combobox
-
-        build2Combo=new JTextField();
-        build2Combo.addKeyListener(new comboClickListener("build2"));
-        build2Combo.addFocusListener(new fListener("build2"));
-        build2List.setBounds(20, 190, 250, 60);
-        build2List.setVisible(false);
-        build2Lab.setBounds(20, 140, 100, 15);
-        build2Combo.setBounds(20, 160, 250, 30);
-
-        flo2Combo=new JTextField();
-        flo2Combo.addKeyListener(new comboClickListener("flo2"));
-        flo2Combo.addFocusListener(new fListener("flo2"));
-        flo2List.setBounds(20, 310, 250, 60);
-        flo2List.setVisible(false);
-        flo2Lab.setBounds(20, 260, 100, 15);
-        flo2Combo.setBounds(20, 280, 250, 30);
-
-        room2Combo=new JTextField();
-        room2Combo.addKeyListener(new comboClickListener("room2"));
-        room2Combo.addFocusListener(new fListener("room2"));
-        room2List.setBounds(20, 430, 250, 60);
-        room2List.setVisible(false);
-        room2Lab.setBounds(20, 380, 100, 15);
-        room2Combo.setBounds(20, 400, 250, 30);
+        
+        targetSearchTextField=new JTextField();
+        targetSearchTextField.addKeyListener(new targetSearch());
+        targetSearchTextField.addFocusListener(new fListener("target"));
+        targetSearchList.setBounds(20, 230, 250, 60);
+        targetSearchList.setVisible(false);
+        targetSearchList.addMouseListener(new targetListActionListener());
+        targetSearchTextField.setBounds(20, 200, 250, 30);
+        
+        leftPanel.add(targetSearchTextField);
+        leftPanel.add(targetSearchList);
 
         // Adding comboboxes to Frame
         leftPanel.add(first2Lab);
-        leftPanel.add(room2Lab);
-        leftPanel.add(flo2Lab);
-        leftPanel.add(build2Lab);
-        leftPanel.add(flo2Combo);
-        leftPanel.add(room2Combo);
-        leftPanel.add(build2Combo);
-        leftPanel.add(build2List);
-        leftPanel.add(flo2List);
-        leftPanel.add(room2List);
-
         // Adding buttons to Frame  
         leftPanel.add(goBut);
     }
     //this method will show the directions this method is where backend should be added
     protected void middle1(){
         setMiddlePanel(Color.WHITE);
-        JLabel lab=new JLabel("Directions....");
-        lab.setBounds(250, 250, 100, 100);
+        ArrayList<Space> directions = searcher.getDirections(startLocation, targetLocation);
+        JLabel lab=new JLabel(directions.toString());
+        lab.setBounds(250, 250, 400, 100);
         middlePanel.add(lab);
         repaint();
     }
@@ -341,19 +324,14 @@ public class User_Frame extends JFrame{
 
     //Searchbars' Listeners 
        
-    protected class comboClickListener implements KeyListener{
-        String comboType;
-        
-        public comboClickListener(String s){
-            comboType=s;
-        }
-
+    protected class startSearch implements KeyListener{
+  
         @Override
         public void keyTyped(KeyEvent e) {
-            ArrayList<Space> searchResults= searcher.search(mapText.getText()+ e.getKeyChar());
-            mapListModel.clear();
+            ArrayList<Space> searchResults= searcher.search(startSearchTextField.getText()+ e.getKeyChar());
+            startSearchListModel.clear();
             for (Space space : searchResults) {
-                mapListModel.addElement(space);
+                startSearchListModel.addElement(space);
             }
         }
 
@@ -367,6 +345,26 @@ public class User_Frame extends JFrame{
         }
     }
 
+    protected class targetSearch implements KeyListener{
+  
+        @Override
+        public void keyTyped(KeyEvent e) {
+            ArrayList<Space> searchResults= searcher.search(targetSearchTextField.getText()+ e.getKeyChar());
+            targetSearchListModel.clear();
+            for (Space space : searchResults) {
+                targetSearchListModel.addElement(space);
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {            
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            
+        }
+    }
    protected class fListener implements FocusListener{
     String comboType;
     fListener(String s){
@@ -374,39 +372,69 @@ public class User_Frame extends JFrame{
     }
     @Override
     public void focusGained(FocusEvent e) {
-        if(comboType.equals("map")){
-            mapList.setVisible(true);
+        if(comboType.equals("start")){
+            startSearchList.setVisible(true);
         }
-        else if(comboType.equals("build2")){
-            build2List.setVisible(true);
-            room2List.setVisible(false);
-            flo2List.setVisible(false);
-        }
-        else if(comboType.equals("flo2")){
-            build2List.setVisible(false);
-            room2List.setVisible(false);
-            flo2List.setVisible(true);
-        }
-        else if(comboType.equals("room2")){
-            build2List.setVisible(false);
-            room2List.setVisible(true);
-            flo2List.setVisible(false);
+        else if(comboType.equals("target")){
+            startSearchList.setVisible(false);
+            targetSearchList.setVisible(true);
         }
         else{
-            mapList.setVisible(false);
+            startSearchList.setVisible(false);
         }
         
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        mapList.setVisible(false);
-        build2List.setVisible(false);
-        room2List.setVisible(false);
-        flo2List.setVisible(false);
+        startSearchList.setVisible(false);
     }
     
    }
+   protected class comboBoxActionListener implements ActionListener{
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String pick = (String)mapPickList.getSelectedItem();
+        searcher.setCurrentMap(pick);
+    }
+    
+   }
+   protected class startListActionListener implements MouseListener{
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Space pick = startSearchList.getSelectedValue();
+        startSearchTextField.setText(pick.getName());
+        startLocation = pick;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+   }
+   protected class targetListActionListener implements MouseListener{
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Space pick = targetSearchList.getSelectedValue();
+        targetSearchTextField.setText(pick.getName());
+        targetLocation = pick;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+   }
     
 }
