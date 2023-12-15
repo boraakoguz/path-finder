@@ -2,6 +2,7 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -63,10 +64,13 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         contentPane.add(backBut);
 		
 		JPanel feedbacksPanel = new JPanel();
+		
 		feedbacksPanel.setBackground(Color.BLACK);
+		feedbacksPanel.setBounds( 20, 40, 600,600);
 		Controller cnt = new Controller();
 		cnt.setCurrentMap("Bilkent");
 		ArrayList<Feedback> feedbackList = cnt.getFeedBackList();
+		feedbacksPanel.setLayout(new GridLayout(feedbackList.size(),1));
 		for (Feedback feedback : feedbackList) {
 			FeedBackMenuObject menuObj = new FeedBackMenuObject(feedback);
 			feedbacksPanel.add(menuObj);
