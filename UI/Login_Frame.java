@@ -18,14 +18,12 @@ import Utilities.Login;
 
 public class Login_Frame extends JFrame{
     Path_Finder_Frame controller;
-	Login log;
     protected Color backGroundpink; //backgroud color
     protected JPanel contentPane=new JPanel();
 	protected JTextField textField;
 	protected JTextField textField_1;
 
-    public Login_Frame(Path_Finder_Frame c,Login l){
-		log=l;
+    public Login_Frame(Path_Finder_Frame c){
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
@@ -105,7 +103,7 @@ public class Login_Frame extends JFrame{
 		cancelbut.setBorder(BorderFactory.createEmptyBorder());
 		panel_1.add(cancelbut);
     }
-	protected boolean dummyAdmin(Login l,String mail,String password){
+	protected boolean dummyAdmin(String mail,String password){
 		if((mail.equals("admin"))&&(password.equals("admin"))){
 			return true;
 		}
@@ -114,7 +112,7 @@ public class Login_Frame extends JFrame{
 		}
 	}
 
-	protected boolean dummyEditor(Login l,String mail,String password){
+	protected boolean dummyEditor(String mail,String password){
 		if((mail.equals("admin"))&&(password.equals("admin"))){
 			return true;
 		}
@@ -140,10 +138,10 @@ public class Login_Frame extends JFrame{
 					JOptionPane.showMessageDialog(null, "Enter Both Mail and Password");
 				}
 				else{
-					if(dummyEditor(log,mail,password)){
+					if(dummyEditor(mail,password)){
 						controller.changeFrame(4);
 					}
-					else if(dummyAdmin(log,mail,password)){
+					else if(dummyAdmin(mail,password)){
 						controller.changeFrame(3);
 					}
 					else{

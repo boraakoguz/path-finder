@@ -14,12 +14,10 @@ public class Path_Finder_Frame{
     Admin_AddUser_Frame adduser;
     Editor_SeeFeedback_Frame seefeed;
     Editor_DeatiledFeedback_Frame detailFeed;
-    Login log;
 
-    Path_Finder_Frame(Login l){
-        log=l;
+    Path_Finder_Frame(){
         user=new User_Frame(this);
-        login=new Login_Frame(this,log);
+        login=new Login_Frame(this);
         feedBack=new CFeedback_Frame(this);
         adWelcome=new Admin_Welcome_Page(this);
         adduser=new Admin_AddUser_Frame(this);
@@ -172,7 +170,7 @@ public class Path_Finder_Frame{
         
     }
     public static void main(String[] args) {
-        Path_Finder_Frame f=new Path_Finder_Frame(null);
+        Path_Finder_Frame f=new Path_Finder_Frame();
     }
     
 }
