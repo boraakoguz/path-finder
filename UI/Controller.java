@@ -57,8 +57,8 @@ public class Controller {
      * adds a feedback to the current map, gets String input content of the feedback
      * @param content
      */
-    public void addFeedBack(String content){
-        Feedback newFeedback = new Feedback(content, true);
+    public void addFeedBack(String content,String map,String building, String floor){
+        Feedback newFeedback = new Feedback(content,map,building,floor, true);
         this.feedBackList.add(newFeedback);
         FeedbackContainer container = this.currentMap.getFeedbackContainer();
         container.addFeedBack(newFeedback);

@@ -15,10 +15,10 @@ import Utilities.LoadSave;
 
 public class boratest {
     public static void main(String[] args) {
-        Feedback f1 = new Feedback("xyz çalışmıyor",true);
-        Feedback f2 = new Feedback("abc çalışmıyor",true);
-        Feedback f3 = new Feedback("adsdad çalışmıyor",true);
-        Feedback f4 = new Feedback("lan çalışmıyor",true);
+        Feedback f1 = new Feedback("xyz çalışmıyor","Bilkent","B Building","First Floor",true);
+        Feedback f2 = new Feedback("abc çalışmıyor","Bilkent","B Building","First Floor",true);
+        Feedback f3 = new Feedback("adsdad çalışmıyor","Bilkent","B Building","First Floor",true);
+        Feedback f4 = new Feedback("lan çalışmıyor","Bilkent","B Building","First Floor",true);
         ArrayList<Feedback> fbList = new ArrayList<Feedback>();
         fbList.add(f1);
         fbList.add(f2);

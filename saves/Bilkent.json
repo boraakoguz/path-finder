@@ -3,18 +3,30 @@
     "feedBackList": [
       {
         "content": "xyz çalışmıyor",
+        "map": "Bilkent",
+        "building": "B Building",
+        "floor": "First Floor",
         "status": true
       },
       {
         "content": "abc çalışmıyor",
+        "map": "Bilkent",
+        "building": "B Building",
+        "floor": "First Floor",
         "status": true
       },
       {
         "content": "adsdad çalışmıyor",
+        "map": "Bilkent",
+        "building": "B Building",
+        "floor": "First Floor",
         "status": true
       },
       {
         "content": "lan çalışmıyor",
+        "map": "Bilkent",
+        "building": "B Building",
+        "floor": "First Floor",
         "status": true
       }
     ]
