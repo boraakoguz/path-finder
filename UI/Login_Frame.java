@@ -9,8 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Utilities.Login;
+
 
 public class Login_Frame extends JFrame{
     Path_Finder_Frame controller;
@@ -99,7 +103,23 @@ public class Login_Frame extends JFrame{
 		cancelbut.setBorder(BorderFactory.createEmptyBorder());
 		panel_1.add(cancelbut);
     }
+	protected boolean dummyAdmin(String mail,String password){
+		if((mail.equals("admin"))&&(password.equals("admin"))){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
+	protected boolean dummyEditor(String mail,String password){
+		if((mail.equals("admin"))&&(password.equals("admin"))){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public class textListener implements ActionListener {
 		String mail;
 		String password;
@@ -114,12 +134,21 @@ public class Login_Frame extends JFrame{
 			if(butType.equals("login")){
 				mail=textField.getText();
 				password=textField_1.getText();
-				if((mail.equals("editor"))&&(password.equals("editor"))){
-					controller.changeFrame(4);
+				if((mail.equals(""))||(password.equals(""))){
+					JOptionPane.showMessageDialog(null, "Enter Both Mail and Password");
 				}
-				if((mail.equals("admin"))&&(password.equals("admin"))){
-					controller.changeFrame(3);
+				else{
+					if(dummyEditor(mail,password)){
+						controller.changeFrame(4);
+					}
+					else if(dummyAdmin(mail,password)){
+						controller.changeFrame(3);
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Enter valid Mail and Password");
+					}
 				}
+				
 			}
 			else if(butType.equals("cancel")){
 				controller.changeFrame(0);
