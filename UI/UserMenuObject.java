@@ -19,7 +19,7 @@ public class UserMenuObject extends JPanel {
         userName.setBackground(backGroundpink);
         userName.setOpaque(true);
         userName.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JLabel userLevel = new JLabel(user.getuserLevel());
+        JLabel userLevel = new JLabel(String.valueOf(user.getuserLevel()));
         userLevel.setBackground(backGroundpink);
         userLevel.setOpaque(true);
         userLevel.setBorder(BorderFactory.createLineBorder(Color.BLACK));

@@ -1,4 +1,5 @@
 package UI;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,6 +9,10 @@ import Building.Space;
 import Utilities.Feedback;
 import Utilities.FeedbackContainer;
 import Utilities.LoadSave;
+import Utilities.Login;
+import Utilities.User;
+import net.thegreshams.firebase4j.error.FirebaseException;
+import net.thegreshams.firebase4j.error.JacksonUtilityException;
 
 public class Controller {
     LoadSave loadSave;
@@ -15,11 +20,17 @@ public class Controller {
     ArrayList<Map> maps;
     ArrayList<Feedback> feedBackList;
     Map currentMap;
+    Login login;
     private int authLevel = 0; // 0-> User, 1 -> Editor, 2-> Admin
     public Controller(){
         this.loadSave = new LoadSave();
         this.search = new Search();
         this.maps = this.loadSave.loadSaves();
+
+        try {
+            this.login = new Login();
+        } catch (FirebaseException e) {
+        }
     }
     /**
      * This function gets a String input from the UI and sets the current context of the application
@@ -111,5 +122,31 @@ public class Controller {
             i++;
         }
         return null;
+    }
+    public ArrayList<User> getUserList(){
+        try {
+            return this.login.getUserList();
+        } catch (UnsupportedEncodingException | FirebaseException e) {
+        }
+        return null;
+    }
+    public int login(String username, String password){
+        try {
+            return this.login.login(username, password);
+        } catch (UnsupportedEncodingException | FirebaseException e) {
+        }
+        return 0;
+    }
+    public void createAccount(String username, String password, int auth){
+        try {
+            this.login.createAccount(username, password, auth);
+        } catch (UnsupportedEncodingException | FirebaseException | JacksonUtilityException e) {
+        }
+    }
+    public void removeAccount(String username){
+        try {
+            this.login.removeAccount(username);
+        } catch (UnsupportedEncodingException | FirebaseException e) {
+        }
     }
 }
