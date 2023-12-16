@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.google.gson.JsonObject;
 
 import net.thegreshams.firebase4j.error.FirebaseException;
 import net.thegreshams.firebase4j.error.JacksonUtilityException;
