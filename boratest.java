@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import Building.Building;
@@ -12,10 +13,13 @@ import UI.Controller;
 import Utilities.Feedback;
 import Utilities.FeedbackContainer;
 import Utilities.LoadSave;
+import Utilities.Login;
+import net.thegreshams.firebase4j.error.FirebaseException;
+import net.thegreshams.firebase4j.error.JacksonUtilityException;
 
 public class boratest {
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws FirebaseException, UnsupportedEncodingException, JacksonUtilityException {
         Feedback f1 = new Feedback("xyz çalışmıyor","Bilkent","B Building","First Floor",true);
         Feedback f2 = new Feedback("abc çalışmıyor","Bilkent","B Building","First Floor",true);
         Feedback f3 = new Feedback("adsdad çalışmıyor","Bilkent","B Building","First Floor",true);
@@ -65,12 +69,13 @@ public class boratest {
         System.out.println(a);
         System.out.println("///////////////////////////////////////////////////////////");
         ArrayList<Space> found = controller.nearestMapObjects(a.get(1),0);
-        System.out.println(found);
         //System.out.println(search.search("B102").getDirections());
         //System.out.println("\nSearch result: " + search.search("B"));
-        System.out.println(map.getFeedbackContainer().getFeedBackList().toString());
-        System.out.println(loadedMaps.get(0).getFeedbackContainer().getFeedBackList().get(0));
-        
+        Login login = new Login();
+        login.createAccount("Boraborabora", "abcd", 2);
+        System.out.println(login.login("Boraborabora", "abcd"));
+        System.out.println(login.login("Boraborabora", "abc"));
+        login.getUserList();
 
     }
 }

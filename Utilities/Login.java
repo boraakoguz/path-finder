@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import net.thegreshams.firebase4j.error.FirebaseException;
 import net.thegreshams.firebase4j.error.JacksonUtilityException;
 import net.thegreshams.firebase4j.model.FirebaseResponse;
@@ -19,14 +21,38 @@ public class Login {
         Map<String, Object> accountInfo=new LinkedHashMap<String, Object>();
         Map<String, Object> newAccount=new LinkedHashMap<String, Object>();
         accountInfo.put( "Password", password);
+        accountInfo.put( "Auth", auth);
 		newAccount.put(name, accountInfo);
         firebase.patch(newAccount);
     }
-    public static void deleteAccount(String username) throws UnsupportedEncodingException, FirebaseException{
+    /**
+     * returns 0 if wrong username, 1 if wrong password, 2 if succeful editor login, 3 if succesful admin login
+     * @param username
+     * @param password
+     * @throws UnsupportedEncodingException
+     * @throws FirebaseException
+     */
+    public int login(String username, String password) throws UnsupportedEncodingException, FirebaseException{
+        FirebaseResponse response = firebase.get(username);
+        if(!response.getRawBody().equals("null"))
+        {
+            JSONObject jsonObject = new JSONObject(response.getRawBody());
+            if(password.equals(jsonObject.get("Password"))){
+                return Integer.parseInt(jsonObject.get("Auth").toString()) + 1;
+            }
+            return 1;
+        }
+        return 0;
+    }
+    public void removeAccount(String username) throws UnsupportedEncodingException, FirebaseException{
         firebase.delete(username);
     }
-    public boolean login(String username, String password, int auth) throws UnsupportedEncodingException, FirebaseException{
-        FirebaseResponse response = firebase.get(username);
-        return false;
+    public void getUserList() throws UnsupportedEncodingException, FirebaseException{
+        FirebaseResponse response = firebase.get();
+        if(!response.getRawBody().equals("null"))
+        {
+            JSONObject jsonObject = new JSONObject(response.getRawBody());
+        }
+        return;
     }
 }
