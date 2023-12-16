@@ -124,6 +124,8 @@ public class Path_Finder_Frame{
             feedBack.setVisible(false);
             adWelcome.setVisible(false);
             edWelcome.setVisible(false);
+            
+            userlist.refreshUserList();
             userlist.setVisible(true);
             seefeed.setVisible(false);
             adduser.setVisible(false);

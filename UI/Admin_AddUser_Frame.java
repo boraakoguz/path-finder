@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,6 +23,8 @@ public class Admin_AddUser_Frame extends JFrame{
     protected Path_Finder_Frame controller;
     protected JTextField textField;
 	protected JTextField textField_1;
+    protected JComboBox<String> userPickList = new JComboBox<String>();
+    protected int pickedUserType = 2;
 
     Admin_AddUser_Frame(Path_Finder_Frame c,Controller bc){
         backendController=bc;
@@ -64,7 +67,7 @@ public class Admin_AddUser_Frame extends JFrame{
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Enter Mail Adress");
+		JLabel lblNewLabel_1 = new JLabel("Enter Username");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1.setBounds(130, 277, 170, 27);
 		contentPane.add(lblNewLabel_1);
@@ -74,14 +77,16 @@ public class Admin_AddUser_Frame extends JFrame{
 		textField_1.setBounds(130, 407, 279, 46);
 		contentPane.add(textField_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Enter Passoword");
+		JLabel lblNewLabel_1_1 = new JLabel("Enter Password");
 		lblNewLabel_1_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_1.setBounds(130, 370, 170, 27);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(130, 216, 279, 46);
-		contentPane.add(comboBox);
+        userPickList.addItem("Admin");
+        userPickList.addItem("Editor");
+        userPickList.addActionListener(new comboBoxActionListener());
+		userPickList.setBounds(130, 216, 279, 46);
+		contentPane.add(userPickList);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Choose User Type");
 		lblNewLabel_1_2.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -119,9 +124,25 @@ public class Admin_AddUser_Frame extends JFrame{
                 //if user enters cansel the app will be direted to admin welcome page
             }
             if(butType.equals("add")){
-                controller.changeFrame(3);
+                if(pickedUserType != -1){
+                    backendController.createAccount(textField.getText(), textField_1.getText(), pickedUserType);
+                    controller.changeFrame(3);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Please choose User Authentication Level");
+                }
+                
                 //users should be added to database in here
             }
+        }
+    }
+    protected class comboBoxActionListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String pick = (String)userPickList.getSelectedItem();
+
+            pickedUserType = Integer.parseInt(pick);
         }
     }
 }

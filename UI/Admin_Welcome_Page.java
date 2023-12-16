@@ -131,6 +131,7 @@ public class Admin_Welcome_Page extends JFrame {
                 controller.changeFrame(5);
             }
             else if(butType.equals("userlist")){
+                
                 controller.changeFrame(6);
             }
             else if(butType.equals("out")){

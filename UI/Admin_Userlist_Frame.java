@@ -25,6 +25,7 @@ public class Admin_Userlist_Frame extends JFrame {
     protected Color backGroundpink; //backgroud color
     protected Path_Finder_Frame controller;
     protected ArrayList<User> userList;
+    protected JPanel userlistPanel=new JPanel();
     
     Admin_Userlist_Frame(Path_Finder_Frame c,Controller bc){
         backendController=bc;
@@ -66,22 +67,26 @@ public class Admin_Userlist_Frame extends JFrame {
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         contentPane.add(backBut);
 		
-        JPanel userlistPanel=new JPanel();
+        
 		userlistPanel.setBounds( 60, 170, 900,400);
-		Controller cnt = new Controller();
-		cnt.setCurrentMap("Bilkent");
-		userList = cnt.getUserList();
-		userlistPanel.setLayout(new GridLayout(userList.size(),1));
-		for (User user : userList) {
-			UserMenuObject menuObj = new UserMenuObject(user,new ButAction("remove"));
-			userlistPanel.add(menuObj);
-		}
+        refreshUserList();
+		
+        
 		
 		JLabel lblNewLabel_3 = new JLabel("Admin Account");
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_3.setBounds(981, 10, 195, 46);
 		contentPane.add(lblNewLabel_3);
         contentPane.add(userlistPanel);
+    }
+    public void refreshUserList(){
+        userList = backendController.getUserList();
+        userlistPanel.removeAll();
+        userlistPanel.setLayout(new GridLayout(userList.size(),1));
+		for (User user : userList) {
+			UserMenuObject menuObj = new UserMenuObject(user,backendController);
+			userlistPanel.add(menuObj);
+		}
     }
     public class ButAction implements ActionListener {
         String butType;
@@ -93,10 +98,6 @@ public class Admin_Userlist_Frame extends JFrame {
             if(butType.equals("back1")){
                 controller.changeFrame(3);
                 //if user clicks to back button the app will be directed to admin welcome page
-            }
-            if(butType.equals("remove")){
-                System.out.println("in progress");
-                //user removing from data base should be added here
             }
         }
     }
