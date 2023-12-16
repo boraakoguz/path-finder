@@ -23,15 +23,15 @@ public class UserMenuObject extends JPanel {
         userLevel.setBackground(backGroundpink);
         userLevel.setOpaque(true);
         userLevel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JButton seeFeedback = new JButton("See Feedback");
-        seeFeedback.setBackground(Color.BLACK);
-        seeFeedback.setForeground(Color.WHITE);
-        seeFeedback.setOpaque(true);
-        seeFeedback.addActionListener(action);
+        JButton removeUser = new JButton("Remove");
+        removeUser.setBackground(Color.BLACK);
+        removeUser.setForeground(Color.WHITE);
+        removeUser.setOpaque(true);
+        removeUser.addActionListener(action);
         this.setLayout(new GridLayout(1, 3));
         this.add(userName);
         this.add(userLevel);
-        this.add(seeFeedback);
+        this.add(removeUser);
         this.setVisible(true);
     }
 }
