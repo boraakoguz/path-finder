@@ -69,11 +69,12 @@ public class User_Frame extends JFrame{
 
     protected JLabel first2Lab=new JLabel( "Where do You want to go?");
 
-
+    protected Controller backendController;
     protected JComboBox<Space> searchBar = new JComboBox<Space>();
 
 
-    public User_Frame(Path_Finder_Frame c){
+    public User_Frame(Path_Finder_Frame c,Controller bc){
+        backendController=bc;
         controller=c;
         searcher=new Controller();
         backGroundpink=Color.decode("#dd96b8"); //color adjusment

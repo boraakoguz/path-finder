@@ -19,13 +19,15 @@ import Utilities.Feedback;
 import Utilities.User;
 
 public class Admin_Userlist_Frame extends JFrame {
+    protected Controller backendController;
     protected JButton backBut=new JButton();
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
     protected Path_Finder_Frame controller;
     protected ArrayList<User> userList;
     
-    Admin_Userlist_Frame(Path_Finder_Frame c){
+    Admin_Userlist_Frame(Path_Finder_Frame c,Controller bc){
+        backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");

@@ -17,13 +17,15 @@ import Utilities.Login;
 
 
 public class Login_Frame extends JFrame{
+	protected Controller backendController;
     Path_Finder_Frame controller;
     protected Color backGroundpink; //backgroud color
     protected JPanel contentPane=new JPanel();
 	protected JTextField textField;
 	protected JTextField textField_1;
 
-    public Login_Frame(Path_Finder_Frame c){
+    public Login_Frame(Path_Finder_Frame c,Controller bc){
+		backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");

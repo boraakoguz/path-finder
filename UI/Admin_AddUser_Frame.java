@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Admin_AddUser_Frame extends JFrame{
-    
+    protected Controller backendController;
     protected JButton backBut=new JButton();
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
@@ -23,7 +23,8 @@ public class Admin_AddUser_Frame extends JFrame{
     protected JTextField textField;
 	protected JTextField textField_1;
 
-    Admin_AddUser_Frame(Path_Finder_Frame c){
+    Admin_AddUser_Frame(Path_Finder_Frame c,Controller bc){
+        backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");

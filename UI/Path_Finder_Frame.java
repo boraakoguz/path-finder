@@ -24,7 +24,7 @@ public class Path_Finder_Frame{
         adduser=new Admin_AddUser_Frame(this,backendController);
         edWelcome=new Editor_Welcome_Page(this,backendController);
         userlist=new Admin_Userlist_Frame(this,backendController);
-        seefeed=new Editor_SeeFeedback_Frame(this);
+        seefeed=new Editor_SeeFeedback_Frame(this,backendController);
         //detailFeed=new Editor_DeatiledFeedback_Frame(this,null);
         user.setVisible(true);
     }
@@ -38,7 +38,7 @@ public class Path_Finder_Frame{
             userlist.setVisible(false);
             seefeed.setVisible(false);
             adduser.setVisible(false);
-            detailFeed=new Editor_DeatiledFeedback_Frame(this,f);
+            detailFeed=new Editor_DeatiledFeedback_Frame(this,f,backendController);
             detailFeed.setVisible(true);
 
             //going to chosen feedback in order to read it detailed 

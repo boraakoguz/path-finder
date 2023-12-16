@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 import UI.Admin_Welcome_Page.adminListener;
 
 public class Editor_Welcome_Page extends JFrame{
+    protected Controller backendController;
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
     protected Path_Finder_Frame controller;
-    public Editor_Welcome_Page(Path_Finder_Frame c){
+    public Editor_Welcome_Page(Path_Finder_Frame c,Controller bc){
+        backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");

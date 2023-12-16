@@ -17,12 +17,14 @@ import UI.User_Frame.ButAction;
 import Utilities.Feedback;
 
 public class Editor_DeatiledFeedback_Frame extends JFrame {
+	protected Controller backendController;
     Path_Finder_Frame controller;
     protected Color backGroundpink; //backgroud color
     protected JPanel contentPane=new JPanel();
     protected Feedback feed;
 	
-    public Editor_DeatiledFeedback_Frame(Path_Finder_Frame c,Feedback f){
+    public Editor_DeatiledFeedback_Frame(Path_Finder_Frame c,Feedback f,Controller bc){
+		backendController=bc;
         controller=c;
 		feed=f;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CFeedback_Frame extends JFrame {
+	protected Controller backendController;
     Path_Finder_Frame controller;
     protected Color backGroundpink; //backgroud color
     protected JPanel contentPane=new JPanel();
@@ -25,7 +26,8 @@ public class CFeedback_Frame extends JFrame {
 	protected JTextField textField_5;
 	protected JTextField textField_6;
 
-    public CFeedback_Frame(Path_Finder_Frame c){
+    public CFeedback_Frame(Path_Finder_Frame c,Controller bc){
+		backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
