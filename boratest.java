@@ -74,6 +74,8 @@ public class boratest {
         Login login = new Login();
         login.createAccount("Boraborabora", "abcd", 2);
         login.createAccount("Bora", "abcd", 1);
+        login.createAccount("Kenan","editor",1);
+        login.createAccount("KenanAdmin", "admin", 2);
         System.out.println(login.login("Boraborabora", "abcd"));
         System.out.println(login.login("Boraborabora", "abc"));
         System.out.println(login.getUserList());

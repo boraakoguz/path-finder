@@ -137,17 +137,26 @@ public class Login_Frame extends JFrame{
 				mail=textField.getText();
 				password=textField_1.getText();
 				if((mail.equals(""))||(password.equals(""))){
-					JOptionPane.showMessageDialog(null, "Enter Both Mail and Password");
+					JOptionPane.showMessageDialog(null, "Enter Both Username and Password");
 				}
 				else{
-					if(dummyEditor(mail,password)){
-						controller.changeFrame(4);
-					}
-					else if(dummyAdmin(mail,password)){
-						controller.changeFrame(3);
-					}
-					else{
-						JOptionPane.showMessageDialog(null, "Enter valid Mail and Password");
+					int result = backendController.login(mail, password);
+					switch (result) {
+						case 0:
+							JOptionPane.showMessageDialog(null, "Wrong Username");
+							break;
+						case 1:
+							JOptionPane.showMessageDialog(null, "Wrong Password");
+							break;
+						case 2:
+							controller.changeFrame(4);
+							break;
+						case 3:
+							controller.changeFrame(3);
+							break;
+						default:
+							JOptionPane.showMessageDialog(null, "An Error occured please try later");
+							break;
 					}
 				}
 				
