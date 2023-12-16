@@ -185,9 +185,5 @@ public class Editor_SeeFeedback_Frame extends JFrame {
             }
         }
     }
-	public static void main(String[] args) {
-		Editor_SeeFeedback_Frame f=new Editor_SeeFeedback_Frame(null);
-		f.setVisible(true);
-	}
 
 }
