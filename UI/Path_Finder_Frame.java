@@ -5,6 +5,7 @@ import Utilities.Login;
 
 // this class is like a controller class. every frame changes happen here
 public class Path_Finder_Frame{
+    Controller backendController=new Controller();
     User_Frame user;
     Login_Frame login;
     CFeedback_Frame feedBack;
@@ -16,13 +17,13 @@ public class Path_Finder_Frame{
     Editor_DeatiledFeedback_Frame detailFeed;
 
     Path_Finder_Frame(){
-        user=new User_Frame(this);
-        login=new Login_Frame(this);
-        feedBack=new CFeedback_Frame(this);
-        adWelcome=new Admin_Welcome_Page(this);
-        adduser=new Admin_AddUser_Frame(this);
-        edWelcome=new Editor_Welcome_Page(this);
-        userlist=new Admin_Userlist_Frame(this);
+        user=new User_Frame(this,backendController);
+        login=new Login_Frame(this,backendController);
+        feedBack=new CFeedback_Frame(this,backendController);
+        adWelcome=new Admin_Welcome_Page(this,backendController);
+        adduser=new Admin_AddUser_Frame(this,backendController);
+        edWelcome=new Editor_Welcome_Page(this,backendController);
+        userlist=new Admin_Userlist_Frame(this,backendController);
         seefeed=new Editor_SeeFeedback_Frame(this);
         //detailFeed=new Editor_DeatiledFeedback_Frame(this,null);
         user.setVisible(true);
