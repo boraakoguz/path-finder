@@ -31,7 +31,9 @@ public class FeedBackMenuObject extends JPanel{
         seeFeedback.setBackground(Color.BLACK);
         seeFeedback.setForeground(Color.WHITE);
         seeFeedback.setOpaque(true);
+        seeFeedback.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         seeFeedback.addActionListener(action);
+
         this.setLayout(new GridLayout(1, 4));
         this.add(mapName);
         this.add(buildingName);
