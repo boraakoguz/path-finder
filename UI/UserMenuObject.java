@@ -43,6 +43,7 @@ public class UserMenuObject extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             backendController.removeAccount(userName);
+            repaint();
         }
     }
 }
