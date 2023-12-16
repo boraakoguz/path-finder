@@ -1,10 +1,13 @@
 package Utilities;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+
+import com.google.gson.JsonObject;
 
 import net.thegreshams.firebase4j.error.FirebaseException;
 import net.thegreshams.firebase4j.error.JacksonUtilityException;
@@ -47,12 +50,18 @@ public class Login {
     public void removeAccount(String username) throws UnsupportedEncodingException, FirebaseException{
         firebase.delete(username);
     }
-    public void getUserList() throws UnsupportedEncodingException, FirebaseException{
+    public ArrayList<User> getUserList() throws UnsupportedEncodingException, FirebaseException{
         FirebaseResponse response = firebase.get();
+        ArrayList<User> userList = new ArrayList<User>();
         if(!response.getRawBody().equals("null"))
         {
             JSONObject jsonObject = new JSONObject(response.getRawBody());
+            for(Object name : jsonObject.names()){
+                int userAuth = Integer.parseInt(((JSONObject)jsonObject.get(name.toString())).get("Auth").toString());
+                User user = new User(name.toString(), userAuth);
+                userList.add(user);
+            }
         }
-        return;
+        return userList;
     }
 }

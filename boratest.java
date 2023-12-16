@@ -73,9 +73,10 @@ public class boratest {
         //System.out.println("\nSearch result: " + search.search("B"));
         Login login = new Login();
         login.createAccount("Boraborabora", "abcd", 2);
+        login.createAccount("Bora", "abcd", 1);
         System.out.println(login.login("Boraborabora", "abcd"));
         System.out.println(login.login("Boraborabora", "abc"));
-        login.getUserList();
+        System.out.println(login.getUserList());
 
     }
 }

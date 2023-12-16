@@ -2,9 +2,9 @@ package Utilities;
 
 public class User {
     private String userName;
-    private String userLevel;
+    private int userLevel;
 
-    public User(String name,String level){
+    public User(String name,int level){
         userName=name;
         userLevel=level;
     }
@@ -13,7 +13,7 @@ public class User {
         return this.userName; 
     }
     
-    public String getuserLevel() { 
+    public int getuserLevel() { 
         return this.userLevel; 
     }
 
