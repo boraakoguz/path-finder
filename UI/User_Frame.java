@@ -32,8 +32,6 @@ import Building.Space;
 
 //this class runs all actions that user type user can do. basically there are 3 panels; left,middle and right. things happens by changin these panels features. 
 public class User_Frame extends JFrame{
-    //creating variables
-    protected Controller searcher;
     protected Path_Finder_Frame controller;
     protected boolean[] isMenuchange=new boolean[3];
     protected int[] lastPanels=new int[3];
@@ -76,7 +74,6 @@ public class User_Frame extends JFrame{
     public User_Frame(Path_Finder_Frame c,Controller bc){
         backendController=bc;
         controller=c;
-        searcher=new Controller();
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.setTitle("Path Finder");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -178,7 +175,7 @@ public class User_Frame extends JFrame{
         mapLab.setBounds(20, 120, 100, 15);
         mapPickList.setBounds(20,140,250,30);
         mapPickList.addActionListener(new comboBoxActionListener());
-        for (String map : searcher.getAvailableMaps()) {
+        for (String map : backendController.getAvailableMaps()) {
             mapPickList.addItem(map);
         }
 
@@ -238,7 +235,7 @@ public class User_Frame extends JFrame{
     //this method will show the directions this method is where backend should be added
     protected void middle1(){
         setMiddlePanel(Color.WHITE);
-        ArrayList<Space> directions = searcher.getDirections(startLocation, targetLocation);
+        ArrayList<Space> directions = backendController.getDirections(startLocation, targetLocation);
         JLabel lab=new JLabel(directions.toString());
         lab.setBounds(250, 250, 400, 100);
         middlePanel.add(lab);
@@ -343,7 +340,7 @@ public class User_Frame extends JFrame{
   
         @Override
         public void keyTyped(KeyEvent e) {
-            ArrayList<Space> searchResults= searcher.search(startSearchTextField.getText()+ e.getKeyChar());
+            ArrayList<Space> searchResults= backendController.search(startSearchTextField.getText()+ e.getKeyChar());
             startSearchListModel.clear();
             for (Space space : searchResults) {
                 startSearchListModel.addElement(space);
@@ -364,7 +361,7 @@ public class User_Frame extends JFrame{
   
         @Override
         public void keyTyped(KeyEvent e) {
-            ArrayList<Space> searchResults= searcher.search(targetSearchTextField.getText()+ e.getKeyChar());
+            ArrayList<Space> searchResults= backendController.search(targetSearchTextField.getText()+ e.getKeyChar());
             targetSearchListModel.clear();
             for (Space space : searchResults) {
                 targetSearchListModel.addElement(space);
@@ -411,7 +408,7 @@ public class User_Frame extends JFrame{
     @Override
     public void actionPerformed(ActionEvent e) {
         String pick = (String)mapPickList.getSelectedItem();
-        searcher.setCurrentMap(pick);
+        backendController.setCurrentMap(pick);
     }
     
    }

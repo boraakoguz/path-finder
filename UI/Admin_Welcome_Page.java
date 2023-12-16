@@ -17,6 +17,8 @@ public class Admin_Welcome_Page extends JFrame {
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
     protected Path_Finder_Frame controller;
+    protected String adminName;
+    protected JLabel lblNewLabel_1;
     public Admin_Welcome_Page(Path_Finder_Frame c,Controller bc){
         backendController=bc;
         controller=c;
@@ -93,7 +95,7 @@ public class Admin_Welcome_Page extends JFrame {
         btnUserList.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnUserList);
 		
-		JLabel lblNewLabel_1 = new JLabel("Welcome Admin X");
+		lblNewLabel_1 = new JLabel("Welcome Admin " + this.adminName);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(440, 136, 353, 47);
 		contentPane.add(lblNewLabel_1);
@@ -114,6 +116,11 @@ public class Admin_Welcome_Page extends JFrame {
         btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_1);
     }
+    public void setAdminName(String name){
+        this.adminName = name;
+        lblNewLabel_1.setText("Welcome Admin " + this.adminName);
+        
+    }
     public class adminListener implements ActionListener {
         String butType;
 
@@ -131,14 +138,12 @@ public class Admin_Welcome_Page extends JFrame {
                 controller.changeFrame(5);
             }
             else if(butType.equals("userlist")){
-                
+
                 controller.changeFrame(6);
             }
             else if(butType.equals("out")){
                 controller.changeFrame(0);
             }
-        }
-    
-        
+        }   
     }
 }

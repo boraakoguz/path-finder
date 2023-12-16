@@ -13,4 +13,7 @@ public class FeedbackContainer {
     public void addFeedBack(Feedback fb){
         this.feedBackList.add(fb);
     }
+    public void removeFeedBack(Feedback feedback){
+        this.feedBackList.remove(feedback);
+    }
 }

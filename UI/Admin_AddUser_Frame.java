@@ -141,8 +141,13 @@ public class Admin_AddUser_Frame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             String pick = (String)userPickList.getSelectedItem();
-
-            pickedUserType = Integer.parseInt(pick);
+            if(pick.equals("Editor")){
+                pickedUserType = 1;
+            }
+            else{
+                pickedUserType = 2;
+            }
+            
         }
     }
 }

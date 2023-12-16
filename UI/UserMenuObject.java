@@ -16,8 +16,10 @@ public class UserMenuObject extends JPanel {
     protected Color backGroundpink; //backgroud color
     protected String userName;
     protected Controller backendController;
-    public UserMenuObject(User user, Controller backendController){
+    protected Admin_Userlist_Frame parent;
+    public UserMenuObject(User user, Controller backendController, Admin_Userlist_Frame parent){
         this.backendController = backendController;
+        this.parent = parent;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         JLabel userName = new JLabel(user.getuserName());
         this.userName = user.getuserName();
@@ -43,7 +45,7 @@ public class UserMenuObject extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             backendController.removeAccount(userName);
-            repaint();
+            parent.refreshUserList();
         }
     }
 }

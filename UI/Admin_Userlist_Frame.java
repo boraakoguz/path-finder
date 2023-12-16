@@ -81,12 +81,14 @@ public class Admin_Userlist_Frame extends JFrame {
     }
     public void refreshUserList(){
         userList = backendController.getUserList();
+        userlistPanel.setVisible(false);
         userlistPanel.removeAll();
         userlistPanel.setLayout(new GridLayout(userList.size(),1));
 		for (User user : userList) {
-			UserMenuObject menuObj = new UserMenuObject(user,backendController);
+			UserMenuObject menuObj = new UserMenuObject(user,backendController,this);
 			userlistPanel.add(menuObj);
 		}
+        userlistPanel.setVisible(true);
     }
     public class ButAction implements ActionListener {
         String butType;

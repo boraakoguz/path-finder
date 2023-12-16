@@ -149,9 +149,11 @@ public class Login_Frame extends JFrame{
 							JOptionPane.showMessageDialog(null, "Wrong Password");
 							break;
 						case 2:
+							controller.setEditorName(mail);
 							controller.changeFrame(4);
 							break;
 						case 3:
+							controller.setAdminName(mail);
 							controller.changeFrame(3);
 							break;
 						default:

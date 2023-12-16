@@ -65,7 +65,7 @@ public class CFeedback_Frame extends JFrame {
 		lblNewLabel_2.setBounds(26, 288, 184, 30);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Please Enter Your Email");
+		JLabel lblNewLabel_1_1 = new JLabel("Please Enter Your Mail");
 		lblNewLabel_1_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_1.setBounds(31, 187, 220, 21);
 		contentPane.add(lblNewLabel_1_1);
@@ -139,6 +139,7 @@ public class CFeedback_Frame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			backendController.addFeedBack(textField_6.getText(), textField_2.getText(), textField_3.getText(),textField_4.getText());
 			//after feedback submited app goes back to main page
 			controller.changeFrame(0);
 		}

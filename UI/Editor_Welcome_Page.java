@@ -12,13 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import UI.Admin_Welcome_Page.adminListener;
-
 public class Editor_Welcome_Page extends JFrame{
     protected Controller backendController;
     protected JPanel contentPane=new JPanel();
     protected Color backGroundpink; //backgroud color
     protected Path_Finder_Frame controller;
+    protected JLabel lblNewLabel_1;
+    protected String editorName;
     public Editor_Welcome_Page(Path_Finder_Frame c,Controller bc){
         backendController=bc;
         controller=c;
@@ -78,7 +78,7 @@ public class Editor_Welcome_Page extends JFrame{
         btnAddUser.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnAddUser);
 		
-		JLabel lblNewLabel_1 = new JLabel("Welcome Editor X");
+		lblNewLabel_1 = new JLabel("Welcome Editor " + this.editorName);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(440, 136, 353, 47);
 		contentPane.add(lblNewLabel_1);
@@ -99,6 +99,10 @@ public class Editor_Welcome_Page extends JFrame{
         btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());
 		contentPane.add(btnNewButton_1);
     }
+    public void setEditorName(String name){
+        this.editorName = name;
+        lblNewLabel_1.setText("Welcome Editor " + this.editorName);
+    }
     public class editorListener implements ActionListener {
         String butType;
         public editorListener(String s){
@@ -117,8 +121,7 @@ public class Editor_Welcome_Page extends JFrame{
             else if(butType.equals("out")){
                 controller.changeFrame(0);
             }
-        }
-    
-        
+        }    
     }
+
 }

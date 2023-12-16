@@ -2,20 +2,6 @@
   "feedbackContainer": {
     "feedBackList": [
       {
-        "content": "xyz çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "status": true
-      },
-      {
-        "content": "abc çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "status": true
-      },
-      {
         "content": "adsdad çalışmıyor",
         "map": "Bilkent",
         "building": "B Building",
@@ -27,6 +13,20 @@
         "map": "Bilkent",
         "building": "B Building",
         "floor": "First Floor",
+        "status": true
+      },
+      {
+        "content": "Asansör bozuk",
+        "map": "Bilk",
+        "building": "B",
+        "floor": "1",
+        "status": true
+      },
+      {
+        "content": "Asansör bozuk",
+        "map": "Bilk",
+        "building": "B",
+        "floor": "1",
         "status": true
       }
     ]

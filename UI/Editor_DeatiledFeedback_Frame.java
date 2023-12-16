@@ -12,8 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import UI.Editor_Welcome_Page.editorListener;
-import UI.User_Frame.ButAction;
 import Utilities.Feedback;
 
 public class Editor_DeatiledFeedback_Frame extends JFrame {
@@ -147,6 +145,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
             }
             if(butType.equals("delete")){
                 //Deleting the feedback from database should be added here
+				backendController.deleteFeedBack(feed);
                 controller.changeFrame(8);
             }
         }

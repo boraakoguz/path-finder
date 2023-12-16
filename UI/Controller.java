@@ -21,7 +21,6 @@ public class Controller {
     ArrayList<Feedback> feedBackList;
     Map currentMap;
     Login login;
-    private int authLevel = 0; // 0-> User, 1 -> Editor, 2-> Admin
     public Controller(){
         this.loadSave = new LoadSave();
         this.search = new Search();
@@ -41,11 +40,12 @@ public class Controller {
             if(space.getName().equals(mapName)){
                 this.search.emptySearchTree();
                 this.search.initializeSearchTree(space);
-                this.feedBackList = ((Map)space).getFeedbackContainer().getFeedBackList();
                 this.currentMap = (Map)space;
+                setFeedBackList(space);
             }
         }
     }
+
     /**
      * Returns the loaded and available map names
      * @return
@@ -65,15 +65,31 @@ public class Controller {
         return this.feedBackList;
     }
     /**
+     * sets the current feedback list
+     * @param space
+     */
+    public void setFeedBackList(Space space){
+        this.feedBackList = ((Map)space).getFeedbackContainer().getFeedBackList();
+    }
+    /**
      * adds a feedback to the current map, gets String input content of the feedback
      * @param content
      */
     public void addFeedBack(String content,String map,String building, String floor){
         Feedback newFeedback = new Feedback(content,map,building,floor, true);
-        this.feedBackList.add(newFeedback);
         FeedbackContainer container = this.currentMap.getFeedbackContainer();
         container.addFeedBack(newFeedback);
         this.currentMap.addFeedBackContainer(container);
+        this.loadSave.save(currentMap);
+    }
+    /**
+     * deletes the given feedback
+     * @param feedback
+     */
+    public void deleteFeedBack(Feedback feedback){
+        this.currentMap.getFeedbackContainer().removeFeedBack(feedback);
+        setFeedBackList(this.currentMap);
+        loadSave.save(this.currentMap);
     }
     /**
      * Searches the given object in the current map
@@ -123,6 +139,10 @@ public class Controller {
         }
         return null;
     }
+    /**
+     * return the arraylist of user type objects
+     * @return
+     */
     public ArrayList<User> getUserList(){
         try {
             return this.login.getUserList();
@@ -130,6 +150,12 @@ public class Controller {
         }
         return null;
     }
+    /**
+     * sends the data from UI to the Firebase to check credentials
+     * @param username
+     * @param password
+     * @return
+     */
     public int login(String username, String password){
         try {
             return this.login.login(username, password);
@@ -137,12 +163,22 @@ public class Controller {
         }
         return 0;
     }
+    /**
+     * sends the data from UI to firebase to create an account
+     * @param username
+     * @param password
+     * @param auth
+     */
     public void createAccount(String username, String password, int auth){
         try {
             this.login.createAccount(username, password, auth);
         } catch (UnsupportedEncodingException | FirebaseException | JacksonUtilityException e) {
         }
     }
+    /**
+     * deletes the specified user from firebase
+     * @param username
+     */
     public void removeAccount(String username){
         try {
             this.login.removeAccount(username);

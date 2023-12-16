@@ -5,7 +5,7 @@ import Utilities.Login;
 
 // this class is like a controller class. every frame changes happen here
 public class Path_Finder_Frame{
-    Controller backendController=new Controller();
+    Controller backendController;
     User_Frame user;
     Login_Frame login;
     CFeedback_Frame feedBack;
@@ -17,6 +17,7 @@ public class Path_Finder_Frame{
     Editor_DeatiledFeedback_Frame detailFeed;
 
     Path_Finder_Frame(){
+        backendController = new Controller();
         user=new User_Frame(this,backendController);
         login=new Login_Frame(this,backendController);
         feedBack=new CFeedback_Frame(this,backendController);
@@ -25,7 +26,8 @@ public class Path_Finder_Frame{
         edWelcome=new Editor_Welcome_Page(this,backendController);
         userlist=new Admin_Userlist_Frame(this,backendController);
         seefeed=new Editor_SeeFeedback_Frame(this,backendController);
-        //detailFeed=new Editor_DeatiledFeedback_Frame(this,null);
+        Feedback dummyFeedback = new Feedback("",   "", "", "", false);
+        detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
         user.setVisible(true);
     }
     protected void changeFrame(int i, Feedback f){
@@ -152,6 +154,7 @@ public class Path_Finder_Frame{
             adWelcome.setVisible(false);
             edWelcome.setVisible(false);
             userlist.setVisible(false);
+            seefeed.refreshFeedBackList();
             seefeed.setVisible(true);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
@@ -172,8 +175,10 @@ public class Path_Finder_Frame{
         }
         
     }
-    public static void main(String[] args) {
-        Path_Finder_Frame f=new Path_Finder_Frame();
+    public void setEditorName(String name){
+        this.edWelcome.setEditorName(name);
     }
-    
+    public void setAdminName(String name){
+        this.adWelcome.setAdminName(name);
+    }    
 }
