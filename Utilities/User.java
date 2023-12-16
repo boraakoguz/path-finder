@@ -13,8 +13,11 @@ public class User {
         return this.userName; 
     }
     
-    public int getuserLevel() { 
-        return this.userLevel; 
+    public String getuserLevel() { 
+        if(this.userLevel == 1){
+            return "Editor";
+        }
+        return "Admin"; 
     }
 
     public String toString(){

@@ -81,6 +81,7 @@ public class Admin_Userlist_Frame extends JFrame {
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_3.setBounds(981, 10, 195, 46);
 		contentPane.add(lblNewLabel_3);
+        contentPane.add(userlistPanel);
     }
     public class ButAction implements ActionListener {
         String butType;
