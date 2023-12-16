@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -278,6 +279,8 @@ public class User_Frame extends JFrame{
                 if(isMenuchange[0]){
                     setLeftPanel(backGroundpink);
                     left1();
+                    startLocation=null;
+                    targetLocation=null;
                     isMenuchange[0]=false;
                 }
                 if(isMenuchange[1]){
@@ -294,9 +297,14 @@ public class User_Frame extends JFrame{
                     isMenuchange[2]=true;
             }
             else if(butType.equals("next1")){
-                isMenuchange[0]=true;
-                setLeftPanel(backGroundpink);
-                left2();
+                if(startLocation==null){
+                    JOptionPane.showMessageDialog(null, "Please Enter Your Location Properly");
+                }
+                else{
+                    isMenuchange[0]=true;
+                    setLeftPanel(backGroundpink);
+                    left2();
+                }
             }
 
             else if((butType.equals("wat"))||(butType.equals("vend"))){
@@ -306,8 +314,14 @@ public class User_Frame extends JFrame{
             }
 
             else if(butType.equals("go")){
-                isMenuchange[1]=true;
-                middle1();
+                if(targetLocation==null){
+                    JOptionPane.showMessageDialog(null, "Please Enter Your Destination Properly");
+                }
+                else{
+                    isMenuchange[1]=true;
+                    middle1();
+                }
+                
                 // the path directions of space to space should be added here 
             }
 

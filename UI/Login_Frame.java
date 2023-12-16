@@ -113,7 +113,7 @@ public class Login_Frame extends JFrame{
 	}
 
 	protected boolean dummyEditor(String mail,String password){
-		if((mail.equals("admin"))&&(password.equals("admin"))){
+		if((mail.equals("editor"))&&(password.equals("editor"))){
 			return true;
 		}
 		else{
