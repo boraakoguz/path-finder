@@ -1,15 +1,21 @@
 package UI;
 import javax.swing.JPanel;
 
+import Building.Space;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+<<<<<<< HEAD
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+=======
+import java.util.ArrayList;
+>>>>>>> c70f263242149c64e84e3dd59c06ba702354bd60
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +29,7 @@ public class LeftScreenPanel extends JPanel implements ActionListener {
     private JLabel labelBuilding = new JLabel("Select Building");
     private JLabel labelFloor = new JLabel("Select Floor");
     private JLabel labelRoom = new JLabel("Select Room");
+<<<<<<< HEAD
     private JComboBox mapBox = new JComboBox<>();
     private JComboBox buildingBox = new JComboBox<>(); 
     private JComboBox floorBox = new JComboBox<>();
@@ -30,12 +37,20 @@ public class LeftScreenPanel extends JPanel implements ActionListener {
 
     private JButton backButton = new JButton(new ImageIcon(((ImageIcon) new JButton(new ImageIcon("image (20).png")).getIcon()).getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
 
+=======
+    private JComboBox<Space> mapBox = new JComboBox<Space>();
+    private JComboBox<Space> buildingBox = new JComboBox<Space>(); 
+    private JComboBox<Space> floorBox = new JComboBox<Space>();
+    private JComboBox<Space> roomBox = new JComboBox<Space>();
+>>>>>>> c70f263242149c64e84e3dd59c06ba702354bd60
     private JButton button1;
     private JButton button2;
+    private Controller backendController;
     GridBagConstraints c = new GridBagConstraints();
     
 
-    public LeftScreenPanel(String title) {
+    public LeftScreenPanel(String title, Controller controller) {
+        this.backendController = controller;
         labelTitle = new JLabel(title);
         labelTitle.setFont(new Font("Serif", Font.ITALIC, 25));
         setBackground(Color.PINK);
@@ -102,8 +117,8 @@ public class LeftScreenPanel extends JPanel implements ActionListener {
         
     }
     
-    public LeftScreenPanel(String type, JButton button1) {
-        this(type);
+    public LeftScreenPanel(String type, JButton button1,Controller controller) {
+        this(type,controller);
         this.button1 = button1;
         c.gridx = 0;
         c.gridy = 10;
@@ -111,8 +126,8 @@ public class LeftScreenPanel extends JPanel implements ActionListener {
 
     }
 
-    public LeftScreenPanel(String type, JButton button1, JButton button2) {
-        this(type, button1);
+    public LeftScreenPanel(String type, JButton button1, JButton button2,Controller controller) {
+        this(type, button1, controller);
         this.button2 = button2;
         c.gridx = 1;
         c.gridy = 10;
@@ -121,7 +136,10 @@ public class LeftScreenPanel extends JPanel implements ActionListener {
 
 
     public void fillMapBoxes() {
-
+        ArrayList<String> maps = backendController.getAvailableMaps();
+        for (String string : maps) {
+            mapBox.addItem(null);
+        }
     }
 
     public void fillBuildingBox() {

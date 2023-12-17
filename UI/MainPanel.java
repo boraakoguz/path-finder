@@ -4,17 +4,16 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
+<<<<<<< HEAD
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
+=======
+>>>>>>> c70f263242149c64e84e3dd59c06ba702354bd60
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 
 public class MainPanel extends JPanel{
     final public static int DRAW_ACTION = 0;
@@ -35,7 +34,7 @@ public class MainPanel extends JPanel{
     final public int PANEL_DEFAULT_SIZE = 200;
     final public int MAX_ZOOM = 5;
     final public int MIN_ZOOM = 0;
-    public int currentZoom = 3;
+    public int currentZoom = 1;
     public int differenceSize = 100;
     public int drawPanelSize = (PANEL_DEFAULT_SIZE*(currentZoom+2));
     public int mainPanelSize = drawPanelSize + differenceSize*2;

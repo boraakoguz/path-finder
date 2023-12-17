@@ -1,23 +1,19 @@
 package UI;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 
 public class AdminMapTools extends JFrame {
     Controller backendController;
     public AdminMapTools(Controller backendController){
         this.backendController = backendController;
-        this.setSize(700,400);
+        this.setSize(1200,700);
         
         JButton button1 = new JButton("Select");
-        LeftScreenPanel leftScreen = new LeftScreenPanel("Admin Map Tools Panel", button1);
+        LeftScreenPanel leftScreen = new LeftScreenPanel("Admin Map Tools Panel", button1,backendController);
         MainPanel mainPanel = new MainPanel();
         SettingsBarPanel settingsBar = new SettingsBarPanel();
         ToolsPanel tools = new ToolsPanel(mainPanel);
