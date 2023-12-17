@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 public abstract class Space {  
     protected transient Space parent;
-    protected int[] xPoints;
-    protected int[] yPoints;
+    protected int xPoint;
+    protected int yPoint;
+    protected int width;
+    protected int height;
     protected String name;
-    private int mapShowCaseRatio = 1;
     protected ArrayList<Space> contents;
     transient private boolean isHighlighted = false;
    
@@ -82,6 +83,30 @@ public abstract class Space {
             return true;
         }
         return false;
+    }
+    public void setX(int x){
+        this.xPoint = x;
+    }
+    public void setY(int y){
+        this.yPoint = y;
+    }
+    public void setWidth(int width){
+        this.width = width;
+    }
+    public void setHeight(int height){
+        this.height = height;
+    }
+    public int getX(){
+        return this.xPoint;
+    }
+    public int getY(){
+        return this.yPoint;
+    }
+    public int getWidth(){
+        return this.width;
+    }
+    public int getHeight(){
+        return this.height;
     }
     public String toString(){
         return this.getName();

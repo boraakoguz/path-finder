@@ -27,10 +27,6 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     public int testWidth;
     public int testHeight;
 
-    public DrawPanel() {
-
-    }
-
     public int resizeDefaultVaules(int value) {
         return value/(mainPanel.getCurrentZoom()+2);
     }
@@ -44,11 +40,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
-
         addComponentListener(this);
     }
-    
-
     public void addSpace(int x, int y, int width, int height) {
         paintDrawTemp(getGraphics());
         int area = width*height;

@@ -58,6 +58,13 @@ public class Controller {
         return mapNames;
     }
     /**
+     * returns map objects
+     * @return
+     */
+    public ArrayList<Map> getAvailableMapObjects(){
+        return this.maps;
+    }
+    /**
      * returns the feedback list of the selected map
      * @return
      */

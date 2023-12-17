@@ -1,12 +1,14 @@
 package UI;
 import javax.swing.JPanel;
 
+import Building.Space;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Label;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,16 +20,18 @@ public class LeftScreenPanel extends JPanel {
     private JLabel labelBuilding = new JLabel("Select Building");
     private JLabel labelFloor = new JLabel("Select Floor");
     private JLabel labelRoom = new JLabel("Select Room");
-    private JComboBox mapBox = new JComboBox<>();
-    private JComboBox buildingBox = new JComboBox<>(); 
-    private JComboBox floorBox = new JComboBox<>();
-    private JComboBox roomBox = new JComboBox<>();
+    private JComboBox<Space> mapBox = new JComboBox<Space>();
+    private JComboBox<Space> buildingBox = new JComboBox<Space>(); 
+    private JComboBox<Space> floorBox = new JComboBox<Space>();
+    private JComboBox<Space> roomBox = new JComboBox<Space>();
     private JButton button1;
     private JButton button2;
+    private Controller backendController;
     GridBagConstraints c = new GridBagConstraints();
     
 
-    public LeftScreenPanel(String title) {
+    public LeftScreenPanel(String title, Controller controller) {
+        this.backendController = controller;
         labelTitle = new JLabel(title);
         labelTitle.setFont(new Font("Serif", Font.ITALIC, 25));
         setBackground(Color.PINK);
@@ -86,8 +90,8 @@ public class LeftScreenPanel extends JPanel {
         c.gridwidth = 1;
     }
     
-    public LeftScreenPanel(String type, JButton button1) {
-        this(type);
+    public LeftScreenPanel(String type, JButton button1,Controller controller) {
+        this(type,controller);
         this.button1 = button1;
         c.gridx = 0;
         c.gridy = 9;
@@ -95,8 +99,8 @@ public class LeftScreenPanel extends JPanel {
 
     }
 
-    public LeftScreenPanel(String type, JButton button1, JButton button2) {
-        this(type, button1);
+    public LeftScreenPanel(String type, JButton button1, JButton button2,Controller controller) {
+        this(type, button1, controller);
         this.button2 = button2;
         c.gridx = 1;
         c.gridy = 9;
@@ -105,7 +109,10 @@ public class LeftScreenPanel extends JPanel {
 
 
     public void fillMapBoxes() {
-
+        ArrayList<String> maps = backendController.getAvailableMaps();
+        for (String string : maps) {
+            mapBox.addItem(null);
+        }
     }
 
     public void fillBuildingBox() {
