@@ -95,7 +95,6 @@ public class LeftScreenPanel extends JPanel {
 
     }
 
-    
     public LeftScreenPanel(String type, JButton button1, JButton button2) {
         this(type, button1);
         this.button2 = button2;

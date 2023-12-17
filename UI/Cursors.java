@@ -1,3 +1,4 @@
+package UI;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
@@ -8,10 +9,7 @@ public class Cursors {
     private static Image eraser = toolkit.getImage("eraser-icon.png");
     private static Image path = toolkit.getImage("path-icon.png");
     private static Image wall = toolkit.getImage("wall-icon.png");
-
-
     
-
     public static Cursor eraserCursor() {
         return toolkit.createCustomCursor(eraser , new Point(0, 47), "img");
     }

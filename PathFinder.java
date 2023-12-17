@@ -1,12 +1,10 @@
-import UI.App;
-import UI.Controller;
+import UI.Path_Finder_Frame;
 
 public class PathFinder {
-    Controller controller;
-    App app;
+    Path_Finder_Frame pathFinder;
     public PathFinder(){
-        this.controller = new Controller();
-        this.app = new App();
+
+        this.pathFinder = new Path_Finder_Frame();
 
     }
     public static void main(String[] args) {

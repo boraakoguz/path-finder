@@ -131,7 +131,6 @@ public class Admin_Welcome_Page extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //admins will directed to each(the page names are same with buttype names. so, ı do not write which page will be directed in each if)
             if(butType.equals("map")){
-                System.out.println("in progress");
                 controller.changeFrame(7);
             }
             else if(butType.equals("adduser")){

@@ -1,3 +1,4 @@
+package UI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,11 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 
-public class TestGUIert {
-    public TestGUIert(){
-        JFrame frame = new JFrame();
-        
-        frame.setSize(700,400);
+public class AdminMapTools extends JFrame {
+    Controller backendController;
+    public AdminMapTools(Controller backendController){
+        this.backendController = backendController;
+        this.setSize(700,400);
         
         JButton button1 = new JButton("Select");
         LeftScreenPanel leftScreen = new LeftScreenPanel("Admin Map Tools Panel", button1);
@@ -33,16 +34,9 @@ public class TestGUIert {
         allMapTools.add(mainPanel, BorderLayout.CENTER);
         
 
-        frame.add(leftScreen, BorderLayout.WEST);
-        frame.add(allMapTools , BorderLayout.CENTER);
-
-        frame.setVisible(true);
+        this.add(leftScreen, BorderLayout.WEST);
+        this.add(allMapTools , BorderLayout.CENTER);
+        this.setVisible(false);
 
     }
-
-    public static void main(String[] args) {
-        TestGUIert test = new TestGUIert();
-    }
-
-    
 }

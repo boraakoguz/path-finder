@@ -14,8 +14,9 @@ public class Path_Finder_Frame{
     Admin_AddUser_Frame adduser;
     Editor_SeeFeedback_Frame seefeed;
     Editor_DeatiledFeedback_Frame detailFeed;
+    AdminMapTools adminMapTools;
 
-    Path_Finder_Frame(){
+    public Path_Finder_Frame(){
         backendController = new Controller();
         user=new User_Frame(this,backendController);
         login=new Login_Frame(this,backendController);
@@ -27,6 +28,7 @@ public class Path_Finder_Frame{
         seefeed=new Editor_SeeFeedback_Frame(this,backendController);
         Feedback dummyFeedback = new Feedback("","","","",   "", "", "", false);
         detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
+        adminMapTools = new AdminMapTools(this.backendController);
         user.setVisible(true);
     }
     protected void changeFrame(int i, Feedback f){
@@ -57,9 +59,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going back to main page
         }
-        if(i==1){
+        else if(i==1){
             user.setVisible(false);
             login.setVisible(true);
             feedBack.setVisible(false);
@@ -69,9 +72,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to login page
         }
-        if(i==2){
+        else if(i==2){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(true);
@@ -81,9 +85,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to create feedback page
         }
-        if(i==3){
+        else if(i==3){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -93,9 +98,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             // goint to admin welcome page
         }
-        if(i==4){
+        else if(i==4){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -105,9 +111,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             // going to editor welcome page
         }
-        if(i==5){
+        else if(i==5){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -117,9 +124,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(true);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to add user page
         }
-        if(i==6){
+        else if(i==6){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -131,9 +139,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to userlist page
         }
-        if(i==7){
+        else if(i==7){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -143,10 +152,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(true);
             //going to admin map tools page 
-            //Admin map tools should be added
         }
-        if(i==8){
+        else if(i==8){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -157,9 +166,10 @@ public class Path_Finder_Frame{
             seefeed.setVisible(true);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to editors' seefeedback page
         }
-        if(i==9){
+        else if(i==9){
             user.setVisible(false);
             login.setVisible(false);
             feedBack.setVisible(false);
@@ -169,6 +179,7 @@ public class Path_Finder_Frame{
             seefeed.setVisible(false);
             adduser.setVisible(false);
             detailFeed.setVisible(false);
+            adminMapTools.setVisible(false);
             //going to editor map tools page
             //Editor Maptools should be added
         }
