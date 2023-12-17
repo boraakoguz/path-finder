@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,6 +27,7 @@ public class MainPanel extends JPanel{
     final public static int PATH_ACTION = 7;
     final public static int WALL_ACTION = 8;
     public int currenAction = -1;
+    public Color currentColor = Color.BLACK;
 
 
     //drawPanel setSize() ---> PANEL_DEFAULT_SIZE + (currentZoom*ADDITIONAL_PANEL_SIZE)
@@ -39,10 +41,7 @@ public class MainPanel extends JPanel{
     public int mainPanelSize = drawPanelSize + differenceSize*2;
 
     //current zoom + 2. Remove panel defult size
-
-    public Color currentColor = Color.BLACK;
     
-
     JPanel westPanel = new JPanel();
     JPanel northPanel = new JPanel();
     JPanel mainPanel = new JPanel(null);
@@ -79,6 +78,10 @@ public class MainPanel extends JPanel{
 
     public int getCurrentAction() {
         return currenAction;
+    }
+
+    public Color getCurrentColor() {
+        return currentColor;
     }
 
     public void arrangeCursor(int cursorType) {
@@ -120,6 +123,10 @@ public class MainPanel extends JPanel{
     public void color() {
         currenAction = COLOR_ACTION;
         arrangeCursor(COLOR_ACTION);
+        Color newColor = JColorChooser.showDialog(this, JColorChooser.SELECTION_MODEL_PROPERTY, currentColor);
+        if(newColor != null) {
+            currentColor = newColor;
+        }
     }
     public void eraser() {
         currenAction = ERASER_ACTION;
