@@ -6,17 +6,23 @@ package Utilities;
 public class Feedback {
 
     //String variable that includes feedback.
+    private String mail;
+    private String name;
     private String content;
     private String map;
     private String building; 
     private String floor;
+    private String room;
     //The status of the feedback: 'false' for unhandled feedbacks, 'true' for done ones.
     private boolean status;
-    public Feedback(String content, String map, String building, String floor, boolean status){
+    public Feedback(String mail, String name, String content, String map, String building, String floor, String room, boolean status){
+        this.mail = mail;
+        this.name = name;
         this.content = content;
         this.map = map;
         this.building = building;
         this.floor = floor;
+        this.room = room;
         this.status = status;
     }
     //Getter and setter for feedback status.
@@ -37,10 +43,13 @@ public class Feedback {
      * Getter for the feedback message.
      * @param feedback message.
      */
+    public String getName(){ return this.name;}
+    public String getMail(){ return this.mail;}
     public String getFeedBack() { return this.content; }
     public String getMap() { return this.map; }
     public String getBuilding() { return this.building; }
     public String getFloor() { return this.floor; }
+    public String getRoom(){ return this.room; }
 
     public String toString(){
         return this.content + " Status: " + this.status;

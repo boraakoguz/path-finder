@@ -34,6 +34,7 @@ public class UserMenuObject extends JPanel {
         removeUser.setBackground(Color.BLACK);
         removeUser.setForeground(Color.WHITE);
         removeUser.setOpaque(true);
+        removeUser.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         removeUser.addActionListener(new ButtonListener());
         this.setLayout(new GridLayout(1, 3));
         this.add(userName);

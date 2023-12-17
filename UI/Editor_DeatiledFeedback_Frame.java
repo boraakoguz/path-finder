@@ -57,7 +57,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
 		lblNewLabel_3.setBounds(981, 10, 195, 46);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name X");
+		JLabel lblNewLabel_1 = new JLabel("Name: " + feed.getName());
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1.setBounds(10, 172, 170, 27);
 		contentPane.add(lblNewLabel_1);
@@ -102,7 +102,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
 		lblNewLabel_1_2_1.setBounds(10, 212, 170, 27);
 		contentPane.add(lblNewLabel_1_2_1);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("Mail X");
+		JLabel lblNewLabel_1_3 = new JLabel("Mail: " + feed.getMail());
 		lblNewLabel_1_3.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_3.setBounds(10, 249, 170, 27);
 		contentPane.add(lblNewLabel_1_3);
@@ -122,7 +122,7 @@ public class Editor_DeatiledFeedback_Frame extends JFrame {
 		lblNewLabel_1_3_3.setBounds(10, 459, 170, 27);
 		contentPane.add(lblNewLabel_1_3_3);
 		
-		JLabel lblNewLabel_1_3_4 = new JLabel("Room: X");
+		JLabel lblNewLabel_1_3_4 = new JLabel("Room: " +feed.getRoom());
 		lblNewLabel_1_3_4.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNewLabel_1_3_4.setBounds(10, 494, 170, 27);
 		contentPane.add(lblNewLabel_1_3_4);

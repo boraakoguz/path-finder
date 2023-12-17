@@ -139,7 +139,7 @@ public class CFeedback_Frame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			backendController.addFeedBack(textField_6.getText(), textField_2.getText(), textField_3.getText(),textField_4.getText());
+			backendController.addFeedBack(textField_1.getText(),textField.getText(),textField_6.getText(), textField_2.getText(), textField_3.getText(),textField_4.getText(),textField_5.getText());
 			//after feedback submited app goes back to main page
 			controller.changeFrame(0);
 		}

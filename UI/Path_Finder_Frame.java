@@ -25,7 +25,7 @@ public class Path_Finder_Frame{
         edWelcome=new Editor_Welcome_Page(this,backendController);
         userlist=new Admin_Userlist_Frame(this,backendController);
         seefeed=new Editor_SeeFeedback_Frame(this,backendController);
-        Feedback dummyFeedback = new Feedback("",   "", "", "", false);
+        Feedback dummyFeedback = new Feedback("","","","",   "", "", "", false);
         detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
         user.setVisible(true);
     }

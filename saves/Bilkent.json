@@ -2,31 +2,13 @@
   "feedbackContainer": {
     "feedBackList": [
       {
-        "content": "adsdad çalışmıyor",
+        "mail": "bora@mail.com",
+        "name": "Bora",
+        "content": "No water left in vending machine",
         "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "status": true
-      },
-      {
-        "content": "lan çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "status": true
-      },
-      {
-        "content": "Asansör bozuk",
-        "map": "Bilk",
-        "building": "B",
-        "floor": "1",
-        "status": true
-      },
-      {
-        "content": "Asansör bozuk",
-        "map": "Bilk",
-        "building": "B",
-        "floor": "1",
+        "building": "B building",
+        "floor": "First",
+        "room": "B-102",
         "status": true
       }
     ]
