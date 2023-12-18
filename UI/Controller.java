@@ -166,6 +166,58 @@ public class Controller {
         return null;
     }
     /**
+     * returns the parts where you enter a Space object
+     * @param start
+     * @param target
+     * @return
+     */
+    public ArrayList<Space> getEnterDirections(Space start, Space target){
+        ArrayList<Space> startPath = start.getDirections();
+        ArrayList<Space> targetPath = target.getDirections();
+        ArrayList<Space> tempSecondPartOfPath = new ArrayList<Space>();
+        int i = 0;
+        int j = 0;
+        while(i<startPath.size()){
+            j = 0;
+            tempSecondPartOfPath.clear();
+            while(j<targetPath.size()){            
+                if(startPath.get(i).equals(targetPath.get(j))){
+                    Collections.reverse(tempSecondPartOfPath);
+                    return tempSecondPartOfPath;
+                }
+                tempSecondPartOfPath.add(targetPath.get(j));
+                j++;
+            }
+            i++;
+        }
+        return null;
+    }
+    /**
+     * return the parts where you exit a Space object
+     * @param start
+     * @param target
+     * @return
+     */
+    public ArrayList<Space> getExitDirections(Space start, Space target){
+        ArrayList<Space> result = new ArrayList<Space>();
+        ArrayList<Space> startPath = start.getDirections();
+        ArrayList<Space> targetPath = target.getDirections();
+        int i = 0;
+        int j = 0;
+        while(i<startPath.size()){
+            j = 0;
+            result.add(startPath.get(i));
+            while(j<targetPath.size()){            
+                if(startPath.get(i).equals(targetPath.get(j))){
+                    return result;
+                }
+                j++;
+            }
+            i++;
+        }
+        return null;
+    }
+    /**
      * return the arraylist of user type objects
      * @return
      */

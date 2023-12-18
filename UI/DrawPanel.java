@@ -31,6 +31,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     public int testWidth;
     public int testHeight;
 
+    int floorNumber = 0;
+
     public int resizeDefaultVaules(int value) {
         return value/(mainPanel.getCurrentZoom()+2);
     }
@@ -79,7 +81,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 newSpace = new Building(name);
             }
             else if(this.activeSpace instanceof Building){
-                newSpace = new Floor(name);
+                newSpace = new Floor(name,floorNumber);
             }
             else if(this.activeSpace instanceof Floor){
                 newSpace = new Room(name);
@@ -338,7 +340,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         if(this.activeSpace instanceof Map){
             for (Space building : this.activeSpace.getContents()) {
                 g.setColor(building.getColor());
-                g.fillRect(
+                g.drawRect(
                     resizeNormalValues(building.getX()),
                     resizeNormalValues(building.getY()),
                     resizeNormalValues(building.getWidth()),
@@ -352,14 +354,14 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 g.setColor(Color.BLACK);
                 g.drawString(building.getName(),
                     resizeNormalValues(building.getX()),
-                    resizeNormalValues(building.getY()));
+                    resizeNormalValues(building.getY()+5));
             }
         }
         else if(this.activeSpace instanceof Building){
             if(this.activeSpace.getContents().size() >= 1){
                 Space floor = activeSpace.getContents().get(0);
                 g.setColor(floor.getColor());
-                g.fillRect(
+                g.drawRect(
                     resizeNormalValues(floor.getX()),
                     resizeNormalValues(floor.getY()),
                     resizeNormalValues(floor.getWidth()),
@@ -373,13 +375,13 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 g.setColor(Color.BLACK);
                 g.drawString(floor.getName(),
                     resizeNormalValues(floor.getX()),
-                    resizeNormalValues(floor.getY()));
+                    resizeNormalValues(floor.getY()+5));
             } 
         }
         else if(this.activeSpace instanceof Floor){
             for (Space room : this.activeSpace.getContents()) {
                 g.setColor(room.getColor());
-                g.fillRect(
+                g.drawRect(
                     resizeNormalValues(room.getX()),
                     resizeNormalValues(room.getY()),
                     resizeNormalValues(room.getWidth()),
@@ -393,7 +395,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 g.setColor(Color.BLACK);
                 g.drawString(room.getName(),
                     resizeNormalValues(room.getX()),
-                    resizeNormalValues(room.getY()));
+                    resizeNormalValues(room.getY()+5));
             }
         }
         else if(this.activeSpace instanceof Room){

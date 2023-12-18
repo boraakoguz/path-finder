@@ -63,9 +63,9 @@
         "height": 50,
         "entranceX": 70,
         "entranceY": 50,
-        "colorR": 255,
-        "colorG": 255,
-        "colorB": 255,
+        "colorR": 0,
+        "colorG": 0,
+        "colorB": 0,
         "name": "B Building",
         "contents": [
           {
@@ -87,10 +87,26 @@
                   "data": {
                     "xPoint": 0,
                     "yPoint": 0,
-                    "width": 0,
-                    "height": 0,
-                    "entranceX": 0,
-                    "entranceY": 0,
+                    "width": 53,
+                    "height": 33,
+                    "entranceX": 26,
+                    "entranceY": 33,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "B101",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 52,
+                    "yPoint": 0,
+                    "width": 53,
+                    "height": 32,
+                    "entranceX": 78,
+                    "entranceY": 32,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
@@ -101,16 +117,48 @@
                 {
                   "type": "Building.Room",
                   "data": {
-                    "xPoint": 0,
+                    "xPoint": 105,
                     "yPoint": 0,
-                    "width": 0,
-                    "height": 0,
-                    "entranceX": 0,
-                    "entranceY": 0,
+                    "width": 47,
+                    "height": 33,
+                    "entranceX": 128,
+                    "entranceY": 33,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
                     "name": "B103",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 0,
+                    "yPoint": 63,
+                    "width": 52,
+                    "height": 36,
+                    "entranceX": 35,
+                    "entranceY": 63,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "B104",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 52,
+                    "yPoint": 63,
+                    "width": 54,
+                    "height": 34,
+                    "entranceX": 80,
+                    "entranceY": 63,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "B105",
                     "contents": []
                   }
                 }
@@ -130,24 +178,23 @@
               "colorG": 0,
               "colorB": 0,
               "name": "Second Floor",
-              "contents": [
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 0,
-                    "yPoint": 0,
-                    "width": 0,
-                    "height": 0,
-                    "entranceX": 0,
-                    "entranceY": 0,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "B201",
-                    "contents": []
-                  }
-                }
-              ]
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "xPoint": 0,
+              "yPoint": 0,
+              "width": 50,
+              "height": 28,
+              "entranceX": 25,
+              "entranceY": 28,
+              "colorR": 255,
+              "colorG": 255,
+              "colorB": 255,
+              "name": "B101",
+              "contents": []
             }
           }
         ]
@@ -192,9 +239,9 @@
               "height": 103,
               "entranceX": 92,
               "entranceY": 126,
-              "colorR": 255,
-              "colorG": 255,
-              "colorB": 255,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
               "name": "First Floor",
               "contents": [
                 {
@@ -206,10 +253,10 @@
                     "height": 37,
                     "entranceX": 28,
                     "entranceY": 37,
-                    "colorR": 255,
-                    "colorG": 255,
-                    "colorB": 255,
-                    "name": "B102",
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "FF101",
                     "contents": []
                   }
                 },
@@ -222,10 +269,10 @@
                     "height": 36,
                     "entranceX": 83,
                     "entranceY": 36,
-                    "colorR": 102,
-                    "colorG": 102,
-                    "colorB": 255,
-                    "name": "B103",
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "FF102",
                     "contents": []
                   }
                 },
@@ -238,26 +285,42 @@
                     "height": 40,
                     "entranceX": 139,
                     "entranceY": 40,
-                    "colorR": 255,
-                    "colorG": 255,
-                    "colorB": 255,
-                    "name": "B104",
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "FF103",
                     "contents": []
                   }
                 },
                 {
                   "type": "Building.Room",
                   "data": {
-                    "xPoint": 31,
-                    "yPoint": 73,
-                    "width": 75,
-                    "height": 64,
-                    "entranceX": 68,
-                    "entranceY": 137,
-                    "colorR": 255,
-                    "colorG": 255,
-                    "colorB": 255,
+                    "xPoint": 0,
+                    "yPoint": 67,
+                    "width": 62,
+                    "height": 39,
+                    "entranceX": 30,
+                    "entranceY": 67,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
                     "name": "FF104",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 61,
+                    "yPoint": 66,
+                    "width": 60,
+                    "height": 39,
+                    "entranceX": 80,
+                    "entranceY": 66,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "FF105",
                     "contents": []
                   }
                 }

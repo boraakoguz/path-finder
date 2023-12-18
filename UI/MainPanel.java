@@ -20,7 +20,7 @@ public class MainPanel extends JPanel{
     final public static int PATH_ACTION = 7;
     final public static int WALL_ACTION = 8;
     public int currenAction = -1;
-    public Color currentColor = Color.WHITE;
+    public Color currentColor = Color.BLACK;
 
 
     //drawPanel setSize() ---> PANEL_DEFAULT_SIZE + (currentZoom*ADDITIONAL_PANEL_SIZE)

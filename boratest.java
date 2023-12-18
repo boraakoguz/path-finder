@@ -36,8 +36,8 @@ public class boratest {
         Map map = new Map("Bilkent");
         Building Bbuilding = new Building("B Building");
         Building GBuilding = new Building("G Building");
-        Floor Bfirst = new Floor("First Floor");
-        Floor Bsecond = new Floor("Second Floor");
+        Floor Bfirst = new Floor("First Floor",0);
+        Floor Bsecond = new Floor("Second Floor",1);
         Room B1_102 = new Room("B102");
         Room B1_103 = new Room("B103");
         Room B1_201 = new Room("B201");

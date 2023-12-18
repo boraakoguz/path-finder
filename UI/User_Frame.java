@@ -73,14 +73,15 @@ public class User_Frame extends JFrame{
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
         this.directionsPanel = new DirectionsPanel(backendController);
+        this.directionsPanel.setBounds(300,0,700,700);
         this.setTitle("Path Finder");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1200,700);
+        this.setSize(1200,735);
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
         setContentPane(contentPanel);
         contentPanel.setBackground(Color.WHITE);
-        contentPanel.setLayout(new GridLayout(1,3));
+        contentPanel.setLayout(null);
         setLeftPanel(backGroundpink);
         setRightPanel(Color.WHITE);
         contentPanel.add(leftPanel);
