@@ -1,6 +1,8 @@
 package UI;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -34,7 +36,7 @@ public class User_Frame extends JFrame{
     protected JPanel contentPanel=new JPanel();
     protected JPanel leftPanel=new JPanel();
     protected JPanel rightPanel=new JPanel();
-    protected JPanel middlePanel=new JPanel();
+    protected DirectionsPanel directionsPanel;
 
     protected JButton logBut=new JButton("Login");
     protected JButton feedBut=new JButton("Create Feedback");
@@ -70,6 +72,7 @@ public class User_Frame extends JFrame{
         backendController=bc;
         controller=c;
         backGroundpink=Color.decode("#dd96b8"); //color adjusment
+        this.directionsPanel = new DirectionsPanel(backendController);
         this.setTitle("Path Finder");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,700);
@@ -77,13 +80,12 @@ public class User_Frame extends JFrame{
         this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
         setContentPane(contentPanel);
         contentPanel.setBackground(Color.WHITE);
-        contentPanel.setLayout(null);
+        contentPanel.setLayout(new GridLayout(1,3));
         setLeftPanel(backGroundpink);
-        setMiddlePanel(Color.WHITE);
         setRightPanel(Color.WHITE);
         contentPanel.add(leftPanel);
-        contentPanel.add(middlePanel);
         contentPanel.add(rightPanel);
+        contentPanel.add(directionsPanel);
         left1();
     }
 
@@ -100,13 +102,6 @@ public class User_Frame extends JFrame{
         backBut.setIcon(new ImageIcon("image (11).png"));
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         leftPanel.add(backBut);
-        repaint();
-    }
-    protected void setMiddlePanel(Color c){
-        middlePanel.removeAll();
-        middlePanel.setBackground(c);
-        middlePanel.setBounds(300, 0, 700, 700);
-        middlePanel.setLayout(null);
         repaint();
     }
     protected void setRightPanel(Color c){
@@ -227,15 +222,7 @@ public class User_Frame extends JFrame{
         // Adding buttons to Frame  
         leftPanel.add(goBut);
     }
-    //this method will show the directions this method is where backend should be added
-    protected void middle1(){
-        setMiddlePanel(Color.WHITE);
-        ArrayList<Space> directions = backendController.getDirections(startLocation, targetLocation);
-        JLabel lab=new JLabel(directions.toString());
-        lab.setBounds(250, 250, 400, 100);
-        middlePanel.add(lab);
-        repaint();
-    }
+    
     //Search bar methods 
     // search method should be added here
     
@@ -277,7 +264,7 @@ public class User_Frame extends JFrame{
                     isMenuchange[0]=false;
                 }
                 if(isMenuchange[1]){
-                    setMiddlePanel(Color.WHITE);
+                    directionsPanel.setVisibility(false);
                     isMenuchange[1]=false;
                 }
                 if(isMenuchange[2]){
@@ -286,8 +273,8 @@ public class User_Frame extends JFrame{
                 }
             }
             else if(butType.equals("menu1")){
-                    right1();
-                    isMenuchange[2]=true;
+                right1();
+                isMenuchange[2]=true;
             }
             else if(butType.equals("next1")){
                 if(startLocation==null){
@@ -302,7 +289,7 @@ public class User_Frame extends JFrame{
 
             else if((butType.equals("wat"))||(butType.equals("vend"))){
                 isMenuchange[1]=true;
-                middle1();
+                directionsPanel.setVisibility(true);
                 // the path directions of objects should be added here 
             }
 
@@ -312,7 +299,9 @@ public class User_Frame extends JFrame{
                 }
                 else{
                     isMenuchange[1]=true;
-                    middle1();
+                    directionsPanel.setDirections(startLocation, targetLocation);
+                    directionsPanel.setVisibility(true);
+
                 }
                 
                 // the path directions of space to space should be added here 
