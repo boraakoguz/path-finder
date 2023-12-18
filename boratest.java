@@ -1,9 +1,9 @@
+import java.awt.Color;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import Building.Building;
 import Building.Floor;
-import Building.Hallway;
 import Building.Map;
 import Building.MapObject;
 import Building.Room;
@@ -35,23 +35,45 @@ public class boratest {
         
         Map map = new Map("Bilkent");
         Building Bbuilding = new Building("B Building");
+        Building GBuilding = new Building("G Building");
         Floor Bfirst = new Floor("First Floor");
         Floor Bsecond = new Floor("Second Floor");
-        Hallway b1Hallway = new Hallway("Main Hall");
-        Hallway b2Hallway = new Hallway("Main Hall");
         Room B1_102 = new Room("B102");
         Room B1_103 = new Room("B103");
         Room B1_201 = new Room("B201");
         MapObject vending = new MapObject("B First Floor Vending Machine",0,true);
+        
+        map.setX(50);
+        map.setY(50);
+        map.setWidth(100);
+        map.setHeight(50);
+        map.setColor(Color.WHITE);
+        map.setEntranceX(70);
+        map.setEntranceY(50);
+
+        Bbuilding.setX(50);
+        Bbuilding.setY(50);
+        Bbuilding.setWidth(100);
+        Bbuilding.setHeight(50);
+        Bbuilding.setColor(Color.WHITE);
+        Bbuilding.setEntranceX(70);
+        Bbuilding.setEntranceY(50);
+
+        GBuilding.setX(200);
+        GBuilding.setY(250);
+        GBuilding.setWidth(100);
+        GBuilding.setHeight(50);
+        GBuilding.setColor(Color.WHITE);
+        GBuilding.setEntranceX(270);
+        GBuilding.setEntranceY(250);
+        
         map.addSpace(Bbuilding);
+        map.addSpace(GBuilding);
         map.addFeedBackContainer(container);
         Bbuilding.addSpace(Bfirst);
         Bbuilding.addSpace(Bsecond);
-        Bfirst.addSpace(b1Hallway);
-        Bfirst.addSpace(b2Hallway);
-        b1Hallway.addSpace(B1_102);
-        b1Hallway.addSpace(vending);
-        b2Hallway.addSpace(B1_103);
+        Bfirst.addSpace(B1_102);
+        Bfirst.addSpace(B1_103);
         Bsecond.addSpace(B1_201);
         LoadSave loadSave = new LoadSave();
         loadSave.save(map);
@@ -74,13 +96,14 @@ public class boratest {
         //System.out.println(search.search("B102").getDirections());
         //System.out.println("\nSearch result: " + search.search("B"));
         Login login = new Login();
+        /* 
         login.createAccount("Boraborabora", "abcd", 2);
         login.createAccount("Bora", "abcd", 1);
         login.createAccount("Kenan","editor",1);
         login.createAccount("KenanAdmin", "admin", 2);
         System.out.println(login.login("Boraborabora", "abcd"));
         System.out.println(login.login("Boraborabora", "abc"));
-        System.out.println(login.getUserList());
+        System.out.println(login.getUserList())*/
 
     }
 }

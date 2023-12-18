@@ -21,6 +21,8 @@ public class Controller {
     ArrayList<Feedback> feedBackList;
     Map currentMap;
     Login login;
+    Space currentDrawContext;
+    DrawPanel drawPanel;
     public Controller(){
         this.loadSave = new LoadSave();
         this.search = new Search();
@@ -45,7 +47,9 @@ public class Controller {
             }
         }
     }
-
+    public void save(){
+        this.loadSave.save(currentMap);
+    }
     /**
      * Returns the loaded and available map names
      * @return
@@ -63,6 +67,21 @@ public class Controller {
      */
     public ArrayList<Map> getAvailableMapObjects(){
         return this.maps;
+    }
+    /**
+     * sets the draw panel context
+     * @param space
+     */
+    public void setCurrentDrawContext(Space space){
+        this.currentDrawContext = space;
+        this.drawPanel.setActiveSpace(space);
+    }
+    /**
+     * sets the drawpanel object
+     * @param panel
+     */
+    public void setDrawPanel(DrawPanel panel){
+        this.drawPanel = panel;
     }
     /**
      * returns the feedback list of the selected map
@@ -191,5 +210,22 @@ public class Controller {
             this.login.removeAccount(username);
         } catch (UnsupportedEncodingException | FirebaseException e) {
         }
+    }
+    /**
+     * deletes the given space
+     * @param space
+     */
+    public void deleteSpace(Space space){
+        Space parentSpace = space.getParent();
+        parentSpace.getContents().remove(space);   
+    }
+    /**
+     * adds the given space to the given parent space
+     * @param parent
+     * @param space
+     */
+    public void addSpace(Space parent, Space space){
+        parent.addSpace(space);
+        setCurrentMap(this.currentMap.getName());
     }
 }

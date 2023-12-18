@@ -5,13 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-<<<<<<< HEAD
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JLabel;
-=======
->>>>>>> c70f263242149c64e84e3dd59c06ba702354bd60
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -26,7 +20,7 @@ public class MainPanel extends JPanel{
     final public static int PATH_ACTION = 7;
     final public static int WALL_ACTION = 8;
     public int currenAction = -1;
-    public Color currentColor = Color.BLACK;
+    public Color currentColor = Color.WHITE;
 
 
     //drawPanel setSize() ---> PANEL_DEFAULT_SIZE + (currentZoom*ADDITIONAL_PANEL_SIZE)
@@ -44,10 +38,14 @@ public class MainPanel extends JPanel{
     JPanel westPanel = new JPanel();
     JPanel northPanel = new JPanel();
     JPanel mainPanel = new JPanel(null);
-    JPanel drawPanel = new DrawPanel(this);
+    DrawPanel drawPanel;
+    LeftScreenPanel leftScreenPanel;
     JScrollPane scrollPane;
+    Controller backendController;
 
-    public MainPanel() {
+    public MainPanel(Controller backendController, LeftScreenPanel leftScreenPanel) {
+        this.backendController = backendController;
+        this.drawPanel = new DrawPanel(this,leftScreenPanel,backendController);
         setLayout(new BorderLayout());
         add(westPanel, BorderLayout.WEST);
         add(northPanel, BorderLayout.NORTH);
@@ -61,6 +59,7 @@ public class MainPanel extends JPanel{
         mainPanel.setSize(mainPanelSize, mainPanelSize);
         drawPanel.setSize(drawPanelSize, drawPanelSize);
         drawPanel.setLocation(differenceSize, differenceSize);
+        this.backendController.setDrawPanel(drawPanel);
         mainPanel.add(drawPanel);
         JScrollPane scrollPane = new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);;
         add(scrollPane);

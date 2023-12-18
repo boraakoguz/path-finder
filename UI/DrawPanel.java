@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -15,33 +14,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 
+import Building.Building;
+import Building.Floor;
+import Building.Map;
+import Building.Room;
+import Building.Space;
+
 public class DrawPanel extends JPanel implements MouseInputListener, ComponentListener{
     public MainPanel mainPanel;
-    ArrayList<Integer> testXList = new ArrayList<Integer>();
-    ArrayList<Integer> testYList = new ArrayList<Integer>();
-    ArrayList<Integer> testWidthList = new ArrayList<Integer>();
-    ArrayList<Integer> testHeightList = new ArrayList<Integer>();
-    ArrayList<Color> testColorList = new ArrayList<Color>();
-    ArrayList<String> testSpacesName = new ArrayList<String>();
 
-    ArrayList<Integer> testEnterenceXList = new ArrayList<Integer>();
-    ArrayList<Integer> testEnterenceYList = new ArrayList<Integer>();
-
-    public int totalSpaces = 0;
+    Controller backendController;
+    Space activeSpace;
+    LeftScreenPanel leftScreenPanel;
     public int testX;
     public int testY;
     public int testWidth;
     public int testHeight;
 
-<<<<<<< HEAD
-    
-
-    public DrawPanel() {
-
-    }
-
-=======
->>>>>>> c70f263242149c64e84e3dd59c06ba702354bd60
     public int resizeDefaultVaules(int value) {
         return value/(mainPanel.getCurrentZoom()+2);
     }
@@ -50,12 +39,18 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         return value*(mainPanel.getCurrentZoom()+2);
     }
 
-    public DrawPanel(MainPanel mainPanel){
+    public DrawPanel(MainPanel mainPanel, LeftScreenPanel leftScreenPanel, Controller controller){
+        this.backendController = controller;
         this.mainPanel = mainPanel;
+        this.leftScreenPanel = leftScreenPanel;
         setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
         addComponentListener(this);
+    }
+    public void setActiveSpace(Space space){
+        this.activeSpace = space;
+        repaint();
     }
     public void addSpace(int x, int y, int width, int height) {
         paintDrawTemp(getGraphics());
@@ -63,8 +58,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         int originalY = resizeDefaultVaules(y);
         int originalWidth = resizeDefaultVaules(width);
         int originalHeight = resizeDefaultVaules(height);
-        int area = width*height;
-        //TODO: ADD AREA
+
         String name = JOptionPane.showInputDialog(mainPanel, 
                                         "X-Cor: " + originalX +
                                         "\nY-Cor: " + originalY +
@@ -80,37 +74,57 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             repaint();
         }
         else {
-            testXList.add(originalX);
-            testYList.add(originalY);
-            testWidthList.add(originalWidth);
-            testHeightList.add(originalHeight);
-            testColorList.add(mainPanel.getCurrentColor());
-            testEnterenceXList.add(originalX + originalWidth/2);
-            testEnterenceYList.add(originalY + originalHeight);
-            testSpacesName.add(name);
-            totalSpaces++;
+            Space newSpace;
+            if(this.activeSpace instanceof Map){
+                newSpace = new Building(name);
+            }
+            else if(this.activeSpace instanceof Building){
+                newSpace = new Floor(name);
+            }
+            else if(this.activeSpace instanceof Floor){
+                newSpace = new Room(name);
+            }
+            else{
+                newSpace = new Map(name);
+            }
+            newSpace.setX(originalX);
+            newSpace.setY(originalY);
+            newSpace.setWidth(originalWidth);
+            newSpace.setHeight(originalHeight);
+            newSpace.setColor(mainPanel.getCurrentColor());
+            newSpace.setEntranceX(originalX+originalWidth/2);
+            newSpace.setEntranceY(originalY+originalHeight);
+            newSpace.setName(name);
+
+            backendController.addSpace(this.activeSpace, newSpace);
+            backendController.save();
+            if(this.activeSpace instanceof Map){
+                leftScreenPanel.fillBuildingBox(this.activeSpace);
+            }
+            else if(this.activeSpace instanceof Building){
+                leftScreenPanel.fillFloorBox(this.activeSpace);
+            }
+            else if(this.activeSpace instanceof Floor){
+                leftScreenPanel.fillRoomBox(this.activeSpace);
+            }
+            else{
+                leftScreenPanel.fillMapBoxes();
+            } 
             repaint();
         }
-        System.out.println(testXList.size());
     }
 
     public void deleteSpace(int x, int y) {
         int deleteX = resizeDefaultVaules(x);
         int deleteY = resizeDefaultVaules(y);
-        for(int i = 0; i < totalSpaces; i++){
+        for(Space space : this.activeSpace.getContents()){
             if(
-                deleteX > testXList.get(i) &&
-                deleteY > testYList.get(i) &&
-                deleteX < testXList.get(i) + testWidthList.get(i) &&
-                deleteY < testYList.get(i) + testHeightList.get(i)
+                deleteX > space.getX() &&
+                deleteY > space.getY() &&
+                deleteX < space.getX() + space.getWidth() &&
+                deleteY < space.getY() + space.getHeight()
             ) {
-                testXList.remove(i);
-                testYList.remove(i);
-                testWidthList.remove(i);
-                testHeightList.remove(i);
-                testColorList.remove(i);
-                testSpacesName.remove(i);
-                totalSpaces--;
+                backendController.deleteSpace(space);
                 repaint();
                 break;
             }
@@ -121,14 +135,13 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     public void editSpace(int x, int y) {
         int editX = resizeDefaultVaules(x);
         int editY = resizeDefaultVaules(y);
-        for(int i = 0; i < totalSpaces; i++){
+        for(Space space : this.activeSpace.getContents()){
             if(
-                editX > testXList.get(i) &&
-                editY > testYList.get(i) &&
-                editX < testXList.get(i) + testWidthList.get(i) &&
-                editY < testYList.get(i) + testHeightList.get(i)
+                editX > space.getX() &&
+                editY > space.getY() &&
+                editX < space.getX() + space.getWidth() &&
+                editY < space.getY() + space.getHeight()
             ) {
-                int currentSpaceIndex = i;
                 JButton locationButton = new JButton("Change Location and Size");
                 JButton colorButton = new JButton(" Change Color");
                 JButton nameButton = new JButton("Change Name");
@@ -142,11 +155,11 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                         JTextField field2 = new JTextField();
                         JTextField field3 = new JTextField();
                         JTextField field4 = new JTextField();
-                        String text1 = "Information about the space '" + testSpacesName.get(currentSpaceIndex) + "'";
-                        String text2 =  "X-Cor: " + testXList.get(currentSpaceIndex) + "\n" +
-                                        "Y-Cor: " + testYList.get(currentSpaceIndex) + "\n" +
-                                        "Width: " + testWidthList.get(currentSpaceIndex) + "\n" +
-                                        "Height: " + testHeightList.get(currentSpaceIndex) + "\n\n";
+                        String text1 = "Information about the space '" + space.getName() + "'";
+                        String text2 =  "X-Cor: " + space.getX() + "\n" +
+                                        "Y-Cor: " + space.getY() + "\n" +
+                                        "Width: " + space.getWidth() + "\n" +
+                                        "Height: " + space.getHeight() + "\n\n";
                         Object [] fields = {
                         text1, text2,
                         "New X-Cor", field1,
@@ -171,10 +184,10 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                                     int newHeight = Integer.parseInt(field4.getText());
 
                                     if(newX > 0 && newY > 0 && newWidth > 0 && newHeight > 0) {
-                                        testXList.set(currentSpaceIndex, newX);
-                                        testYList.set(currentSpaceIndex, newY);
-                                        testWidthList.set(currentSpaceIndex, newWidth);
-                                        testHeightList.set(currentSpaceIndex, newHeight);
+                                        space.setX(newX);
+                                        space.setY(newY);
+                                        space.setWidth(newWidth);
+                                        space.setHeight(newHeight);
                                     }
                                 } catch (Exception e2) {
                                     System.out.println("String");   
@@ -191,10 +204,10 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 colorButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, testColorList.get(currentSpaceIndex));                                        
+                        Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, space.getColor());                                        
                         if(newColor != null) {
-                            testColorList.set(currentSpaceIndex, newColor);
-                            paint(getGraphics());
+                            space.setColor(newColor);
+                            repaint();
                         }           
                     }
                 });
@@ -204,7 +217,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     public void actionPerformed(ActionEvent e) {
                         String newName = JOptionPane.showInputDialog(mainPanel, "Enter New Name", "Change Name", JOptionPane.PLAIN_MESSAGE);
                         if(newName != null && !newName.equals("")) {
-                            testSpacesName.set(currentSpaceIndex, newName);
+                            space.setName(newName);
                             repaint();
                         }
                     }
@@ -229,9 +242,9 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 newSide = "EAST";
-                                maxCor = testYList.get(currentSpaceIndex) + testHeightList.get(currentSpaceIndex);
-                                minCor = testYList.get(currentSpaceIndex);
-                                corOtherComp = testXList.get(currentSpaceIndex) + testWidthList.get(currentSpaceIndex);
+                                maxCor = space.getY() + space.getHeight();
+                                minCor = space.getY();
+                                corOtherComp = space.getX() + space.getWidth();
                                 isOnX = false;
                                 directionChooice = 1;
                             }                            
@@ -240,9 +253,9 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 newSide = "WEST";
-                                maxCor = testYList.get(currentSpaceIndex) + testHeightList.get(currentSpaceIndex);
-                                minCor = testYList.get(currentSpaceIndex);
-                                corOtherComp = testXList.get(currentSpaceIndex);
+                                maxCor = space.getY() + space.getHeight();
+                                minCor = space.getY();
+                                corOtherComp = space.getX();
                                 isOnX = false;
                                 directionChooice = 2;
                             }                            
@@ -251,9 +264,9 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 newSide = "NORTH";
-                                maxCor = testXList.get(currentSpaceIndex) + testWidthList.get(currentSpaceIndex);
-                                minCor = testXList.get(currentSpaceIndex);
-                                corOtherComp = testYList.get(currentSpaceIndex);
+                                maxCor = space.getX() + space.getWidth();
+                                minCor = space.getX();
+                                corOtherComp = space.getY();
                                 isOnX = true;
                                 directionChooice = 3;
                             }                            
@@ -262,9 +275,9 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 newSide = "SOUTH";
-                                maxCor = testXList.get(currentSpaceIndex) + testWidthList.get(currentSpaceIndex);
-                                minCor = testXList.get(currentSpaceIndex);
-                                corOtherComp = testYList.get(currentSpaceIndex) + testHeightList.get(currentSpaceIndex);
+                                maxCor = space.getX() + space.getWidth();
+                                minCor = space.getX();
+                                corOtherComp =  space.getY()+ space.getHeight();
                                 isOnX = true;
                                 directionChooice = 4;
                             }                            
@@ -288,12 +301,12 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                                 int newValue = Integer.parseInt(newName);
                                 if(newValue > minCor && newValue < maxCor) {
                                     if(isOnX) {
-                                        testEnterenceXList.set(currentSpaceIndex, newValue);
-                                        testEnterenceYList.set(currentSpaceIndex, corOtherComp);
+                                        space.setEntranceX(newValue);
+                                        space.setEntranceY(corOtherComp);
                                     }
                                     else {
-                                        testEnterenceXList.set(currentSpaceIndex, corOtherComp);
-                                        testEnterenceYList.set(currentSpaceIndex, newValue);
+                                        space.setX(corOtherComp);
+                                        space.setY(newValue);
                                     }
                                     repaint();
                                 }
@@ -313,42 +326,81 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     locationButton, colorButton, nameButton, enteranceButton
                 };
                 JOptionPane.showConfirmDialog(mainPanel,buttons,"Edit Space",JOptionPane.CANCEL_OPTION);
+                backendController.save();
                 break;                
             }
         }
     }
 
-    public void editSpace() {
-
-    }
-
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
-        for(int i = 0; i < totalSpaces; i++) {
-            g.setColor(testColorList.get(i));
-            g.fillRect(
-                resizeNormalValues(testXList.get(i)), 
-                resizeNormalValues(testYList.get(i)), 
-                resizeNormalValues(testWidthList.get(i)), 
-                resizeNormalValues(testHeightList.get(i))
-                );
-            g.setColor(Color.GREEN);
-            g.fillRect(
-                resizeNormalValues(testEnterenceXList.get(i))-5,
-                resizeNormalValues(testEnterenceYList.get(i))-5,
-                10,
-                10
-                );
-            g.setColor(Color.BLACK);
-            g.drawString(
-                testSpacesName.get(i),
-                resizeNormalValues(testXList.get(i)),
-                resizeNormalValues(testYList.get(i))
-                );
+        if(this.activeSpace instanceof Map){
+            for (Space building : this.activeSpace.getContents()) {
+                g.setColor(building.getColor());
+                g.fillRect(
+                    resizeNormalValues(building.getX()),
+                    resizeNormalValues(building.getY()),
+                    resizeNormalValues(building.getWidth()),
+                    resizeNormalValues(building.getHeight()));
+                g.setColor(Color.GREEN);
+                g.fillRect(
+                    resizeNormalValues(building.getEntranceX())-5,
+                    resizeNormalValues(building.getEntranceY())-5,
+                    10,
+                    10);
+                g.setColor(Color.BLACK);
+                g.drawString(building.getName(),
+                    resizeNormalValues(building.getX()),
+                    resizeNormalValues(building.getY()));
+            }
+        }
+        else if(this.activeSpace instanceof Building){
+            if(this.activeSpace.getContents().size() >= 1){
+                Space floor = activeSpace.getContents().get(0);
+                g.setColor(floor.getColor());
+                g.fillRect(
+                    resizeNormalValues(floor.getX()),
+                    resizeNormalValues(floor.getY()),
+                    resizeNormalValues(floor.getWidth()),
+                    resizeNormalValues(floor.getHeight()));
+                g.setColor(Color.GREEN);
+                g.fillRect(
+                    resizeNormalValues(floor.getEntranceX())-5,
+                    resizeNormalValues(floor.getEntranceY())-5,
+                    10,
+                    10);
+                g.setColor(Color.BLACK);
+                g.drawString(floor.getName(),
+                    resizeNormalValues(floor.getX()),
+                    resizeNormalValues(floor.getY()));
+            } 
+        }
+        else if(this.activeSpace instanceof Floor){
+            for (Space room : this.activeSpace.getContents()) {
+                g.setColor(room.getColor());
+                g.fillRect(
+                    resizeNormalValues(room.getX()),
+                    resizeNormalValues(room.getY()),
+                    resizeNormalValues(room.getWidth()),
+                    resizeNormalValues(room.getHeight()));
+                g.setColor(Color.GREEN);
+                g.fillRect(
+                    resizeNormalValues(room.getEntranceX())-5,
+                    resizeNormalValues(room.getEntranceY())-5,
+                    10,
+                    10);
+                g.setColor(Color.BLACK);
+                g.drawString(room.getName(),
+                    resizeNormalValues(room.getX()),
+                    resizeNormalValues(room.getY()));
+            }
+        }
+        else if(this.activeSpace instanceof Room){
+            System.out.println("r");
         }
     }
-
+    
     public void paintPath(Graphics g, int x, int y){
         g.fillRect(x, y, 3, 3);
     }

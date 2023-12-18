@@ -12,9 +12,9 @@ public class AdminMapTools extends JFrame {
         this.backendController = backendController;
         this.setSize(1200,700);
         
-        JButton button1 = new JButton("Select");
-        LeftScreenPanel leftScreen = new LeftScreenPanel("Admin Map Tools Panel", button1,backendController);
-        MainPanel mainPanel = new MainPanel();
+        
+        LeftScreenPanel leftScreen = new LeftScreenPanel("Admin Map Tools Panel",backendController);
+        MainPanel mainPanel = new MainPanel(backendController, leftScreen);
         SettingsBarPanel settingsBar = new SettingsBarPanel();
         ToolsPanel tools = new ToolsPanel(mainPanel);
         

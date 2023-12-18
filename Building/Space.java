@@ -1,4 +1,5 @@
 package Building;
+import java.awt.Color;
 import java.util.ArrayList;
 
 public abstract class Space {  
@@ -7,6 +8,11 @@ public abstract class Space {
     protected int yPoint;
     protected int width;
     protected int height;
+    protected int entranceX;
+    protected int entranceY;
+    protected int colorR;
+    protected int colorG;
+    protected int colorB;
     protected String name;
     protected ArrayList<Space> contents;
     transient private boolean isHighlighted = false;
@@ -84,6 +90,9 @@ public abstract class Space {
         }
         return false;
     }
+    public void setName(String name){
+        this.name = name;
+    }
     public void setX(int x){
         this.xPoint = x;
     }
@@ -96,6 +105,17 @@ public abstract class Space {
     public void setHeight(int height){
         this.height = height;
     }
+    public void setEntranceX(int x){
+        this.entranceX = x;
+    }
+    public void setEntranceY(int y){
+        this.entranceY = y;
+    }
+    public void setColor(Color color){
+        this.colorR = color.getRed();
+        this.colorG = color.getGreen();
+        this.colorB = color.getBlue();
+    }
     public int getX(){
         return this.xPoint;
     }
@@ -107,6 +127,15 @@ public abstract class Space {
     }
     public int getHeight(){
         return this.height;
+    }
+    public int getEntranceX(){
+        return this.entranceX;
+    }
+    public Color getColor(){
+        return new Color(this.colorR,this.colorG,this.colorB);
+    }
+    public int getEntranceY(){
+        return this.entranceY;
     }
     public String toString(){
         return this.getName();

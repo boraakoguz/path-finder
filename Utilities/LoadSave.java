@@ -1,4 +1,5 @@
 package Utilities;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -45,6 +46,7 @@ public class LoadSave {
             jsonReader = new JsonReader(new FileReader(file));
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
+            gsonBuilder.registerTypeAdapter(Color.class, new InterfaceAdapter<Color>());
             Gson gson = gsonBuilder.create();
             loadedMap = gson.fromJson(jsonReader, Map.class);
             createRelationsToLoadedMap(loadedMap);
@@ -58,11 +60,13 @@ public class LoadSave {
             Writer writer = new FileWriter(new File(this.workingDirectory, map.getName() + ".json"));
             GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
             gsonBuilder.registerTypeAdapter(Space.class, new InterfaceAdapter<Space>());
+            gsonBuilder.registerTypeAdapter(Color.class, new InterfaceAdapter<Color>());
             Gson gson = gsonBuilder.create();
             gson.toJson(map, writer);
             writer.flush();
             writer.close();
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
     public void createRelationsToLoadedMap(Space map){
