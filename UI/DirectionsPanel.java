@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import Building.Space;
 
 public class DirectionsPanel extends JPanel {
     final int ZOOMIN = 4;
     final int XCORRECTION = 20;
     final int YCORRECTION = 100;
+    final int  COLLISION_DETECTION_SIZE = 20;
     JButton nextStep = new JButton("Next");
     JButton previousStep = new JButton("Previous");
     Controller backendController;
@@ -29,10 +30,16 @@ public class DirectionsPanel extends JPanel {
     int changeDirectionTypeIndex;
     boolean exitDirectionType;
     Space currentStep;
+    Polygon arrowHead;
 
     public DirectionsPanel(Controller backendController){
         this.backendController = backendController;
         this.setBackground(Color.WHITE);
+        this.arrowHead = new Polygon();
+        this.arrowHead.addPoint( 0,5);
+        this.arrowHead.addPoint( -5, -5);
+        this.arrowHead.addPoint( 5,-5);
+
         this.nextStep.addActionListener(new ActionListener() {
 
             @Override
@@ -101,27 +108,104 @@ public class DirectionsPanel extends JPanel {
         this.setVisible(vis);
         repaint();
     }
-    public int zoomIn(int data){
-        return data*ZOOMIN;
+    public int zoomIn(double d){
+        return (int) (d*ZOOMIN);
     }
     public int getMean(int data, int offset){
         return (data+data+offset)/2;
     }
-    public Polygon drawLineBetweenEntrances(int startX, int startY, int targetX, int targetY){
-        ArrayList<Integer> avoidedXPoints = new ArrayList<Integer>();
-        ArrayList<Integer> avoidedYPoints = new ArrayList<Integer>();
-        ArrayList<Integer> avoidedHeights = new ArrayList<Integer>();
-        ArrayList<Integer> avoidedWidths = new ArrayList<Integer>();
-        for (Space space : currentStep.getContents()) {
-            
+    /* 
+    public ArrayList<Polygon> drawLineBetweenEntrances(int startX, int startY, int targetX, int targetY){
+        if(startX - targetX < 0){ // to the left
+
         }
         return null;
+    }
+    */
+    public void drawLineBetweenEntrances(int startX, int startY, int targetX, int targetY, Graphics g){
+        int dx = targetX - startX;
+        int dy = targetY - startY;
+        double D = Math.sqrt(dx*dx + dy*dy);
+        double xm = D - 10, xn = xm, ym = 10, yn = -10, x;
+        double sin = dy / D, cos = dx / D;
+    
+        x = xm*cos - ym*sin + startX;
+        ym = xm*sin + ym*cos + startY;
+        xm = x;
+    
+        x = xn*cos - yn*sin + startX;
+        yn = xn*sin + yn*cos + startY;
+        xn = x;
+    
+        int[] xpoints = {targetX, (int) xm, (int) xn};
+        int[] ypoints = {targetY, (int) ym, (int) yn};
+        
+        g.drawLine(startX, startY, targetX, targetY);
+        g.fillPolygon(xpoints, ypoints, 3);
+    }
+    public boolean checkVertical(int x,int y,boolean isDown){
+         int tempY = y;
+        if(isDown){
+            tempY = y;
+            while(tempY>0){
+                tempY = tempY - COLLISION_DETECTION_SIZE;
+                if(checkCollision(x, y)){
+                    return false;
+                }
+            }
+        }
+        else{
+            while(tempY<700){
+                tempY = tempY + COLLISION_DETECTION_SIZE;
+                if(checkCollision(x, y)){
+                    return false;
+                }
+            }
+        }   
+        return true;  
+    }
+    public boolean checkHorizontal(int x,int y,boolean isRight){
+         int tempX = x;
+        if(isRight){
+            tempX = y;
+            while(tempX>0){
+                tempX = tempX - COLLISION_DETECTION_SIZE;
+                if(checkCollision(x, y)){
+                    return false;
+                }
+            }
+        }
+        else{
+            while(tempX<700){
+                tempX = tempX + COLLISION_DETECTION_SIZE;
+                if(checkCollision(x, y)){
+                    return false;
+                }
+            }
+        }   
+        return true;  
+    }
+    
+    public boolean checkCollision(int x, int y){
+        for(Space space : currentStep.getContents()){
+            if(
+                x > space.getX() &&
+                y > space.getY() &&
+                x < space.getX() + space.getWidth() &&
+                y < space.getY() + space.getHeight())
+            {
+                return true;
+            }
+        }
+        return false;
     }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        ArrayList<Point> entrances = new ArrayList<Point>();
         for (Space space : currentStep.getContents()){
             if(directions.contains(space)){
+                entrances.add(new Point(space.getEntranceX(),space.getEntranceY()));
                 if(exitDirectionType){
                     g.setColor(Color.RED);
                 }
@@ -138,6 +222,16 @@ public class DirectionsPanel extends JPanel {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.BOLD, 20));
         g.drawString("Step: " + (stepIndex+1)  + "/" + maxIndex, 10, 30);  
-        g.drawString("Go to " + currentStep, 350, 650);  
+        g.drawString("Go to " + currentStep, 350, 650);
+        if(entrances.size()>= 2){
+            drawLineBetweenEntrances(
+                zoomIn(entrances.get(0).getX())+XCORRECTION,
+                zoomIn(entrances.get(0).getY())+YCORRECTION,
+                zoomIn(entrances.get(1).getX())+XCORRECTION,
+                zoomIn(entrances.get(1).getY())+YCORRECTION,
+                g);
+        }
+        
+          
     }
 }
