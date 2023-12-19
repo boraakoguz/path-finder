@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Building.Building;
 import Building.Floor;
+import Building.Map;
 import Building.Space;
 
 public class DirectionsPanel extends JPanel {
@@ -91,6 +92,16 @@ public class DirectionsPanel extends JPanel {
     public void setDirections(Space start, Space target){
         this.enterDirections = this.backendController.getEnterDirections(start, target);
         this.exitDirections = this.backendController.getExitDirections(start, target);
+        for (Space exit : exitDirections) {
+            if(exit instanceof Building){
+                exitDirections.remove(exit);
+            }
+        }
+        for (Space enter : enterDirections) {
+            if(enter instanceof Building){
+                enterDirections.remove(enter);
+            }
+        }
         this.directions = new ArrayList<Space>();
         this.directions.addAll(exitDirections);
         this.directions.addAll(enterDirections);
@@ -115,7 +126,12 @@ public class DirectionsPanel extends JPanel {
             else{
                 description = description + "Enter ";
             }
-            description = description + directions.get(i);
+            if(directions.get(i) instanceof Map){
+                description = description + directions.get(i);
+            }
+            else{
+                description = description + directions.get(i);
+            }
             directionDescriptions.add(description);
         }
     }
@@ -302,17 +318,57 @@ public class DirectionsPanel extends JPanel {
                 g.drawString(space.getName(), getMean(zoomIn(space.getX())+XCORRECTION, space.getWidth()), getMean(zoomIn(space.getY())+YCORRECTION, space.getY()));
             }
         }
+        
+        
+
+        if(stepIndex<directions.size()-1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrances.get(1).getX())+XCORRECTION,
+                    zoomIn(entrances.get(1).getY())+YCORRECTION,
+                    zoomIn(entrances.get(0).getX())+XCORRECTION,
+                    zoomIn(entrances.get(0).getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Downstairs to " + directions.get(stepIndex+1) );
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrances.get(0).getX())+XCORRECTION,
+                    zoomIn(entrances.get(0).getY())+YCORRECTION,
+                    zoomIn(entrances.get(1).getX())+XCORRECTION,
+                    zoomIn(entrances.get(1).getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
+            }
+        }
+        else if(directions.get(stepIndex) instanceof Floor){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrances.get(1).getX())+XCORRECTION,
+                    zoomIn(entrances.get(1).getY())+YCORRECTION,
+                    zoomIn(entrances.get(0).getX())+XCORRECTION,
+                    zoomIn(entrances.get(0).getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrances.get(0).getX())+XCORRECTION,
+                    zoomIn(entrances.get(0).getY())+YCORRECTION,
+                    zoomIn(entrances.get(1).getX())+XCORRECTION,
+                    zoomIn(entrances.get(1).getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex).getParent());
+            }
+        }
+
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.BOLD, 20));
         g.drawString("Step: " + (stepIndex+1)  + "/" + maxIndex, 10, 30);  
         g.drawString(directionDescriptions.get(stepIndex), 350, 600);
-        if(entrances.size()>= 2){
-            drawLineBetweenEntrances(
-                zoomIn(entrances.get(0).getX())+XCORRECTION,
-                zoomIn(entrances.get(0).getY())+YCORRECTION,
-                zoomIn(entrances.get(1).getX())+XCORRECTION,
-                zoomIn(entrances.get(1).getY())+YCORRECTION,
-                g);
-        }  
     }
 }
