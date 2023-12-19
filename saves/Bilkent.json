@@ -217,6 +217,38 @@
                     "name": "b104",
                     "contents": []
                   }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 52,
+                    "yPoint": 48,
+                    "width": 80,
+                    "height": 37,
+                    "entranceX": 92,
+                    "entranceY": 85,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "qsa",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 122,
+                    "yPoint": 11,
+                    "width": 12,
+                    "height": 28,
+                    "entranceX": 128,
+                    "entranceY": 39,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "tgh",
+                    "contents": []
+                  }
                 }
               ]
             }

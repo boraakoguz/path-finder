@@ -429,77 +429,23 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     resizeNormalValues(space.getX()),
                     resizeNormalValues(space.getY()+5));
             }
-<<<<<<< HEAD
-        }
-        /*
-        else if(this.activeSpace instanceof Building){
-            if(this.activeSpace.getContents().size() >= 1){
-                Space floor = activeSpace.getContents().get(0);
-                g.setColor(floor.getColor());
-                g.drawRect(
-                    resizeNormalValues(floor.getX()),
-                    resizeNormalValues(floor.getY()),
-                    resizeNormalValues(floor.getWidth()),
-                    resizeNormalValues(floor.getHeight()));
-                g.setColor(Color.GREEN);
-                g.fillRect(
-                    resizeNormalValues(floor.getEntranceX())-5,
-                    resizeNormalValues(floor.getEntranceY())-5,
-                    10,
-                    10);
-                g.setColor(Color.BLACK);
-                g.drawString(floor.getName(),
-                    resizeNormalValues(floor.getX()),
-                    resizeNormalValues(floor.getY()+5));
-            } 
-        }
-         */
-        else if(this.activeSpace instanceof Floor){
-            for (Space room : this.activeSpace.getContents()) {
-                g.setColor(room.getColor());
-                g.drawRect(
-                    resizeNormalValues(room.getX()),
-                    resizeNormalValues(room.getY()),
-                    resizeNormalValues(room.getWidth()),
-                    resizeNormalValues(room.getHeight()));
-                g.setColor(Color.GREEN);
-                g.fillRect(
-                    resizeNormalValues(room.getEntranceX())-5,
-                    resizeNormalValues(room.getEntranceY())-5,
-                    10,
-                    10);
-
-                g.setColor(Color.BLACK);
-                g.drawString(room.getName(),
-                    resizeNormalValues(room.getX()),
-                    resizeNormalValues(room.getY()+5));
-            }
-            Floor currentFloor = (Floor) activeSpace;
-            System.out.println(currentFloor.getDownStairX());
-            System.out.println(currentFloor.getDownStairY());
-            System.out.println(currentFloor.getUpStairX());
-            System.out.println(currentFloor.getUpStairY ());
-            g.setColor(Color.RED);
+            if(activeSpace instanceof Floor){
+                Floor currentFloor = (Floor)activeSpace;
+                g.setColor(Color.RED);
                     g.fillRect(
                     resizeNormalValues(currentFloor.getDownStairX())-5,
                     resizeNormalValues(currentFloor.getDownStairY())-5,
                     10,
                     10);
-            g.setColor(Color.YELLOW);
-                    g.fillRect(
-                    resizeNormalValues(currentFloor.getUpStairX())-5,
-                    resizeNormalValues(currentFloor.getUpStairY())-5,
-                    10,
-                    10);
-        }
-        else if(this.activeSpace instanceof Room){
-            System.out.println("r");
-        }
-        
-        
-=======
+                g.setColor(Color.YELLOW);
+                        g.fillRect(
+                        resizeNormalValues(currentFloor.getUpStairX())-5,
+                        resizeNormalValues(currentFloor.getUpStairY())-5,
+                        10,
+                        10);
+            }
+            
         } 
->>>>>>> 1956e0f1a559bfbef91446bdfabdcf942ad60322
     }
     
     public void paintPath(Graphics g, int x, int y){
