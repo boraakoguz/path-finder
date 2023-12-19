@@ -1,6 +1,8 @@
 package UI;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -33,7 +40,7 @@ public class User_Frame extends JFrame{
     protected boolean[] isMenuchange=new boolean[3];
     protected int[] lastPanels=new int[3];
 
-    protected JPanel contentPanel=new JPanel();
+    protected ContentPanel contentPanel=new ContentPanel();
     protected JPanel leftPanel=new JPanel();
     protected JPanel rightPanel=new JPanel();
     protected DirectionsPanel directionsPanel;
@@ -55,6 +62,8 @@ public class User_Frame extends JFrame{
     protected DefaultListModel<Space> startSearchListModel = new DefaultListModel<Space>();
     protected JList<Space> startSearchList = new JList<Space>(startSearchListModel);
     protected JTextField startSearchTextField;
+    ImageIcon image;
+    JLabel imageLab;
 
     protected DefaultListModel<Space> targetSearchListModel = new DefaultListModel<Space>();
     protected JList<Space> targetSearchList = new JList<Space>(targetSearchListModel);
@@ -81,10 +90,18 @@ public class User_Frame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
         setContentPane(contentPanel);
-        contentPanel.setBackground(Color.WHITE);
         contentPanel.setLayout(null);
+
+        menuBut.addActionListener(new ButAction("menu1"));
+        menuBut.setBounds(1140, 20, 35, 35);
+        menuBut.setFocusable(false);
+
+        menuBut.setIcon(new ImageIcon("image (10).png"));
+        menuBut.setBorder(BorderFactory.createEmptyBorder());
+        contentPanel.add(menuBut);
+
         setLeftPanel(backGroundpink);
-        setRightPanel(Color.WHITE);
+        
         contentPanel.add(leftPanel);
         contentPanel.add(rightPanel);
         contentPanel.add(directionsPanel);
@@ -106,24 +123,16 @@ public class User_Frame extends JFrame{
         leftPanel.add(backBut);
         repaint();
     }
-    protected void setRightPanel(Color c){
-        rightPanel.removeAll();
-        rightPanel.setBackground(c);
-        rightPanel.setBounds(1000, 0, 200, 700);
-        rightPanel.setLayout(null);
-        menuBut.addActionListener(new ButAction("menu1"));
-        menuBut.setBounds(140, 20, 35, 35);
-        menuBut.setFocusable(false);
-        menuBut.setBackground(c);
-        menuBut.setIcon(new ImageIcon("image (10).png"));
-        menuBut.setBorder(BorderFactory.createEmptyBorder());
-        rightPanel.add(menuBut);
-        repaint();
-    }
+    
     
     //this method opens the menu
     protected void right1(){
-        setRightPanel(backGroundpink);
+        
+
+        rightPanel.setBackground(backGroundpink);
+        rightPanel.setBounds(1000, 0, 200, 700);
+        rightPanel.setLayout(null);
+        
 
         logBut.addActionListener(new ButAction("log"));
         logBut.setBounds(0, 60, 100, 40);
@@ -141,6 +150,9 @@ public class User_Frame extends JFrame{
 
         rightPanel.add(logBut);
         rightPanel.add(feedBut);
+        contentPanel.add(rightPanel);
+
+        
     }
     //this method creates "where are you panel"
     protected void left1(){
@@ -224,6 +236,35 @@ public class User_Frame extends JFrame{
         // Adding buttons to Frame  
         leftPanel.add(goBut);
     }
+
+    public class ContentPanel extends JPanel{
+        private BufferedImage image;
+        public ContentPanel()
+        {
+            setOpaque(true);
+            try
+            {
+                image = ImageIO.read(new File("image (30).png"));
+            }
+            catch(IOException ioe)
+            {
+                System.out.println("Unable to fetch image.");
+                ioe.printStackTrace();
+            }
+        }
+
+        @Override
+        public Dimension getPreferredSize()
+        {
+            return (new Dimension(image.getWidth(), image.getHeight()));
+        }
+        @Override
+        protected void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, this);
+        }
+    }
     
     //Search bar methods 
     // search method should be added here
@@ -283,7 +324,8 @@ public class User_Frame extends JFrame{
                     isMenuchange[1]=false;
                 }
                 if(isMenuchange[2]){
-                    setRightPanel(Color.WHITE);
+                    rightPanel.removeAll();
+                    contentPanel.remove(rightPanel);
                     isMenuchange[2]=false;
                 }
             }
@@ -328,6 +370,7 @@ public class User_Frame extends JFrame{
             else if(butType.equals("feed")){
                 controller.changeFrame(2);
             }
+            repaint();
         }
     
         

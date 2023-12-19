@@ -44,6 +44,18 @@ public class Admin_Welcome_Page extends JFrame {
         imageLab.setBounds(10, 30, 40, 40);
         contentPane.add(imageLab);
 
+        ImageIcon image1=new ImageIcon("image (17).png");
+        JLabel imageLab1=new JLabel();
+        imageLab1.setIcon(image1);
+        imageLab1.setBounds(700, 270, 200, 200);
+        contentPane.add(imageLab1);
+
+        JLabel lblNewLabel_15 = new JLabel("Path Finder");
+        lblNewLabel_15.setForeground(Color.WHITE);
+		lblNewLabel_15.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblNewLabel_15.setBounds(730, 470, 330, 52);
+		contentPane.add(lblNewLabel_15);
+
         ImageIcon image2=new ImageIcon("image (18).png");
         JLabel imageLab2=new JLabel();
         imageLab2.setIcon(image2);

@@ -56,6 +56,18 @@ public class Admin_AddUser_Frame extends JFrame{
         imageLab.setBounds(930, 10, 40, 40);
         contentPane.add(imageLab);
 
+        ImageIcon image1=new ImageIcon("image (17).png");
+        JLabel imageLab1=new JLabel();
+        imageLab1.setIcon(image1);
+        imageLab1.setBounds(700, 270, 200, 200);
+        contentPane.add(imageLab1);
+
+        JLabel lblNewLabel_15 = new JLabel("Path Finder");
+        lblNewLabel_15.setForeground(Color.WHITE);
+		lblNewLabel_15.setFont(new Font("Arial", Font.PLAIN, 25));
+		lblNewLabel_15.setBounds(730, 470, 330, 52);
+		contentPane.add(lblNewLabel_15);
+
         ImageIcon image3=new ImageIcon("image (24).png");
         JLabel imageLab3=new JLabel();
         imageLab3.setIcon(image3);
