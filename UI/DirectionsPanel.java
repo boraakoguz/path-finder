@@ -264,7 +264,6 @@ public class DirectionsPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayList<Point> entrances = new ArrayList<Point>();
-        fillOccupiedSpaces();
         g.setColor(currentStep.getColor());
         g.drawRect(zoomIn(currentStep.getX())+XCORRECTION,zoomIn(currentStep.getY())+YCORRECTION, zoomIn(currentStep.getWidth()), zoomIn(currentStep.getHeight())); 
         g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));
