@@ -65,4 +65,9 @@ public class Building extends Space{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Building " + name;
+    }
 }

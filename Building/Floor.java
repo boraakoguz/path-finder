@@ -52,5 +52,10 @@ public class Floor extends Space{
     public int getUpStairY(){
         return this.upStairY;
     }
+
+    @Override
+    public String toString() {
+        return "Floor" + name;
+    }
     
 }
