@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 
+import Building.Floor;
 import Building.Map;
 
 public class MainPanel extends JPanel implements MouseInputListener{
@@ -38,7 +43,7 @@ public class MainPanel extends JPanel implements MouseInputListener{
     public Color currentColor = Color.BLACK;
 
     final public int MAP_PANEL_DEFAULT_SIZE = 200;
-    final public int MAX_ZOOM = 5;
+    final public int MAX_ZOOM = 20;
     final public int MIN_ZOOM = 0;
     public int currentZoom = 1;
     public int differenceSize = 100;
@@ -219,6 +224,28 @@ public class MainPanel extends JPanel implements MouseInputListener{
     public void addFloor() {
         currenAction = ADD_FLOOR_ACTION;
         arrangeCursor(DRAW_ACTION);
+        Floor currentFloor = (Floor)backendController.getCurrentDrawContext();
+        JButton up = new JButton("UP");
+        JButton down = new JButton("DOWN");
+
+        up.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Floor newFloor = new Floor(, ABORT);
+            }            
+        });
+
+        down.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }            
+        });
+        
+        //if(currentFloor.getUpStairsFloor() == null && currentFloor.getDownStairsFloor() == null) {
+
+        
+        
     }
     
     public void delete() {

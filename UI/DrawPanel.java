@@ -78,7 +78,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
 
     //TODO: Delete these params
     public void addSpace(int x, int y, int width, int height) {
-        paintDrawTemp(getGraphics());
+        //paintDrawTemp(getGraphics());
+        paintDrawTempOriginal(getGraphics());
        
         //int originalX = resizeDefaultVaules(x);
         //int originalY = resizeDefaultVaules(y);
@@ -508,6 +509,10 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         g.drawRect(testX, testY, testWidth, testHeight);
     }
 
+    public void paintDrawTempOriginal(Graphics g) {
+        g.drawRect(resizeNormalValues(originalX), resizeNormalValues(originalY), resizeNormalValues(originalWidth), resizeNormalValues(originalHeight));
+    }
+
     public void paintEnterence(Graphics g, int x, int y) {
         g.fillRect(x-3, y-3, 6, 6);
     }
@@ -594,6 +599,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 originalWidth = originalWidth + originalX - activeSpace.getX();
                 originalX = activeSpace.getX();
                 //System.out.println("DSADSFSDFDS");
+                System.out.println("İnside 1");
             }
             
             else if(originalX + originalWidth > activeSpace.getX() + activeSpace.getWidth()) {
@@ -602,17 +608,19 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 //System.out.println(activeSpace.getWidth());
                 //System.out.println(testX);
                 originalWidth = activeSpace.getX() + activeSpace.getWidth() - originalX;
+                System.out.println("İnside 2");
             }
             if(originalY < activeSpace.getY()) {
                 originalHeight = originalHeight + originalY - activeSpace.getY();
                 originalY = activeSpace.getY();
+                System.out.println("İnside 3");
             }
             else if(originalY + originalHeight > activeSpace.getY() + activeSpace.getHeight()) {
                 originalHeight = activeSpace.getY() + activeSpace.getHeight() - originalY;
+                System.out.println("İnside 4");
             }
             
             
-
             addSpace(testX, testY, testWidth, testHeight);
             
         }

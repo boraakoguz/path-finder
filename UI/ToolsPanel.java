@@ -208,13 +208,12 @@ public class ToolsPanel extends JPanel implements ActionListener{
         }
         else if(e.getSource() == object) {
             System.out.println("Object");
-            wall.setBackground(Color.GREEN);
+            object.setBackground(Color.GREEN);
             currerntGreen = object;
             mainPanel.object();
         }
         else if(e.getSource() == addFloor) {
             System.out.println("Add Floor");
-            wall.setBackground(Color.GREEN);
             currerntGreen = addFloor;
             mainPanel.addFloor();
         }
