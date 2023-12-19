@@ -212,7 +212,24 @@
               "colorG": 0,
               "colorB": 0,
               "name": "Ground Floor",
-              "contents": []
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 1,
+                    "yPoint": 1,
+                    "width": 5,
+                    "height": 4,
+                    "entranceX": 3,
+                    "entranceY": 5,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "Vending macgine",
+                    "contents": []
+                  }
+                }
+              ]
             }
           }
         ]
@@ -222,14 +239,14 @@
       "type": "Building.Building",
       "data": {
         "maxFloor": 3,
-        "minFloor": -2,
-        "numberOfFloors": 4,
-        "xPoint": 58,
-        "yPoint": 56,
-        "width": 40,
-        "height": 22,
-        "entranceX": 78,
-        "entranceY": 78,
+        "minFloor": -3,
+        "numberOfFloors": 5,
+        "xPoint": 42,
+        "yPoint": 49,
+        "width": 69,
+        "height": 41,
+        "entranceX": 76,
+        "entranceY": 90,
         "colorR": 0,
         "colorG": 0,
         "colorB": 0,
@@ -239,37 +256,89 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 0,
-              "downStairX": 88,
-              "downStairY": 67,
-              "upStairX": 68,
-              "upStairY": 67,
-              "xPoint": 58,
-              "yPoint": 56,
-              "width": 40,
-              "height": 22,
-              "entranceX": 78,
-              "entranceY": 78,
+              "downStairX": 101,
+              "downStairY": 69,
+              "upStairX": 52,
+              "upStairY": 69,
+              "xPoint": 42,
+              "yPoint": 49,
+              "width": 69,
+              "height": 41,
+              "entranceX": 76,
+              "entranceY": 90,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
               "name": "Ground Floor",
-              "contents": []
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 42,
+                    "yPoint": 49,
+                    "width": 24,
+                    "height": 11,
+                    "entranceX": 54,
+                    "entranceY": 60,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "b101",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 66,
+                    "yPoint": 49,
+                    "width": 18,
+                    "height": 12,
+                    "entranceX": 75,
+                    "entranceY": 61,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "b102",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.MapObject",
+                  "data": {
+                    "type": 1,
+                    "functional": true,
+                    "icon": "image (23).png",
+                    "xPoint": 61,
+                    "yPoint": 71,
+                    "width": 11,
+                    "height": 9,
+                    "entranceX": 66,
+                    "entranceY": 80,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "vending",
+                    "contents": []
+                  }
+                }
+              ]
             }
           },
           {
             "type": "Building.Floor",
             "data": {
               "floorNumber": 1,
-              "downStairX": 88,
-              "downStairY": 67,
-              "upStairX": 68,
-              "upStairY": 67,
-              "xPoint": 58,
-              "yPoint": 56,
-              "width": 40,
-              "height": 22,
-              "entranceX": 78,
-              "entranceY": 78,
+              "downStairX": 101,
+              "downStairY": 69,
+              "upStairX": 52,
+              "upStairY": 69,
+              "xPoint": 42,
+              "yPoint": 49,
+              "width": 69,
+              "height": 41,
+              "entranceX": 76,
+              "entranceY": 90,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
@@ -281,76 +350,63 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 2,
-              "downStairX": 88,
-              "downStairY": 67,
-              "upStairX": 68,
-              "upStairY": 67,
-              "xPoint": 58,
-              "yPoint": 56,
-              "width": 40,
-              "height": 22,
-              "entranceX": 78,
-              "entranceY": 78,
+              "downStairX": 101,
+              "downStairY": 69,
+              "upStairX": 52,
+              "upStairY": 69,
+              "xPoint": 42,
+              "yPoint": 49,
+              "width": 69,
+              "height": 41,
+              "entranceX": 76,
+              "entranceY": 90,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
               "name": "2",
-              "contents": [
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 72,
-                    "yPoint": 60,
-                    "width": 13,
-                    "height": 14,
-                    "entranceX": 78,
-                    "entranceY": 74,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "B20",
-                    "contents": []
-                  }
-                }
-              ]
+              "contents": []
             }
           },
           {
             "type": "Building.Floor",
             "data": {
               "floorNumber": -1,
-              "downStairX": 88,
-              "downStairY": 67,
-              "upStairX": 68,
-              "upStairY": 67,
-              "xPoint": 58,
-              "yPoint": 56,
-              "width": 40,
-              "height": 22,
-              "entranceX": 78,
-              "entranceY": 78,
+              "downStairX": 101,
+              "downStairY": 69,
+              "upStairX": 52,
+              "upStairY": 69,
+              "xPoint": 42,
+              "yPoint": 49,
+              "width": 69,
+              "height": 41,
+              "entranceX": 76,
+              "entranceY": 90,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
               "name": "-1",
-              "contents": [
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 72,
-                    "yPoint": 62,
-                    "width": 16,
-                    "height": 16,
-                    "entranceX": 80,
-                    "entranceY": 78,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "BZ",
-                    "contents": []
-                  }
-                }
-              ]
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": -2,
+              "downStairX": 101,
+              "downStairY": 69,
+              "upStairX": 52,
+              "upStairY": 69,
+              "xPoint": 42,
+              "yPoint": 49,
+              "width": 69,
+              "height": 41,
+              "entranceX": 76,
+              "entranceY": 90,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "-2",
+              "contents": []
             }
           }
         ]

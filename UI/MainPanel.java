@@ -3,24 +3,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.event.MouseInputListener;
 
 import Building.Building;
-import Building.Floor;
 import Building.Map;
 import Building.Space;
 
@@ -41,7 +33,7 @@ public class MainPanel extends JPanel {
     final public static int ZOOM_OUT_ACTION = 8;
     final public static int PATH_ACTION = 9;
     final public static int WALL_ACTION = 10;
-    final public static int OBEJECT_ACTION = 11;
+    final public static int OBJECT_ACTION = 11;
     final public static int ADD_FLOOR_ACTION = 12;
     final public static int DELETE_ACTION = 13;
     final public static int ADD_MAP_ACTION = 14;
@@ -110,7 +102,6 @@ public class MainPanel extends JPanel {
     public void arrangeCursor(int cursorType) {
         if(cursorType == DRAW_ACTION) {
             drawPanel.setCursor(new Cursor(1));
-            System.out.println("Draw Cursor");
         }
         else if(cursorType == COLOR_ACTION) {
             drawPanel.setCursor(new Cursor(0));
@@ -210,7 +201,7 @@ public class MainPanel extends JPanel {
     }
     
     public void object() {
-        currenAction = OBEJECT_ACTION;
+        currenAction = OBJECT_ACTION;
         arrangeCursor(DRAW_ACTION);
     }
     

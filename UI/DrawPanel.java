@@ -138,6 +138,49 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             repaint();
         }
     }
+    public void addObject(int x, int y, int width, int height) {
+        paintDrawTempOriginal(getGraphics());
+        
+        String name = JOptionPane.showInputDialog(mainPanel, 
+                                        "X-Cor: " + originalX +
+                                        "\nY-Cor: " + originalY +
+                                        "\nWidth: " + originalWidth +
+                                        "\nHeight: " + originalHeight +
+                                        "\nColor: " + String.format("#%06x", mainPanel.getCurrentColor().getRGB() & 0x00FFFFFF)                            
+                                        ,"Add Space", 1);
+
+        if(name == null || name.equals("")) {
+            repaint();
+        }
+        else { 
+            if(!(this.activeSpace instanceof Floor)){
+                return;
+            }
+            MapObject newSpace = new MapObject(name, 1, true);
+            newSpace.setX(originalX);
+            newSpace.setY(originalY);
+            newSpace.setWidth(originalWidth);
+            newSpace.setHeight(originalHeight);
+            newSpace.setColor(mainPanel.getCurrentColor());
+            newSpace.setEntranceX(originalX+originalWidth/2);
+            newSpace.setEntranceY(originalY+originalHeight);
+            backendController.addMapObjectToFloor((Floor)this.activeSpace, newSpace);
+            backendController.save();
+            if(this.activeSpace instanceof Map){
+                leftScreenPanel.fillBuildingBox(this.activeSpace);
+            }
+            else if(this.activeSpace instanceof Building){
+                leftScreenPanel.fillFloorBox(this.activeSpace);
+            }
+            else if(this.activeSpace instanceof Floor){
+                leftScreenPanel.fillRoomBox(this.activeSpace);
+            }
+            else{
+                leftScreenPanel.fillMapBoxes();
+            } 
+            repaint();
+        }
+    }
 
     public void deleteSpace(int x, int y) {
         int deleteX = resizeDefaultVaules(x);
@@ -590,7 +633,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         else if(mainPanel.getCurrentAction() == MainPanel.CURSOR_ACTION) {
             editSpace(e.getX(), e.getY());
         }
-        //System.out.println(resizeDefaultVaules(e.getX()) + ", " + resizeDefaultVaules(e.getY()));
+
         
         else if(mainPanel.getCurrentAction() == MainPanel.MOVE_ACTION) {
             moveFirstX = e.getX();
@@ -598,6 +641,27 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             previousX = getX();
             previousY = getY();
             System.out.println("X: " + getX());
+        }
+        else if(mainPanel.getCurrentAction() == MainPanel.OBJECT_ACTION) {
+            testX = e.getX();
+            testY = e.getY();
+
+            if(
+                resizeDefaultVaules(testX) < activeSpace.getX() ||
+                resizeDefaultVaules(testY) < activeSpace.getY() ||
+                resizeDefaultVaules(testX) > activeSpace.getX() + activeSpace.getWidth() ||
+                resizeDefaultVaules(testY) > activeSpace.getY() + activeSpace.getHeight()
+            ) {
+                drawingIsSuccesful = false;
+                System.out.println(resizeDefaultVaules(testX) + " > " + activeSpace.getX());
+                System.out.println(resizeDefaultVaules(testY) + " > " + activeSpace.getY());
+                System.out.println(resizeDefaultVaules(testX) + " < " + activeSpace.getX() + activeSpace.getWidth());
+                System.out.println(resizeDefaultVaules(testY) + " < " + activeSpace.getY() + activeSpace.getHeight());
+                System.out.println("Drawing is not succesful");
+            }
+            else {
+                drawingIsSuccesful = true;
+            }
         }
         
     }
@@ -657,6 +721,49 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             addSpace(testX, testY, testWidth, testHeight);
             
         }
+        else if(mainPanel.getCurrentAction() == MainPanel.OBJECT_ACTION && drawingIsSuccesful) {
+            int currentX = e.getX();
+            int currentY = e.getY();
+            if(currentY > testY) {
+                testHeight = e.getY() - testY;
+            }
+            else {
+                testHeight = testY - e.getY();
+                testY = e.getY();
+            }
+            if(currentX > testX) {
+                testWidth = e.getX() - testX;
+            }
+            else {
+                testWidth = testX - e.getX();
+                testX = e.getX();
+            }
+            originalX = resizeDefaultVaules(testX);
+            originalY = resizeDefaultVaules(testY);
+            originalWidth = resizeDefaultVaules(testWidth);
+            originalHeight = resizeDefaultVaules(testHeight);
+            
+            
+            if(originalX < activeSpace.getX()) {
+                originalWidth = originalWidth + originalX - activeSpace.getX();
+                originalX = activeSpace.getX();
+            }
+            
+            else if(originalX + originalWidth > activeSpace.getX() + activeSpace.getWidth()) {
+                originalWidth = activeSpace.getX() + activeSpace.getWidth() - originalX;
+            }
+            if(originalY < activeSpace.getY()) {
+                originalHeight = originalHeight + originalY - activeSpace.getY();
+                originalY = activeSpace.getY();
+            }
+            else if(originalY + originalHeight > activeSpace.getY() + activeSpace.getHeight()) {
+                originalHeight = activeSpace.getY() + activeSpace.getHeight() - originalY;
+            }
+            
+            
+            addObject(testX, testY, testWidth, testHeight);
+            
+        }
         
     }
 
@@ -677,7 +784,6 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     public void mouseDragged(MouseEvent e) {
         if(mainPanel.getCurrentAction() == MainPanel.MOVE_ACTION) {
             setLocation(e.getX()-moveFirstX + previousX, e.getY()-moveFirstY + previousY);
-            //setLocation(e.getX()-moveFirstX, e.getY()-moveFirstY);
             previousX = getX();
             previousY = getY();
             System.out.println(e.getX());

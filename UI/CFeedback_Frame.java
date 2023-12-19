@@ -26,9 +26,6 @@ import javax.swing.JTextField;
 
 
 import Building.Space;
-import UI.User_Frame.fListener;
-import UI.User_Frame.startListActionListener;
-import UI.User_Frame.startSearch;
 
 public class CFeedback_Frame extends JFrame {
     protected JLabel mapLab=new JLabel("Select Map");

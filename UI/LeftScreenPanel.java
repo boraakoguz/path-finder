@@ -8,10 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -158,11 +155,11 @@ public class LeftScreenPanel extends JPanel{
             if(mapBox.getSelectedItem() != null){
                 Space map = (Space) mapBox.getSelectedItem();
                 fillBuildingBox(map);
-                backendController.setCurrentDrawContextEditor((Space)mapBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)mapBox.getSelectedItem());
             }
             else{
                 fillBuildingBox(null);
-                backendController.setCurrentDrawContextEditor(null);
+                backendController.setCurrentDrawContext(null);
             }     
         }
     }
@@ -172,11 +169,11 @@ public class LeftScreenPanel extends JPanel{
             if(buildingBox.getSelectedItem() != null){
                 Space building = (Space) buildingBox.getSelectedItem();
                 fillFloorBox(building); 
-                backendController.setCurrentDrawContextEditor((Space)buildingBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)buildingBox.getSelectedItem());
             }
             else{
                 fillFloorBox(null);
-                backendController.setCurrentDrawContextEditor((Space)mapBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)mapBox.getSelectedItem());
             }
         }
     }
@@ -186,11 +183,11 @@ public class LeftScreenPanel extends JPanel{
             if(floorBox.getSelectedItem() != null){
                 Space floor = (Space) floorBox.getSelectedItem();
                 fillRoomBox(floor);
-                backendController.setCurrentDrawContextEditor((Space)floorBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)floorBox.getSelectedItem());
             }
             else{
                 fillRoomBox(null);
-                backendController.setCurrentDrawContextEditor((Space)buildingBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)buildingBox.getSelectedItem());
             }        
         }
     }
@@ -198,10 +195,10 @@ public class LeftScreenPanel extends JPanel{
         @Override
         public void itemStateChanged(ItemEvent e) {
             if(roomBox.getSelectedItem() != null){
-                backendController.setCurrentDrawContextEditor((Space)roomBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)roomBox.getSelectedItem());
             }
             else{
-                backendController.setCurrentDrawContextEditor((Space)floorBox.getSelectedItem());
+                backendController.setCurrentDrawContext((Space)floorBox.getSelectedItem());
             }
         }
     }
