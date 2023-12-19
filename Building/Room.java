@@ -12,8 +12,7 @@ public class Room extends Space{
         return null;
     }
 
-    @Override
-    public String toString() {
+    public String getCustomString() {
         return "Room " + name;
     }
 }

@@ -13,9 +13,8 @@ public class Map extends Space{
     public FeedbackContainer getFeedbackContainer(){
         return this.feedbackContainer;
     }
-
-    @Override
-    public String toString() {
+    
+    public String getCustomString() {
         return name + " Map";
     }
 }

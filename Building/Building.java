@@ -66,8 +66,8 @@ public class Building extends Space{
         return true;
     }
 
-    @Override
-    public String toString() {
+    
+    public String getCustomString() {
         return "Building " + name;
     }
 }

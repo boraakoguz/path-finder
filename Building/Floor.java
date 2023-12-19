@@ -53,8 +53,7 @@ public class Floor extends Space{
         return this.upStairY;
     }
 
-    @Override
-    public String toString() {
+    public String getCustomString() {
         return "Floor" + name;
     }
     
