@@ -32,7 +32,7 @@ public class Path_Finder_Frame{
         user.setVisible(true);
 
         //TODO: DELETE IT TEST
-        changeFrame(7);
+        //changeFrame(7);
     }
     protected void changeFrame(int i, Feedback f){
         if(i==10){

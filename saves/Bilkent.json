@@ -57,21 +57,6 @@
     {
       "type": "Building.Building",
       "data": {
-<<<<<<< HEAD
-        "maxFloor": 1,
-        "minFloor": -1,
-        "numberOfFloors": 2,
-        "xPoint": 47,
-        "yPoint": 9,
-        "width": 86,
-        "height": 74,
-        "entranceX": 90,
-        "entranceY": 83,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "dsdadasdas",
-=======
         "maxFloor": 3,
         "minFloor": 0,
         "numberOfFloors": 3,
@@ -85,24 +70,10 @@
         "colorG": 0,
         "colorB": 0,
         "name": "B building",
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
         "contents": [
           {
             "type": "Building.Floor",
             "data": {
-<<<<<<< HEAD
-              "floorNumber": 1,
-              "downStairX": 123,
-              "downStairY": 46,
-              "upStairX": 57,
-              "upStairY": 46,
-              "xPoint": 47,
-              "yPoint": 9,
-              "width": 86,
-              "height": 74,
-              "entranceX": 90,
-              "entranceY": 83,
-=======
               "floorNumber": 0,
               "downStairX": 172,
               "downStairY": 72,
@@ -114,14 +85,10 @@
               "height": 71,
               "entranceX": 107,
               "entranceY": 108,
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
               "name": "Ground Floor",
-<<<<<<< HEAD
-              "contents": []
-=======
               "contents": [
                 {
                   "type": "Building.Room",
@@ -216,7 +183,6 @@
                   }
                 }
               ]
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
             }
           }
         ]
@@ -225,21 +191,6 @@
     {
       "type": "Building.Building",
       "data": {
-<<<<<<< HEAD
-        "maxFloor": 1,
-        "minFloor": -1,
-        "numberOfFloors": 2,
-        "xPoint": 143,
-        "yPoint": 41,
-        "width": 24,
-        "height": 63,
-        "entranceX": 155,
-        "entranceY": 104,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "dsadasd",
-=======
         "maxFloor": 10,
         "minFloor": -6,
         "numberOfFloors": 16,
@@ -253,24 +204,10 @@
         "colorG": 0,
         "colorB": 0,
         "name": "SS",
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
         "contents": [
           {
             "type": "Building.Floor",
             "data": {
-<<<<<<< HEAD
-              "floorNumber": 1,
-              "downStairX": 157,
-              "downStairY": 72,
-              "upStairX": 153,
-              "upStairY": 72,
-              "xPoint": 143,
-              "yPoint": 41,
-              "width": 24,
-              "height": 63,
-              "entranceX": 155,
-              "entranceY": 104,
-=======
               "floorNumber": 0,
               "downStairX": 82,
               "downStairY": 118,
@@ -282,7 +219,6 @@
               "height": 33,
               "entranceX": 54,
               "entranceY": 135,
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
@@ -314,18 +250,6 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 1,
-<<<<<<< HEAD
-              "downStairX": 94,
-              "downStairY": 113,
-              "upStairX": 55,
-              "upStairY": 113,
-              "xPoint": 45,
-              "yPoint": 102,
-              "width": 59,
-              "height": 23,
-              "entranceX": 74,
-              "entranceY": 125,
-=======
               "downStairX": 82,
               "downStairY": 118,
               "upStairX": 26,
@@ -479,7 +403,6 @@
               "height": 33,
               "entranceX": 54,
               "entranceY": 135,
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
@@ -510,19 +433,6 @@
           {
             "type": "Building.Floor",
             "data": {
-<<<<<<< HEAD
-              "floorNumber": 1,
-              "downStairX": 27,
-              "downStairY": 59,
-              "upStairX": 18,
-              "upStairY": 59,
-              "xPoint": 8,
-              "yPoint": 35,
-              "width": 29,
-              "height": 49,
-              "entranceX": 22,
-              "entranceY": 84,
-=======
               "floorNumber": -1,
               "downStairX": 82,
               "downStairY": 118,
@@ -879,7 +789,6 @@
               "height": 11,
               "entranceX": 5,
               "entranceY": 11,
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
