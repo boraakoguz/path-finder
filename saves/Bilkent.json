@@ -60,261 +60,6 @@
         "maxFloor": 0,
         "minFloor": 0,
         "numberOfFloors": 1,
-        "xPoint": 130,
-        "yPoint": 74,
-        "width": 33,
-        "height": 50,
-        "entranceX": 146,
-        "entranceY": 124,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "sadasdasdasdas",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 130,
-              "yPoint": 74,
-              "width": 33,
-              "height": 50,
-              "entranceX": 146,
-              "entranceY": 124,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": []
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
-        "xPoint": 34,
-        "yPoint": 15,
-        "width": 96,
-        "height": 48,
-        "entranceX": 82,
-        "entranceY": 63,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "dasdsadas",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 34,
-              "yPoint": 15,
-              "width": 96,
-              "height": 48,
-              "entranceX": 82,
-              "entranceY": 63,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": [
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 66,
-                    "yPoint": 33,
-                    "width": 50,
-                    "height": 19,
-                    "entranceX": 91,
-                    "entranceY": 52,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "ASDFSFSD",
-                    "contents": []
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
-        "xPoint": 0,
-        "yPoint": 0,
-        "width": 24,
-        "height": 35,
-        "entranceX": 12,
-        "entranceY": 35,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "DFDS",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 0,
-              "yPoint": 0,
-              "width": 24,
-              "height": 35,
-              "entranceX": 12,
-              "entranceY": 35,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": [
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 13,
-                    "yPoint": 20,
-                    "width": 11,
-                    "height": 15,
-                    "entranceX": 18,
-                    "entranceY": 35,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "dasdas",
-                    "contents": []
-                  }
-                },
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 9,
-                    "yPoint": 9,
-                    "width": 15,
-                    "height": 13,
-                    "entranceX": 16,
-                    "entranceY": 22,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "dasdas",
-                    "contents": []
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
-        "xPoint": 163,
-        "yPoint": 0,
-        "width": 37,
-        "height": 22,
-        "entranceX": 181,
-        "entranceY": 22,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "FDFDSF",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 163,
-              "yPoint": 0,
-              "width": 37,
-              "height": 22,
-              "entranceX": 181,
-              "entranceY": 22,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": []
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
-        "xPoint": 174,
-        "yPoint": 43,
-        "width": 26,
-        "height": 34,
-        "entranceX": 187,
-        "entranceY": 77,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "FSDFSD",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 174,
-              "yPoint": 43,
-              "width": 26,
-              "height": 34,
-              "entranceX": 187,
-              "entranceY": 77,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": []
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
         "xPoint": 17,
         "yPoint": 92,
         "width": 11,
@@ -353,19 +98,19 @@
     {
       "type": "Building.Building",
       "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
+        "maxFloor": 1,
+        "minFloor": -1,
         "numberOfFloors": 1,
-        "xPoint": 59,
-        "yPoint": 85,
-        "width": 42,
-        "height": 48,
-        "entranceX": 80,
-        "entranceY": 133,
+        "xPoint": 58,
+        "yPoint": 33,
+        "width": 130,
+        "height": 89,
+        "entranceX": 123,
+        "entranceY": 122,
         "colorR": 0,
         "colorG": 0,
         "colorB": 0,
-        "name": "dsda",
+        "name": "B",
         "contents": [
           {
             "type": "Building.Floor",
@@ -375,12 +120,12 @@
               "downStairY": 0,
               "upStairX": 0,
               "upStairY": 0,
-              "xPoint": 59,
-              "yPoint": 85,
-              "width": 42,
-              "height": 48,
-              "entranceX": 80,
-              "entranceY": 133,
+              "xPoint": 58,
+              "yPoint": 33,
+              "width": 130,
+              "height": 89,
+              "entranceX": 123,
+              "entranceY": 122,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,
