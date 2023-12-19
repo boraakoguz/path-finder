@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,26 +11,25 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class ObjectsImage extends JFrame{
-    Image image;
+public class ObjectsImage extends JPanel{
     BufferedImage buffered;
     BufferedImage buffered2;
     //public BufferedImage buffImg = new BufferedImage(240, 240, BufferedImage.TYPE_INT_ARGB);
     public ObjectsImage() throws IOException {
          
-        
-        image = ImageIO.read(new File("image (23).png"));
-        buffered = (BufferedImage) image;
-        buffered2 = resize((BufferedImage) image, 20, 20);
+        setBackground(Color.BLACK);
+        buffered = resize((BufferedImage) ImageIO.read(new File("image (23).png")), 5000, 5000);
+        buffered2 = (BufferedImage) ImageIO.read(new File("image (23).png"));
         setSize(400, 400);
         setVisible(true);
         repaint();
     }
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         g.drawImage(buffered2, 0, 0, null);
-        g.drawRect(10, 10, 10, 10);
+        
     }
 
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
@@ -43,6 +43,10 @@ public class ObjectsImage extends JFrame{
         return dimg;
     }  
     public static void main(String[] args) throws IOException {
-        new ObjectsImage();
+        ObjectsImage test = new ObjectsImage();
+        JFrame frame = new JFrame();
+        frame.add(test);
+        frame.setSize(400, 400);
+        frame.setVisible(true);
     }
 }
