@@ -295,6 +295,9 @@ public class Controller {
      */
     public void addMap(Space map){
         Map newMap = (Map) map;
+
+        FeedbackContainer feedbackContainer = new FeedbackContainer(new ArrayList<Feedback>());
+        newMap.addFeedBackContainer(feedbackContainer);
         this.maps.add(newMap);
         loadSave.save(newMap);
     }
@@ -329,8 +332,8 @@ public class Controller {
      * @param type
      * @param icon
      */
-    public void addMapObjectToFloor(Floor floor,String objName, int type, BufferedImage icon){
-        floor.addMapObject(objName, type, icon);
+    public void addMapObjectToFloor(Floor floor,MapObject mapObj){
+        floor.addMapObject(mapObj);
     }
     /**
      * deletes the given map object from given floor
