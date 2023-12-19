@@ -126,21 +126,75 @@ public class ToolsPanel extends JPanel implements ActionListener{
     }
 
     public void disableEditing() {
+        blueBack.setEnabled(true);
         draw.setEnabled(false);
         color.setEnabled(false);
         eraser.setEnabled(false);
+        move.setEnabled(true);
+        reset.setEnabled(true);
         cursor.setEnabled(false);
+        zoomIn.setEnabled(true);
+        zoomOut.setEnabled(true);
         path.setEnabled(false);
         wall.setEnabled(false);
+        object.setEnabled(false);
+        addFloor.setEnabled(false);
+        delete.setEnabled(false);
+        addMap.setEnabled(false);
     }
 
-    public void enableEditing() {
+    public void buildingEditing() {
+        blueBack.setEnabled(true);
+        draw.setEnabled(false);
+        color.setEnabled(false);
+        eraser.setEnabled(false);
+        move.setEnabled(true);
+        reset.setEnabled(true);
+        cursor.setEnabled(false);
+        zoomIn.setEnabled(true);
+        zoomOut.setEnabled(true);
+        path.setEnabled(false);
+        wall.setEnabled(false);
+        object.setEnabled(false);
+        addFloor.setEnabled(true);
+        delete.setEnabled(true);
+        addMap.setEnabled(false);
+    }
+
+    public void floorEditing() {
+        blueBack.setEnabled(true);
         draw.setEnabled(true);
         color.setEnabled(true);
         eraser.setEnabled(true);
+        move.setEnabled(true);
+        reset.setEnabled(true);
         cursor.setEnabled(true);
+        zoomIn.setEnabled(true);
+        zoomOut.setEnabled(true);
         path.setEnabled(true);
         wall.setEnabled(true);
+        object.setEnabled(true);
+        addFloor.setEnabled(false);
+        delete.setEnabled(true);
+        addMap.setEnabled(false);
+    }
+
+    public void mapEditing() {
+        blueBack.setEnabled(true);
+        draw.setEnabled(true);
+        color.setEnabled(true);
+        eraser.setEnabled(true);
+        move.setEnabled(true);
+        reset.setEnabled(true);
+        cursor.setEnabled(true);
+        zoomIn.setEnabled(true);
+        zoomOut.setEnabled(true);
+        path.setEnabled(true);
+        wall.setEnabled(true);
+        object.setEnabled(false);
+        addFloor.setEnabled(false);
+        delete.setEnabled(true);
+        addMap.setEnabled(true);
     }
 
 

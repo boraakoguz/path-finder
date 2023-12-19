@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
-
+import javax.swing.text.StyledEditorKit.FontSizeAction;
 
 import Building.Building;
 import Building.Floor;
@@ -51,6 +51,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     int previousY;
 
     boolean drawingIsSuccesful;
+
+    Space editedSpace;
 
     int floorNumber = 0;
 
@@ -205,285 +207,284 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         int editY = resizeDefaultVaules(y);
         System.out.println(editX +", " + editY);
         System.out.println(activeSpace);
-        Space editedSpace;
+        boolean isClickedOn = false;
         for(Space space : this.activeSpace.getContents()){
             if(
                 editX > space.getX() &&
                 editY > space.getY() &&
                 editX < space.getX() + space.getWidth() &&
-                editY < space.getY() + space.getHeight()
-                
+                editY < space.getY() + space.getHeight()                
             ) { 
+                isClickedOn = true;
+                editedSpace = space;
                 System.out.println(editX + " > " + space.getX());
                 System.out.println(editY + " > " + space.getY());
                 System.out.println(editX + " < " + (space.getX() + space.getWidth()));
                 System.out.println(editY + " < " +  (space.getY() + space.getHeight()));
-                editedSpace = space;
-                System.out.println(space.getX());
-                System.out.println(space.getY());
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                System.out.println(editedSpace);
+                break;
             }
-            else {
-                editedSpace = activeSpace;
-            }
-            JButton selectSpaceButton = new JButton("Select Space");
-            JButton locationButton = new JButton("Change Location and Size");
-            JButton colorButton = new JButton(" Change Color");
-            JButton nameButton = new JButton("Change Name");
-            JButton enteranceButton = new JButton("Change Enterance");
-            JButton stairsEnterenceButton = new JButton("Change Stairs' Enterence");
+        }
+        if(isClickedOn == false) {
+            editedSpace = activeSpace;
+            System.out.println("İnside also?");
+        }
+        JButton selectSpaceButton = new JButton("Select Space");
+        JButton locationButton = new JButton("Change Location and Size");
+        JButton colorButton = new JButton(" Change Color");
+        JButton nameButton = new JButton("Change Name");
+        JButton enteranceButton = new JButton("Change Enterance");
+        JButton stairsEnterenceButton = new JButton("Change Stairs' Enterence");
 
-            selectSpaceButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    backendController.setCurrentDrawContext(space);
+        selectSpaceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backendController.setCurrentDrawContext(editedSpace);
+                repaint();
+            }
+            
+        });
+        locationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JTextField field1 = new JTextField();
+                JTextField field2 = new JTextField();
+                JTextField field3 = new JTextField();
+                JTextField field4 = new JTextField();
+                String text1 = "Information about the space '" + editedSpace.getName() + "'";
+                String text2 =  "X-Cor: " + editedSpace.getX() + "\n" +
+                                "Y-Cor: " + editedSpace.getY() + "\n" +
+                                "Width: " + editedSpace.getWidth() + "\n" +
+                                "Height: " + editedSpace.getHeight() + "\n\n";
+                Object [] fields = {
+                text1, text2,
+                "New X-Cor", field1,
+                "New Y-Cor", field2,
+                "New Width", field3,
+                "New Height", field4,
+                };
+
+                //TODO: add All conditions, entering letter, not entering, entering to big number, entering zero or negative etc
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Edit Space",JOptionPane.OK_CANCEL_OPTION);
+                if(
+                    chooice == JOptionPane.OK_OPTION &&
+                    !field1.getText().equals("") &&
+                    !field2.getText().equals("") &&
+                    !field3.getText().equals("") &&
+                    !field4.getText().equals("")                 
+                    ) 
+                    {
+                        try {
+                            int newX = Integer.parseInt(field1.getText());
+                            int newY = Integer.parseInt(field2.getText());
+                            int newWidth = Integer.parseInt(field3.getText());
+                            int newHeight = Integer.parseInt(field4.getText());
+
+                            if(newX > 0 && newY > 0 && newWidth > 0 && newHeight > 0) {
+                                editedSpace.setX(newX);
+                                editedSpace.setY(newY);
+                                editedSpace.setWidth(newWidth);
+                                editedSpace.setHeight(newHeight);
+                            }
+                        } catch (Exception e2) {
+                            System.out.println("String");   
+                        }
+                }
+                else {
+                    System.out.println("outside");
+                }
+                System.out.println(field1.getText());
+                repaint();
+            }
+        });
+
+        colorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, editedSpace.getColor());                                        
+                if(newColor != null) {
+                    editedSpace.setColor(newColor);
+                    repaint();
+                }           
+            }
+        });
+
+        nameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String newName = JOptionPane.showInputDialog(mainPanel, "Enter New Name", "Change Name", JOptionPane.PLAIN_MESSAGE);
+                if(newName != null && !newName.equals("")) {
+                    editedSpace.setName(newName);
                     repaint();
                 }
+            }
+        });
+
+        enteranceButton.addActionListener(new ActionListener() {
+            String newSide;
+            boolean isOnX;
+            int maxCor;
+            int minCor;
+            int corOtherComp;
+            int directionChooice = 0;
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton eastButton = new JButton("EAST");
+                JButton westButton = new JButton(" WEST");
+                JButton northButton = new JButton("NORTH");
+                JButton southButton = new JButton("SOUTH");
                 
-            });
-            locationButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    JTextField field1 = new JTextField();
-                    JTextField field2 = new JTextField();
-                    JTextField field3 = new JTextField();
-                    JTextField field4 = new JTextField();
-                    String text1 = "Information about the space '" + space.getName() + "'";
-                    String text2 =  "X-Cor: " + space.getX() + "\n" +
-                                    "Y-Cor: " + space.getY() + "\n" +
-                                    "Width: " + space.getWidth() + "\n" +
-                                    "Height: " + space.getHeight() + "\n\n";
-                    Object [] fields = {
-                    text1, text2,
-                    "New X-Cor", field1,
-                    "New Y-Cor", field2,
-                    "New Width", field3,
-                    "New Height", field4,
-                    };
-
-                    //TODO: add All conditions, entering letter, not entering, entering to big number, entering zero or negative etc
-                    int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Edit Space",JOptionPane.OK_CANCEL_OPTION);
-                    if(
-                        chooice == JOptionPane.OK_OPTION &&
-                        !field1.getText().equals("") &&
-                        !field2.getText().equals("") &&
-                        !field3.getText().equals("") &&
-                        !field4.getText().equals("")                 
-                        ) 
-                        {
-                            try {
-                                int newX = Integer.parseInt(field1.getText());
-                                int newY = Integer.parseInt(field2.getText());
-                                int newWidth = Integer.parseInt(field3.getText());
-                                int newHeight = Integer.parseInt(field4.getText());
-
-                                if(newX > 0 && newY > 0 && newWidth > 0 && newHeight > 0) {
-                                    space.setX(newX);
-                                    space.setY(newY);
-                                    space.setWidth(newWidth);
-                                    space.setHeight(newHeight);
-                                }
-                            } catch (Exception e2) {
-                                System.out.println("String");   
-                            }
+                eastButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        newSide = "EAST";
+                        maxCor = editedSpace.getY() + editedSpace.getHeight();
+                        minCor = editedSpace.getY();
+                        corOtherComp = editedSpace.getX() + editedSpace.getWidth();
+                        isOnX = false;
+                        directionChooice = 1;
+                    }                            
+                });
+                westButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        newSide = "WEST";
+                        maxCor = editedSpace.getY() + editedSpace.getHeight();
+                        minCor = editedSpace.getY();
+                        corOtherComp = editedSpace.getX();
+                        isOnX = false;
+                        directionChooice = 2;
+                    }                            
+                });
+                northButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        newSide = "NORTH";
+                        maxCor = editedSpace.getX() + editedSpace.getWidth();
+                        minCor = editedSpace.getX();
+                        corOtherComp = editedSpace.getY();
+                        isOnX = true;
+                        directionChooice = 3;
+                    }                            
+                });
+                southButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        newSide = "SOUTH";
+                        maxCor = editedSpace.getX() + editedSpace.getWidth();
+                        minCor = editedSpace.getX();
+                        corOtherComp =  editedSpace.getY()+ editedSpace.getHeight();
+                        isOnX = true;
+                        directionChooice = 4;
+                    }                            
+                });
+                Object [] directionButtons = {
+                    eastButton, westButton, northButton, southButton
+                };
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,directionButtons,"Choose Side",JOptionPane.CANCEL_OPTION);
+                if(chooice == JOptionPane.OK_OPTION && directionChooice != 0) {
+                    String text = "";
+                    if(isOnX) {
+                        text = "Enter Enterance X-Cor.";
                     }
                     else {
-                        System.out.println("outside");
+                        text = "Enter Enterance Y-Cor";
                     }
-                    System.out.println(field1.getText());
-                    repaint();
-                }
-            });
-
-            colorButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, space.getColor());                                        
-                    if(newColor != null) {
-                        space.setColor(newColor);
-                        repaint();
-                    }           
-                }
-            });
-
-            nameButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String newName = JOptionPane.showInputDialog(mainPanel, "Enter New Name", "Change Name", JOptionPane.PLAIN_MESSAGE);
-                    if(newName != null && !newName.equals("")) {
-                        space.setName(newName);
-                        repaint();
-                    }
-                }
-            });
-
-            enteranceButton.addActionListener(new ActionListener() {
-                String newSide;
-                boolean isOnX;
-                int maxCor;
-                int minCor;
-                int corOtherComp;
-                int directionChooice = 0;
-                
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JButton eastButton = new JButton("EAST");
-                    JButton westButton = new JButton(" WEST");
-                    JButton northButton = new JButton("NORTH");
-                    JButton southButton = new JButton("SOUTH");
+                    text += "\nThe value must be between " + minCor + " and " + maxCor;
+                    String newName = JOptionPane.showInputDialog(mainPanel, text, "Change Enterence Location", JOptionPane.PLAIN_MESSAGE);
                     
-                    eastButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            newSide = "EAST";
-                            maxCor = space.getY() + space.getHeight();
-                            minCor = space.getY();
-                            corOtherComp = space.getX() + space.getWidth();
-                            isOnX = false;
-                            directionChooice = 1;
-                        }                            
-                    });
-                    westButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            newSide = "WEST";
-                            maxCor = space.getY() + space.getHeight();
-                            minCor = space.getY();
-                            corOtherComp = space.getX();
-                            isOnX = false;
-                            directionChooice = 2;
-                        }                            
-                    });
-                    northButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            newSide = "NORTH";
-                            maxCor = space.getX() + space.getWidth();
-                            minCor = space.getX();
-                            corOtherComp = space.getY();
-                            isOnX = true;
-                            directionChooice = 3;
-                        }                            
-                    });
-                    southButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            newSide = "SOUTH";
-                            maxCor = space.getX() + space.getWidth();
-                            minCor = space.getX();
-                            corOtherComp =  space.getY()+ space.getHeight();
-                            isOnX = true;
-                            directionChooice = 4;
-                        }                            
-                    });
-                    Object [] directionButtons = {
-                        eastButton, westButton, northButton, southButton
-                    };
-                    int chooice = JOptionPane.showConfirmDialog(mainPanel,directionButtons,"Choose Side",JOptionPane.CANCEL_OPTION);
-                    if(chooice == JOptionPane.OK_OPTION && directionChooice != 0) {
-                        String text = "";
-                        if(isOnX) {
-                            text = "Enter Enterance X-Cor.";
-                        }
-                        else {
-                            text = "Enter Enterance Y-Cor";
-                        }
-                        text += "\nThe value must be between " + minCor + " and " + maxCor;
-                        String newName = JOptionPane.showInputDialog(mainPanel, text, "Change Enterence Location", JOptionPane.PLAIN_MESSAGE);
-                        
-                        try {
-                            int newValue = Integer.parseInt(newName);
-                            if(newValue > minCor && newValue < maxCor) {
-                                if(isOnX) {
-                                    space.setEntranceX(newValue);
-                                    space.setEntranceY(corOtherComp);
-                                }
-                                else {
-                                    space.setX(corOtherComp);
-                                    space.setY(newValue);
-                                }
-                                repaint();
+                    try {
+                        int newValue = Integer.parseInt(newName);
+                        if(newValue > minCor && newValue < maxCor) {
+                            if(isOnX) {
+                                editedSpace.setEntranceX(newValue);
+                                editedSpace.setEntranceY(corOtherComp);
                             }
-
-                        } catch (Exception e2) {
-                            // TODO: handle exception
+                            else {
+                                editedSpace.setX(corOtherComp);
+                                editedSpace.setY(newValue);
+                            }
+                            repaint();
                         }
-                        
+
+                    } catch (Exception e2) {
+                        // TODO: handle exception
                     }
                     
-                    directionChooice = 0;
-                    System.out.println("dasdsc");
-                }
-                
-            });
+                }      
+                directionChooice = 0;
+            }       
+        });
 
-            stairsEnterenceButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Floor currentFloor = (Floor)activeSpace;
-                    JTextField field1 = new JTextField();
-                    JTextField field2 = new JTextField();
-                    JTextField field3 = new JTextField();
-                    JTextField field4 = new JTextField();
-                    String text1 = "Information about the space '" + currentFloor.getDownStairX() + "'";
-                    String text2 =  "Down Stairs X: " + currentFloor.getDownStairX() + "\n" +
-                                    "Down Stairs Y: " + currentFloor.getDownStairY() + "\n" +
-                                    "Up Stairs X: " + currentFloor.getUpStairX() + "\n" +
-                                    "Up Stairs Y: " + currentFloor.getUpStairY() + "\n\n";
-                    Object [] fields = {
-                    text1, text2,
-                    "New Down Stairs X", field1,
-                    "New Down Stairs Y", field2,
-                    "New Up Stairs X", field3,
-                    "New Up Stairs Y", field4,
-                    };
+        stairsEnterenceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Floor currentFloor = (Floor)editedSpace;
+                JTextField field1 = new JTextField();
+                JTextField field2 = new JTextField();
+                JTextField field3 = new JTextField();
+                JTextField field4 = new JTextField();
+                String text1 = "Information about the space '" + currentFloor.getCustomString() + "'";
+                String text2 =  "Down Stairs X: " + currentFloor.getDownStairX() + "\n" +
+                                "Down Stairs Y: " + currentFloor.getDownStairY() + "\n" +
+                                "Up Stairs X: " + currentFloor.getUpStairX() + "\n" +
+                                "Up Stairs Y: " + currentFloor.getUpStairY() + "\n\n";
+                Object [] fields = {
+                text1, text2,
+                "New Down Stairs X", field1,
+                "New Down Stairs Y", field2,
+                "New Up Stairs X", field3,
+                "New Up Stairs Y", field4,
+                };
 
-                    int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
-                    if(chooice == JOptionPane.OK_OPTION){
-                        boolean isField1 = true;
-                        boolean isField2 = true;
-                        boolean isField3 = true;
-                        boolean isField4 = true;
-                        try {
-                                int newDownStairsX = Integer.parseInt(field1.getText());
-                                if(newDownStairsX > currentFloor.getX() && newDownStairsX > currentFloor.getX() + currentFloor.getWidth()) {
-                                    currentFloor.setDownStairsX(newDownStairsX);
-                                }
-                            } catch (Exception e2) {isField1 = false;}
-                        try {
-                                int newDownStairsY = Integer.parseInt(field2.getText());
-                                if(newDownStairsY > currentFloor.getY() && newDownStairsY > currentFloor.getY() + currentFloor.getHeight()) {
-                                    currentFloor.setDownStairsY(newDownStairsY);
-                                }
-                            } catch (Exception e2) {isField2 = false;}
-                        try {   
-                                int newUpStairsX = Integer.parseInt(field3.getText());
-                                if(newUpStairsX > currentFloor.getX() && newUpStairsX > currentFloor.getX() + currentFloor.getWidth()) {
-                                    currentFloor.setUpStairsX(newUpStairsX);
-                                }
-                            } catch (Exception e2) {isField3 = false;}
-                        try {
-                                int newUpStairsY = Integer.parseInt(field4.getText());
-                                if(newUpStairsY > currentFloor.getY() && newUpStairsY > currentFloor.getY() + currentFloor.getHeight()) {
-                                    currentFloor.setUpStairsY(newUpStairsY);
-                                }
-                            } catch (Exception e2) {isField4 = false;}
-                        repaint();
-                    }   
-                }    
-            });
-            Object [] buttons = {
-                selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton
-            };
-            if(editedSpace instanceof Floor) {
-                buttons = new Object[]{
-                    selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton, stairsEnterenceButton
-                };  
-            }
-            JOptionPane.showConfirmDialog(mainPanel,buttons,"Edit Space",JOptionPane.CANCEL_OPTION);
-            backendController.save();
-            break;                
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
+                if(chooice == JOptionPane.OK_OPTION){
+                    boolean isField1 = true;
+                    boolean isField2 = true;
+                    boolean isField3 = true;
+                    boolean isField4 = true;
+                    try {
+                            int newDownStairsX = Integer.parseInt(field1.getText());
+                            if(newDownStairsX > currentFloor.getX() && newDownStairsX > currentFloor.getX() + currentFloor.getWidth()) {
+                                currentFloor.setDownStairsX(newDownStairsX);
+                            }
+                        } catch (Exception e2) {isField1 = false;}
+                    try {
+                            int newDownStairsY = Integer.parseInt(field2.getText());
+                            if(newDownStairsY > currentFloor.getY() && newDownStairsY > currentFloor.getY() + currentFloor.getHeight()) {
+                                currentFloor.setDownStairsY(newDownStairsY);
+                            }
+                        } catch (Exception e2) {isField2 = false;}
+                    try {   
+                            int newUpStairsX = Integer.parseInt(field3.getText());
+                            if(newUpStairsX > currentFloor.getX() && newUpStairsX > currentFloor.getX() + currentFloor.getWidth()) {
+                                currentFloor.setUpStairsX(newUpStairsX);
+                            }
+                        } catch (Exception e2) {isField3 = false;}
+                    try {
+                            int newUpStairsY = Integer.parseInt(field4.getText());
+                            if(newUpStairsY > currentFloor.getY() && newUpStairsY > currentFloor.getY() + currentFloor.getHeight()) {
+                                currentFloor.setUpStairsY(newUpStairsY);
+                            }
+                        } catch (Exception e2) {isField4 = false;}
+                    repaint();
+                }   
+            }    
+        });
+        Object [] buttons = {
+            selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton
+        };
+        if(editedSpace instanceof Floor) {
+            buttons = new Object[]{
+                selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton, stairsEnterenceButton
+            };  
         }
+        JOptionPane.showConfirmDialog(mainPanel,buttons,"Edit: " + editedSpace ,JOptionPane.CANCEL_OPTION);
+        backendController.save();              
+        
     }
 
     @Override
@@ -498,15 +499,27 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     resizeNormalValues(20),
                     resizeNormalValues(20));
         }
-        else if(activeSpace instanceof Building) {
+        else if(activeSpace instanceof Room) {
             toolsPanel.disableEditing();
+            g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
+            g.drawString("Inside of the room",
+                    resizeNormalValues(20),
+                    resizeNormalValues(20));
+        }
+        else if(activeSpace instanceof Building) {
+            toolsPanel.buildingEditing();
             g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
             g.drawString("You can't see the building directly, you have to choose a floor.",
                     resizeNormalValues(20),
                     resizeNormalValues(20));
         }
         else {  
-            toolsPanel.enableEditing();  
+            if(activeSpace instanceof Map) {
+                toolsPanel.mapEditing();
+            }
+            else if(activeSpace instanceof Floor) {
+                toolsPanel.floorEditing();
+            }
             g.fillRect(
             0,
             0,
