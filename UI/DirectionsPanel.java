@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Building.Building;
+import Building.Floor;
 import Building.Space;
 
 public class DirectionsPanel extends JPanel {
@@ -26,6 +27,7 @@ public class DirectionsPanel extends JPanel {
     ArrayList<Space> enterDirections;
     ArrayList<Space> exitDirections;
     ArrayList<Space> directions;
+    ArrayList<String> directionDescriptions;
     int stepIndex = 0;
     int maxIndex = 0;
     int changeDirectionTypeIndex;
@@ -96,7 +98,25 @@ public class DirectionsPanel extends JPanel {
         this.maxIndex = this.directions.size();
         this.currentStep = this.directions.get(0);
         this.exitDirectionType = true;
+        fillStringDirections();
         repaint();
+    }
+    public void fillStringDirections(){
+        directionDescriptions = new ArrayList<String>();
+        if(directionDescriptions != null){
+            directionDescriptions.clear();
+        }
+        for(int i = 0; i<this.directions.size();i++){
+            String description = "";
+            if(i<changeDirectionTypeIndex){
+                description = description + "Exit ";
+            }
+            else{
+                description = description + "Enter ";
+            }
+            description = description + directions.get(i);
+            directionDescriptions.add(description);
+        }
     }
 
     public void setVisibility(Boolean vis){
@@ -204,6 +224,24 @@ public class DirectionsPanel extends JPanel {
         g.drawRect(zoomIn(currentStep.getX())+XCORRECTION,zoomIn(currentStep.getY())+YCORRECTION, zoomIn(currentStep.getWidth()), zoomIn(currentStep.getHeight())); 
         g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));
         if(!(currentStep instanceof Building)){
+            if(currentStep instanceof Floor){
+                Point downPoint = new Point(((Floor)currentStep).getDownStairX(),((Floor)currentStep).getDownStairY());
+                Point upPoint = new Point(((Floor)currentStep).getUpStairX(),((Floor)currentStep).getUpStairY());
+                entrances.add(downPoint);
+                entrances.add(upPoint);
+                g.setColor(Color.RED);
+                g.fillOval(
+                    zoomIn(downPoint.getX())+XCORRECTION,
+                    zoomIn(downPoint.getY())+YCORRECTION,
+                    10,
+                    10);
+                g.setColor(Color.YELLOW);
+                g.fillOval(
+                    zoomIn(upPoint.getX())+XCORRECTION,
+                    zoomIn(upPoint.getY())+YCORRECTION,
+                    10,
+                    10);
+            }
             for (Space space : currentStep.getContents()){
                 if(directions.contains(space)){
                     entrances.add(new Point(space.getEntranceX(),space.getEntranceY()));
@@ -223,7 +261,7 @@ public class DirectionsPanel extends JPanel {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.BOLD, 20));
         g.drawString("Step: " + (stepIndex+1)  + "/" + maxIndex, 10, 30);  
-        g.drawString("Go to " + currentStep, 350, 600);
+        g.drawString(directionDescriptions.get(stepIndex), 350, 600);
         if(entrances.size()>= 2){
             drawLineBetweenEntrances(
                 zoomIn(entrances.get(0).getX())+XCORRECTION,
