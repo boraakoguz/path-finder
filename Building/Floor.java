@@ -1,5 +1,7 @@
 package Building;
 
+import java.awt.image.BufferedImage;
+
 public class Floor extends Space{
     protected int floorNumber;
     protected int downStairX;
@@ -9,6 +11,14 @@ public class Floor extends Space{
     public Floor(String name,int floorNumber) {
         super(name);
         this.floorNumber = floorNumber;
+    }
+    public void addMapObject(String objName, int type, BufferedImage icon){
+        MapObject mapObject = new MapObject(objName, type, true);
+        mapObject.setIcon(icon);
+        this.addSpace(mapObject);
+    }
+    public void deleteMapObject(MapObject object){
+        this.getContents().remove(object);
     }
     public void setDownStairX(int x){
         this.downStairX = x;

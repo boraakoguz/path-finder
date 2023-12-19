@@ -1,4 +1,7 @@
 package Building;
+
+import java.awt.image.BufferedImage;
+
 /**
  * @author Mehmet Emre Şahin
  * The object class for the objects that are intractable such as vending machines.
@@ -9,6 +12,7 @@ public class MapObject extends Space{
     private int type; 
     //A boolean variable indicating whether the object is functional in reailty.
     private boolean functional;
+    private BufferedImage icon;
 
     //Constructor
     public MapObject(String name, int type, boolean func){
@@ -28,5 +32,11 @@ public class MapObject extends Space{
      * @return type of the object.
      */
     public int getType() { return this.type; }
-
+    
+    public void setIcon(BufferedImage icon){
+        this.icon = icon;
+    }
+    public BufferedImage getIcon(){
+        return this.icon;
+    }
 }

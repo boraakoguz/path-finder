@@ -20,6 +20,7 @@ import org.apache.log4j.chainsaw.Main;
 import Building.Building;
 import Building.Floor;
 import Building.Map;
+import Building.MapObject;
 import Building.Room;
 import Building.Space;
 
@@ -440,31 +441,11 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     resizeNormalValues(building.getY()+5));
             }
         }
-        /*
-        else if(this.activeSpace instanceof Building){
-            if(this.activeSpace.getContents().size() >= 1){
-                Space floor = activeSpace.getContents().get(0);
-                g.setColor(floor.getColor());
-                g.drawRect(
-                    resizeNormalValues(floor.getX()),
-                    resizeNormalValues(floor.getY()),
-                    resizeNormalValues(floor.getWidth()),
-                    resizeNormalValues(floor.getHeight()));
-                g.setColor(Color.GREEN);
-                g.fillRect(
-                    resizeNormalValues(floor.getEntranceX())-5,
-                    resizeNormalValues(floor.getEntranceY())-5,
-                    10,
-                    10);
-                g.setColor(Color.BLACK);
-                g.drawString(floor.getName(),
-                    resizeNormalValues(floor.getX()),
-                    resizeNormalValues(floor.getY()+5));
-            } 
-        }
-         */
         else if(this.activeSpace instanceof Floor){
             for (Space room : this.activeSpace.getContents()) {
+                if(room instanceof MapObject){
+                    g.drawImage(((MapObject) room).getIcon(), room.getX(), room.getY(), null);
+                }
                 g.setColor(room.getColor());
                 g.drawRect(
                     resizeNormalValues(room.getX()),
