@@ -1,6 +1,10 @@
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import Building.Building;
 import Building.Floor;
@@ -41,8 +45,11 @@ public class boratest {
         Room B1_102 = new Room("B102");
         Room B1_103 = new Room("B103");
         Room B1_201 = new Room("B201");
-        MapObject vending = new MapObject("B First Floor Vending Machine",0,true);
-        
+        MapObject vending = new MapObject("B First Floor Vending Machine",1,true);
+        vending.setX(50);
+        vending.setY(50);
+        vending.setHeight(10);
+        vending.setWidth(10);
         map.setX(50);
         map.setY(50);
         map.setWidth(100);
@@ -70,10 +77,14 @@ public class boratest {
         map.addSpace(Bbuilding);
         map.addSpace(GBuilding);
         map.addFeedBackContainer(container);
+        
         Bbuilding.addSpace(Bfirst);
         Bbuilding.addSpace(Bsecond);
+
         Bfirst.addSpace(B1_102);
         Bfirst.addSpace(B1_103);
+        Bfirst.addMapObject(vending);
+
         Bsecond.addSpace(B1_201);
         Controller controller = new Controller();
         controller.addMap(map);

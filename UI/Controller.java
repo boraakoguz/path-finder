@@ -1,4 +1,5 @@
 package UI;
+import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +7,7 @@ import java.util.Collections;
 import Building.Building;
 import Building.Floor;
 import Building.Map;
+import Building.MapObject;
 import Building.Search;
 import Building.Space;
 import Utilities.Feedback;
@@ -293,8 +295,18 @@ public class Controller {
      */
     public void addMap(Space map){
         Map newMap = (Map) map;
+
+        FeedbackContainer feedbackContainer = new FeedbackContainer(new ArrayList<Feedback>());
+        newMap.addFeedBackContainer(feedbackContainer);
         this.maps.add(newMap);
         loadSave.save(newMap);
+    }
+    /**
+     * deletes the currently open map
+     */
+    public void deleteMap(){
+        this.maps.remove(currentMap);
+        this.currentMap = null;
     }
     /**
      * adds a floor to the given building. Specify addToTop to add to bottom or top.
@@ -312,5 +324,23 @@ public class Controller {
      */
     public boolean deleteFloor(Building building, Floor floor){
         return building.deleteFloor(floor);
+    }
+    /**
+     * adds the given map object to the floor
+     * @param floor
+     * @param objName
+     * @param type
+     * @param icon
+     */
+    public void addMapObjectToFloor(Floor floor,MapObject mapObj){
+        floor.addMapObject(mapObj);
+    }
+    /**
+     * deletes the given map object from given floor
+     * @param floor
+     * @param mapObj
+     */
+    public void deleteMapObjectFromFloor(Floor floor, MapObject mapObj){
+        floor.deleteMapObject(mapObj);
     }
 }

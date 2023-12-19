@@ -2,11 +2,14 @@ package UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -19,6 +22,7 @@ import javax.swing.event.MouseInputListener;
 import Building.Building;
 import Building.Floor;
 import Building.Map;
+import Building.MapObject;
 import Building.Room;
 import Building.Space;
 
@@ -370,18 +374,17 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         if(activeSpace == null) {
             toolsPanel.disableEditing();
             g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
-            g.drawString("To use the map tools, you should select a map from the left panel!!!",
+            g.drawString("To use the map tools, you should select a map from the left panel.",
                     resizeNormalValues(20),
                     resizeNormalValues(20));
         }
         else if(activeSpace instanceof Building) {
             toolsPanel.disableEditing();
             g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
-            g.drawString("You can't see the building directly, you have to choose a floor!!!",
+            g.drawString("You can't see the building directly, you have to choose a floor.",
                     resizeNormalValues(20),
                     resizeNormalValues(20));
         }
-        //if(activeSpace != null) {
         else {  
             toolsPanel.enableEditing();  
             g.fillRect(
@@ -404,26 +407,29 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 resizeNormalValues(activeSpace.getY() + activeSpace.getHeight()),
                 getWidth(),
                 resizeNormalValues(getHeight() - activeSpace.getY() - activeSpace.getHeight()));
-        }
-        if(this.activeSpace instanceof Map){
-            for (Space building : this.activeSpace.getContents()) {
-                g.setColor(building.getColor());
+
+            for (Space space : this.activeSpace.getContents()) {
+                if(space instanceof MapObject){
+                    g.drawImage(resize(((MapObject) space).getIcon(),resizeNormalValues(space.getWidth()),resizeNormalValues(space.getHeight())), resizeNormalValues(space.getX()), resizeNormalValues(space.getY()), null);
+                }
+                g.setColor(space.getColor());
                 g.drawRect(
-                    resizeNormalValues(building.getX()),
-                    resizeNormalValues(building.getY()),
-                    resizeNormalValues(building.getWidth()),
-                    resizeNormalValues(building.getHeight()));
+                    resizeNormalValues(space.getX()),
+                    resizeNormalValues(space.getY()),
+                    resizeNormalValues(space.getWidth()),
+                    resizeNormalValues(space.getHeight()));
                 g.setColor(Color.GREEN);
                 g.fillRect(
-                    resizeNormalValues(building.getEntranceX())-5,
-                    resizeNormalValues(building.getEntranceY())-5,
+                    resizeNormalValues(space.getEntranceX())-5,
+                    resizeNormalValues(space.getEntranceY())-5,
                     10,
                     10);
                 g.setColor(Color.BLACK);
-                g.drawString(building.getName(),
-                    resizeNormalValues(building.getX()),
-                    resizeNormalValues(building.getY()+5));
+                g.drawString(space.getName(),
+                    resizeNormalValues(space.getX()),
+                    resizeNormalValues(space.getY()+5));
             }
+<<<<<<< HEAD
         }
         /*
         else if(this.activeSpace instanceof Building){
@@ -491,6 +497,9 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         }
         
         
+=======
+        } 
+>>>>>>> 1956e0f1a559bfbef91446bdfabdcf942ad60322
     }
     
     public void paintPath(Graphics g, int x, int y){
@@ -508,7 +517,16 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     public void paintEnterence(Graphics g, int x, int y) {
         g.fillRect(x-3, y-3, 6, 6);
     }
-
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+    
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+    
+        return dimg;
+    } 
 
     @Override
     public void mouseClicked(MouseEvent e) {

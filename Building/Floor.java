@@ -1,5 +1,6 @@
 package Building;
 
+
 public class Floor extends Space{
     protected int floorNumber;
     protected int downStairX;
@@ -9,6 +10,17 @@ public class Floor extends Space{
     public Floor(String name,int floorNumber) {
         super(name);
         this.floorNumber = floorNumber;
+    }
+    public void addMapObject(MapObject mapObject){
+        String icon = "image (23).png";
+        if(mapObject.getType() == 0){
+            icon = "image (16).png";
+        }
+        mapObject.setIcon(icon);
+        this.addSpace(mapObject);
+    }
+    public void deleteMapObject(MapObject object){
+        this.getContents().remove(object);
     }
     public void setDownStairX(int x){
         this.downStairX = x;
