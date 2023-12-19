@@ -222,7 +222,7 @@ public class DirectionsPanel extends JPanel {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.BOLD, 20));
         g.drawString("Step: " + (stepIndex+1)  + "/" + maxIndex, 10, 30);  
-        g.drawString("Go to " + currentStep, 350, 650);
+        g.drawString("Go to " + currentStep, 350, 600);
         if(entrances.size()>= 2){
             drawLineBetweenEntrances(
                 zoomIn(entrances.get(0).getX())+XCORRECTION,

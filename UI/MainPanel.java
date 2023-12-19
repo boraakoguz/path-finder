@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -11,15 +12,19 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 
+import Building.Building;
 import Building.Floor;
 import Building.Map;
+import Building.Space;
 
-public class MainPanel extends JPanel implements MouseInputListener{
+public class MainPanel extends JPanel {
     DrawPanel drawPanel;
     LeftScreenPanel leftScreenPanel;
     ToolsPanel toolsPanel;
@@ -39,6 +44,7 @@ public class MainPanel extends JPanel implements MouseInputListener{
     final public static int OBEJECT_ACTION = 11;
     final public static int ADD_FLOOR_ACTION = 12;
     final public static int DELETE_ACTION = 13;
+    final public static int ADD_MAP_ACTION = 14;
     public int currenAction = -1;
     public Color currentColor = Color.BLACK;
 
@@ -57,15 +63,8 @@ public class MainPanel extends JPanel implements MouseInputListener{
     
     JScrollPane scrollPane;
 
-    //int moveFirstX;
-    //int moveFirstY;
-    
-
-    //, ToolsPanel toolsPanel
     public MainPanel(Controller backendController) {
         this.backendController = backendController;
-        //this.toolsPanel = toolsPanel;
-        //this.leftScreenPanel = new LeftScreenPanel(TOOL_TIP_TEXT_KEY, backendController);
         this.leftScreenPanel = new LeftScreenPanel("Admin Map Tools", backendController);
         this.toolsPanel = new ToolsPanel(this);
         this.drawPanel = new DrawPanel(this,leftScreenPanel, this.toolsPanel, backendController);
@@ -86,12 +85,6 @@ public class MainPanel extends JPanel implements MouseInputListener{
         mainPanel.add(drawPanel);
         JScrollPane scrollPane = new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);;
         add(scrollPane);
-        //addMouseListener(this);
-        //addMouseMotionListener(this);
-        //mainPanel.addMouseListener(this);
-        //mainPanel.addMouseMotionListener(this);
-        //drawPanel.addMouseMotionListener(this);
-        
     }
 
     public ToolsPanel getToolsPanel() {
@@ -224,38 +217,56 @@ public class MainPanel extends JPanel implements MouseInputListener{
     public void addFloor() {
         currenAction = ADD_FLOOR_ACTION;
         arrangeCursor(DRAW_ACTION);
-        Floor currentFloor = (Floor)backendController.getCurrentDrawContext();
+        Building currentBuilding = (Building)backendController.getCurrentDrawContext();
         JButton up = new JButton("UP");
         JButton down = new JButton("DOWN");
-
+        Object [] buttons = {"Where do you want to add a floor?", up, down};
+        
+        System.out.println("Testt");
+        
         up.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Floor newFloor = new Floor(, ABORT);
+                currentBuilding.addFloor(Building.FLOOR_UP);
+                
             }            
         });
 
         down.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                currentBuilding.addFloor(Building.FLOOR_DOWN);
             }            
         });
         
-        //if(currentFloor.getUpStairsFloor() == null && currentFloor.getDownStairsFloor() == null) {
-
-        
-        
+        JOptionPane.showConfirmDialog(this,buttons,"Add Floor",JOptionPane.INFORMATION_MESSAGE);
+                
     }
     
     public void delete() {
         System.out.println("Inside main panel delete");
         currenAction = DELETE_ACTION;
         arrangeCursor(DRAW_ACTION);
-        //System.out.println(backendController.getCurrentDrawContext());
-        backendController.deleteSpace(backendController.getCurrentDrawContext());
-        drawPanel.repaint();
+        
+        //TODO: ADD SELF DESCTRUCTION METHOD
+        Space parentSpace = backendController.getCurrentDrawContext().getParent();
+        if(parentSpace != null) {
+            int chooice = JOptionPane.showConfirmDialog (this, "Would You Like to Save your Previous Note First?","Warning", JOptionPane.YES_NO_OPTION);
+            if(chooice == JOptionPane.YES_OPTION) {
+                backendController.deleteSpace(backendController.getCurrentDrawContext());
+                backendController.setCurrentDrawContext(parentSpace);
+            }
+            //TODO: NEED REPAINT?
+            drawPanel.repaint();
+        }
+        else if(parentSpace instanceof Map) {
 
+        }
+    }
+
+    public void addMap() {
+        currenAction = ADD_MAP_ACTION;
+        arrangeCursor(COLOR_ACTION);
     }
 
     public void setPanelSize() {
@@ -267,56 +278,6 @@ public class MainPanel extends JPanel implements MouseInputListener{
         System.out.println("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
         mainPanel.setPreferredSize(new Dimension(mainPanelSize, mainPanelSize));
         mainPanel.setSize(mainPanelSize, mainPanelSize);
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        /*
-        System.out.println("DRAGGED");
-        if(currenAction == MOVE_ACTION) {
-            if(
-                e.getX() > drawPanel.getX() && e.getX() < drawPanel.getX() + drawPanel.getWidth() &&
-                e.getY() > drawPanel.getY() && e.getY() < drawPanel.getY() + drawPanel.getHeight()
-            ) {
-                drawPanel.setLocation(e.getX()-moveFirstX, e.getY()-moveFirstY);
-                System.out.println(e.getX());
-                System.out.println(moveFirstX);
-            }
-        }
-         */
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        System.out.println(1);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        /*
-        System.out.println("DSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-        if(currenAction == MOVE_ACTION) {
-            moveFirstX = e.getX() - drawPanel.getX();
-            moveFirstY = e.getY() - drawPanel.getY();
-        }
-         */
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
     }
 
 }

@@ -151,6 +151,7 @@ public class LeftScreenPanel extends JPanel{
         }
         
     }
+
     class mapBoxListener implements ItemListener{
          @Override
         public void itemStateChanged(ItemEvent e) {

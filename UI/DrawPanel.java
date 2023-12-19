@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 
-import org.apache.log4j.chainsaw.Main;
 
 import Building.Building;
 import Building.Floor;
@@ -78,14 +77,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
 
     //TODO: Delete these params
     public void addSpace(int x, int y, int width, int height) {
-        //paintDrawTemp(getGraphics());
         paintDrawTempOriginal(getGraphics());
-       
-        //int originalX = resizeDefaultVaules(x);
-        //int originalY = resizeDefaultVaules(y);
-        //int originalWidth = resizeDefaultVaules(width);
-        //int originalHeight = resizeDefaultVaules(height);
-
+        
         String name = JOptionPane.showInputDialog(mainPanel, 
                                         "X-Cor: " + originalX +
                                         "\nY-Cor: " + originalY +
@@ -102,10 +95,8 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         }
         else {
             Space newSpace;
-            Space floorSpace = null;
             if(this.activeSpace instanceof Map){
                 newSpace = new Building(name);
-                floorSpace = newSpace.getContents().get(0);
             }
             else if(this.activeSpace instanceof Floor){
                 newSpace = new Room(name);
@@ -120,16 +111,10 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             newSpace.setColor(mainPanel.getCurrentColor());
             newSpace.setEntranceX(originalX+originalWidth/2);
             newSpace.setEntranceY(originalY+originalHeight);
-
-            if(floorSpace != null) {
-                floorSpace.setX(originalX);
-                floorSpace.setY(originalY);
-                floorSpace.setWidth(originalWidth);
-                floorSpace.setHeight(originalHeight);
-                floorSpace.setColor(mainPanel.getCurrentColor());
-                floorSpace.setEntranceX(originalX+originalWidth/2);
-                floorSpace.setEntranceY(originalY+originalHeight);
-                floorSpace.setName("Ground Floor");
+            
+            
+            if(this.activeSpace instanceof Map){
+                ((Building)newSpace).addFloor(0);
             }
 
             backendController.addSpace(this.activeSpace, newSpace);
@@ -187,7 +172,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 selectSpaceButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        activeSpace = space;
+                        backendController.setCurrentDrawContext(space);
                         repaint();
                     }
                     
@@ -477,15 +462,34 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                     resizeNormalValues(room.getEntranceY())-5,
                     10,
                     10);
+
                 g.setColor(Color.BLACK);
                 g.drawString(room.getName(),
                     resizeNormalValues(room.getX()),
                     resizeNormalValues(room.getY()+5));
             }
+            Floor currentFloor = (Floor) activeSpace;
+            System.out.println(currentFloor.getDownStairX());
+            System.out.println(currentFloor.getDownStairY());
+            System.out.println(currentFloor.getUpStairX());
+            System.out.println(currentFloor.getUpStairY ());
+            g.setColor(Color.RED);
+                    g.fillRect(
+                    resizeNormalValues(currentFloor.getDownStairX())-5,
+                    resizeNormalValues(currentFloor.getDownStairY())-5,
+                    10,
+                    10);
+            g.setColor(Color.YELLOW);
+                    g.fillRect(
+                    resizeNormalValues(currentFloor.getUpStairX())-5,
+                    resizeNormalValues(currentFloor.getUpStairY())-5,
+                    10,
+                    10);
         }
         else if(this.activeSpace instanceof Room){
             System.out.println("r");
         }
+        
         
     }
     

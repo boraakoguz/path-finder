@@ -57,56 +57,15 @@
     {
       "type": "Building.Building",
       "data": {
-        "maxFloor": 0,
-        "minFloor": 0,
-        "numberOfFloors": 1,
-        "xPoint": 17,
-        "yPoint": 92,
-        "width": 11,
-        "height": 9,
-        "entranceX": 22,
-        "entranceY": 101,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "N",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 17,
-              "yPoint": 92,
-              "width": 11,
-              "height": 9,
-              "entranceX": 22,
-              "entranceY": 101,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": []
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 1,
+        "maxFloor": 9,
         "minFloor": -1,
-        "numberOfFloors": 1,
-        "xPoint": 58,
-        "yPoint": 33,
-        "width": 130,
-        "height": 89,
-        "entranceX": 123,
-        "entranceY": 122,
+        "numberOfFloors": 10,
+        "xPoint": 18,
+        "yPoint": 4,
+        "width": 116,
+        "height": 100,
+        "entranceX": 76,
+        "entranceY": 104,
         "colorR": 0,
         "colorG": 0,
         "colorB": 0,
@@ -115,17 +74,251 @@
           {
             "type": "Building.Floor",
             "data": {
-              "floorNumber": 0,
-              "downStairX": 0,
-              "downStairY": 0,
-              "upStairX": 0,
-              "upStairY": 0,
-              "xPoint": 58,
-              "yPoint": 33,
-              "width": 130,
-              "height": 89,
-              "entranceX": 123,
-              "entranceY": 122,
+              "floorNumber": 1,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 1,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 36,
+                    "yPoint": 20,
+                    "width": 49,
+                    "height": 43,
+                    "entranceX": 60,
+                    "entranceY": 63,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "B31",
+                    "contents": []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 2,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 3,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 18,
+                    "yPoint": 4,
+                    "width": 26,
+                    "height": 20,
+                    "entranceX": 31,
+                    "entranceY": 24,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "b102",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 44,
+                    "yPoint": 5,
+                    "width": 57,
+                    "height": 36,
+                    "entranceX": 72,
+                    "entranceY": 41,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "b103",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 53,
+                    "yPoint": 81,
+                    "width": 68,
+                    "height": 23,
+                    "entranceX": 87,
+                    "entranceY": 104,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "b104",
+                    "contents": []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 4,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 5,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 6,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 7,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "Ground Floor",
+              "contents": []
+            }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 8,
+              "downStairX": 124,
+              "downStairY": 54,
+              "upStairX": 28,
+              "upStairY": 54,
+              "xPoint": 18,
+              "yPoint": 4,
+              "width": 116,
+              "height": 100,
+              "entranceX": 76,
+              "entranceY": 104,
               "colorR": 0,
               "colorG": 0,
               "colorB": 0,

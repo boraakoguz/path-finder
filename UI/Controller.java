@@ -302,8 +302,8 @@ public class Controller {
      * @param floorName
      * @param addToTop
      */
-    public void addFloor(Building building, String floorName, boolean addToTop){
-        building.addFloor(floorName, addToTop); 
+    public void addFloor(Building building, String floorName, int addToTop){
+        building.addFloor(addToTop); 
     }
     /**
      * deletes the given floor. Returns false if it failed.

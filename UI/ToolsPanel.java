@@ -34,6 +34,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
     JButton object = new JButton(new ImageIcon("object-icon.png"));
     JButton addFloor = new JButton(new ImageIcon("add-floor-icon.png"));
     JButton delete = new JButton(new ImageIcon("delete-icon.png"));
+    JButton addMap = new JButton(new ImageIcon("add-map-icon.png"));
     JButton currerntGreen;
     
     ImageIcon blueBackIcon = new ImageIcon(((ImageIcon) blueBack.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
@@ -50,6 +51,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
     ImageIcon objectIcon = new ImageIcon(((ImageIcon) object.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon addFlorIcon = new ImageIcon(((ImageIcon) addFloor.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon deleteIcon = new ImageIcon(((ImageIcon) delete.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
+    ImageIcon addMapIcon = new ImageIcon(((ImageIcon) addMap.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     
     public ToolsPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -67,6 +69,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         object.setIcon(objectIcon);
         addFloor.setIcon(addFlorIcon);
         delete.setIcon(deleteIcon);
+        addMap.setIcon(addMapIcon);
 
         blueBack.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         draw.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
@@ -82,7 +85,8 @@ public class ToolsPanel extends JPanel implements ActionListener{
         object.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         addFloor.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         delete.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
-        
+        addMap.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
+
         JPanel tempPanel = new JPanel();
         tempPanel.add(blueBack);
         tempPanel.add(draw);
@@ -98,6 +102,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         tempPanel.add(object);
         tempPanel.add(addFloor);
         tempPanel.add(delete);
+        tempPanel.add(addMap);
 
         blueBack.addActionListener(this);
         draw.addActionListener(this);
@@ -113,6 +118,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         object.addActionListener(this);
         addFloor.addActionListener(this);
         delete.addActionListener(this);
+        addMap.addActionListener(this);
 
 
         setLayout(new BorderLayout());
@@ -219,9 +225,13 @@ public class ToolsPanel extends JPanel implements ActionListener{
         }
         else if(e.getSource() == delete) {
             System.out.println("Delete");
-            wall.setBackground(Color.GREEN);
             currerntGreen = delete;
             mainPanel.delete();
+        }
+        else if(e.getSource() == addMap) {
+            System.out.println("Add Map");
+            currerntGreen = addMap;
+            mainPanel.addMap();
         }
     }   
 }
