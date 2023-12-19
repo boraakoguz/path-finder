@@ -16,10 +16,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class LeftScreenPanel extends JPanel{
@@ -34,7 +32,6 @@ public class LeftScreenPanel extends JPanel{
     private JComboBox<Space> buildingBox = new JComboBox<Space>(); 
     private JComboBox<Space> floorBox = new JComboBox<Space>();
     private JComboBox<Space> roomBox = new JComboBox<Space>();
-    private JButton selectButton  = new JButton("Select");
     private JButton backButton = new JButton("Back");
     GridBagConstraints c = new GridBagConstraints();
     
@@ -106,10 +103,6 @@ public class LeftScreenPanel extends JPanel{
         c.gridy = 9;
         add(roomBox, c);
 
-        c.gridx = 0;
-        c.gridy = 10;
-        selectButton.addActionListener(new selectButtonActionListener());
-        add(selectButton, c);
 
         c.gridwidth = 1;        
     }
@@ -131,25 +124,32 @@ public class LeftScreenPanel extends JPanel{
     public void fillBuildingBox(Space map) {
         buildingBox.removeAllItems();
         buildingBox.addItem(null);
-        for (Space building : map.getContents()) {
-            buildingBox.addItem(building);
-        }
+        if(map != null){
+            for (Space building : map.getContents()) {
+                buildingBox.addItem(building);
+            }
+        }  
     }
 
     public void fillFloorBox(Space building) {
         floorBox.removeAllItems();
         floorBox.addItem(null);
-        for (Space floorSpace : building.getContents()) {
-            floorBox.addItem(floorSpace);
+        if(building != null){
+            for (Space floorSpace : building.getContents()) {
+                floorBox.addItem(floorSpace);
+            }
         }
     }
 
     public void fillRoomBox(Space floor) {
         roomBox.removeAllItems();
         roomBox.addItem(null);
-        for (Space room : floor.getContents()) {
-            roomBox.addItem(room);
+        if(floor != null){
+            for (Space room : floor.getContents()) {
+                roomBox.addItem(room);
+            }
         }
+        
     }
     class mapBoxListener implements ItemListener{
          @Override
@@ -157,6 +157,11 @@ public class LeftScreenPanel extends JPanel{
             if(mapBox.getSelectedItem() != null){
                 Space map = (Space) mapBox.getSelectedItem();
                 fillBuildingBox(map);
+                backendController.setCurrentDrawContext((Space)mapBox.getSelectedItem());
+            }
+            else{
+                fillBuildingBox(null);
+                backendController.setCurrentDrawContext(null);
             }     
         }
     }
@@ -166,6 +171,11 @@ public class LeftScreenPanel extends JPanel{
             if(buildingBox.getSelectedItem() != null){
                 Space building = (Space) buildingBox.getSelectedItem();
                 fillFloorBox(building); 
+                backendController.setCurrentDrawContext((Space)buildingBox.getSelectedItem());
+            }
+            else{
+                fillFloorBox(null);
+                backendController.setCurrentDrawContext((Space)mapBox.getSelectedItem());
             }
         }
     }
@@ -175,6 +185,11 @@ public class LeftScreenPanel extends JPanel{
             if(floorBox.getSelectedItem() != null){
                 Space floor = (Space) floorBox.getSelectedItem();
                 fillRoomBox(floor);
+                backendController.setCurrentDrawContext((Space)floorBox.getSelectedItem());
+            }
+            else{
+                fillRoomBox(null);
+                backendController.setCurrentDrawContext((Space)buildingBox.getSelectedItem());
             }        
         }
     }
@@ -182,26 +197,11 @@ public class LeftScreenPanel extends JPanel{
         @Override
         public void itemStateChanged(ItemEvent e) {
             if(roomBox.getSelectedItem() != null){
-                Space room = (Space) roomBox.getSelectedItem();
-            }
-        }
-    }
-    class selectButtonActionListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(roomBox.getSelectedItem() != null){
                 backendController.setCurrentDrawContext((Space)roomBox.getSelectedItem());
             }
-            else if(floorBox.getSelectedItem() != null){
+            else{
                 backendController.setCurrentDrawContext((Space)floorBox.getSelectedItem());
             }
-            else if(buildingBox.getSelectedItem() != null){
-                backendController.setCurrentDrawContext((Space)buildingBox.getSelectedItem());
-            }   
-            else if(mapBox.getSelectedItem() != null){
-                backendController.setCurrentDrawContext((Space)mapBox.getSelectedItem());
-            } 
         }
     }
 }

@@ -33,7 +33,7 @@ public class boratest {
         fbList.add(f4);
         FeedbackContainer container = new FeedbackContainer(fbList);
         
-        Map map = new Map("Bilkent");
+        Map map = new Map("East Campus");
         Building Bbuilding = new Building("B Building");
         Building GBuilding = new Building("G Building");
         Floor Bfirst = new Floor("First Floor",0);
@@ -75,19 +75,24 @@ public class boratest {
         Bfirst.addSpace(B1_102);
         Bfirst.addSpace(B1_103);
         Bsecond.addSpace(B1_201);
+        Bfirst.setUpStairs(Bsecond);
+        Bsecond.setDownStairs(Bfirst);
+        Controller controller = new Controller();
+        controller.addMap(map);
+        controller.setCurrentMap("East Campus");
+        controller.save();
         LoadSave loadSave = new LoadSave();
-        loadSave.save(map);
         ArrayList<Map> loadedMaps = loadSave.loadSaves();
         Map loaded = loadedMaps.get(0);
         //System.out.println(loaded.getName());
         //System.out.println("Loaded map data \n" + loaded.contents.get(0).contents.get(0).getDirections());
         Search search = new Search();
         search.initializeSearchTree(loaded);
-        Controller controller = new Controller();
-        controller.setCurrentMap("Bilkent");
+        
         ArrayList<Space> start = controller.search("B102");
         ArrayList<Space> destination = controller.search("B201");
         ArrayList<Space> a = controller.search("B");
+        /*
         System.out.println("///////////////////////////////////////////////////////////");
         System.out.println(controller.getDirections(start.get(0),destination.get(0)));
         System.out.println(a);
@@ -96,7 +101,6 @@ public class boratest {
         //System.out.println(search.search("B102").getDirections());
         //System.out.println("\nSearch result: " + search.search("B"));
         Login login = new Login();
-        /* 
         login.createAccount("Boraborabora", "abcd", 2);
         login.createAccount("Bora", "abcd", 1);
         login.createAccount("Kenan","editor",1);
