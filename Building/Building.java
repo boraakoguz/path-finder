@@ -37,23 +37,10 @@ public class Building extends Space{
         floor.setColor(Color.BLACK);
         floor.setEntranceX(getEntranceX());
         floor.setEntranceY(getEntranceY());
-<<<<<<< HEAD
         floor.setUpStairsX(getX() + 10);
         floor.setUpStairsY(getY() +getHeight()/2);
         floor.setDownStairsX(getWidth() + getX() - 10);
         floor.setDownStairsY(getY() +getHeight()/2);
-        floor.setName("Ground Floor");
-        System.out.println(floor.getDownStairX());
-        System.out.println(floor.getDownStairY());
-        System.out.println(floor.getUpStairX());
-        System.out.println(floor.getUpStairY ());
-        System.out.println("aasasdjlsasddsfsdlkfjsdflkhjlfkjsdflkjsdlfçjsdlfkçsdjflsdkçfjsdlkfçjsdlfkm");
-=======
-        floor.setUpStairX(getX() + 10);
-        floor.setUpStairY(getY() +getHeight()/2);
-        floor.setDownStairX(getWidth() + getX() - 10);
-        floor.setDownStairY(getY() +getHeight()/2);
->>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
         numberOfFloors++;
     }
     public boolean deleteFloor(Floor floor){
