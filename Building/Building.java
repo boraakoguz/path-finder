@@ -42,10 +42,10 @@ public class Building extends Space{
         floor.setColor(Color.BLACK);
         floor.setEntranceX(getEntranceX());
         floor.setEntranceY(getEntranceY());
-        floor.setUpStairX(getX() + 10);
-        floor.setUpStairY(getY() +getHeight()/2);
-        floor.setDownStairX(getWidth() + getX() - 10);
-        floor.setDownStairY(getY() +getHeight()/2);
+        floor.setUpStairsX(getX() + 10);
+        floor.setUpStairsY(getY() +getHeight()/2);
+        floor.setDownStairsX(getWidth() + getX() - 10);
+        floor.setDownStairsY(getY() +getHeight()/2);
         floor.setName("Ground Floor");
         System.out.println(floor.getDownStairX());
         System.out.println(floor.getDownStairY());

@@ -22,16 +22,16 @@ public class Floor extends Space{
     public void deleteMapObject(MapObject object){
         this.getContents().remove(object);
     }
-    public void setDownStairX(int x){
+    public void setDownStairsX(int x){
         this.downStairX = x;
     }
-    public void setDownStairY(int y){
+    public void setDownStairsY(int y){
         this.downStairY = y;
     }
-    public void setUpStairX(int x){
+    public void setUpStairsX(int x){
         this.upStairX = x;
     }
-    public void setUpStairY(int y){
+    public void setUpStairsY(int y){
         this.upStairY = y;
     }
     public void setFloorNumber(int newNumber){
