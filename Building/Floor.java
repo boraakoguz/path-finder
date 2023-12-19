@@ -52,5 +52,9 @@ public class Floor extends Space{
     public int getUpStairY(){
         return this.upStairY;
     }
+
+    public String getCustomString() {
+        return "Floor" + name;
+    }
     
 }

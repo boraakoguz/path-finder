@@ -11,4 +11,8 @@ public class Room extends Space{
         }
         return null;
     }
+
+    public String getCustomString() {
+        return "Room " + name;
+    }
 }

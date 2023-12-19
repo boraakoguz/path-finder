@@ -65,4 +65,9 @@ public class Building extends Space{
         }
         return true;
     }
+
+    
+    public String getCustomString() {
+        return "Building " + name;
+    }
 }
