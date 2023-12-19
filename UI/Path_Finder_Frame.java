@@ -29,8 +29,8 @@ public class Path_Finder_Frame{
         seefeed=new Editor_SeeFeedback_Frame(this,backendController);
         Feedback dummyFeedback = new Feedback("","","","",   "", "", "", false);
         detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
-        adminMapTools = new AdminMapTools(this.backendController);
-        editorMapTools = new EditorMapTools(this.backendController);
+        adminMapTools = new AdminMapTools(this.backendController,this);
+        editorMapTools = new EditorMapTools(this.backendController,this);
         user.setVisible(true);
 
         //TODO: DELETE IT TEST

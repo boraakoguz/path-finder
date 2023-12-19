@@ -7,11 +7,15 @@ import javax.swing.JPanel;
 
 public class AdminMapTools extends JFrame {
     Controller backendController;
+    public Path_Finder_Frame contFrame;
 
-    public AdminMapTools(Controller backendController){
+    public AdminMapTools(Controller backendController,Path_Finder_Frame m){
         this.backendController = backendController;
+        contFrame=m;
         this.setSize(1200,700);
-        MainPanel mainPanel = new MainPanel(backendController);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+        MainPanel mainPanel = new MainPanel(backendController,contFrame);
         LeftScreenPanel leftScreenPanel = mainPanel.getLeftScreenPanel();
 
         

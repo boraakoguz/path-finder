@@ -7,11 +7,15 @@ import javax.swing.JPanel;
 
 public class EditorMapTools extends JFrame {
     Controller backendController;
+    public Path_Finder_Frame contFrame;
 
-    public EditorMapTools(Controller backendController){
+    public EditorMapTools(Controller backendController,Path_Finder_Frame m){
         this.backendController = backendController;
+        contFrame=m;
         this.setSize(1200,700);
-        MainPanelEditor mainPanel = new MainPanelEditor(backendController);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+        MainPanelEditor mainPanel = new MainPanelEditor(backendController,contFrame);
         LeftScreenPanelEditor leftScreenPanel = mainPanel.getLeftScreenPanel();
         
         ToolsPanelEditor toolsPanel = mainPanel.getToolsPanel();

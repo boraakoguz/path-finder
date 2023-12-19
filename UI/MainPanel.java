@@ -48,16 +48,17 @@ public class MainPanel extends JPanel {
     
     public int drawPanelSize = (MAP_PANEL_DEFAULT_SIZE*(currentZoom+2));
     public int mainPanelSize = drawPanelSize + differenceSize*2;
-    
+    public Path_Finder_Frame contFrame;
     JPanel westPanel = new JPanel();
     JPanel northPanel = new JPanel();
     JPanel mainPanel = new JPanel(null);
     
     JScrollPane scrollPane;
 
-    public MainPanel(Controller backendController) {
+    public MainPanel(Controller backendController,Path_Finder_Frame m) {
         this.backendController = backendController;
-        this.leftScreenPanel = new LeftScreenPanel("Admin Map Tools", backendController);
+        contFrame=m;
+        this.leftScreenPanel = new LeftScreenPanel("Admin Map Tools", backendController,contFrame);
         this.toolsPanel = new ToolsPanel(this);
         this.drawPanel = new DrawPanel(this,leftScreenPanel, this.toolsPanel, backendController);
         setLayout(new BorderLayout());

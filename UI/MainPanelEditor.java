@@ -49,16 +49,17 @@ public class MainPanelEditor extends JPanel {
     
     public int drawPanelSize = (MAP_PANEL_DEFAULT_SIZE*(currentZoom+2));
     public int mainPanelSize = drawPanelSize + differenceSize*2;
-    
+    public Path_Finder_Frame contFrame;
     JPanel westPanel = new JPanel();
     JPanel northPanel = new JPanel();
     JPanel mainPanel = new JPanel(null);
     
     JScrollPane scrollPane;
 
-    public MainPanelEditor(Controller backendController) {
+    public MainPanelEditor(Controller backendController,Path_Finder_Frame m) {
         this.backendController = backendController;
-        this.leftScreenPanel = new LeftScreenPanelEditor("Editor Map Tools", backendController);
+        contFrame=m;
+        this.leftScreenPanel = new LeftScreenPanelEditor("Editor Map Tools", backendController,contFrame);
         this.toolsPanel = new ToolsPanelEditor(this);
         this.drawPanel = new DrawPanelEditor(this,leftScreenPanel, this.toolsPanel, backendController);
         setLayout(new BorderLayout());

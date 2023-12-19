@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 
 public class LeftScreenPanel extends JPanel{
     private Controller backendController;
-
+    private Path_Finder_Frame contFrame;
     private JLabel labelTitle;
     private JLabel labelMap = new JLabel("Select Map");
     private JLabel labelBuilding = new JLabel("Select Building");
@@ -33,7 +33,8 @@ public class LeftScreenPanel extends JPanel{
     GridBagConstraints c = new GridBagConstraints();
     
 
-    public LeftScreenPanel(String title, Controller controller) {
+    public LeftScreenPanel(String title, Controller controller,Path_Finder_Frame m) {
+        contFrame=m;
         this.backendController = controller;
         labelTitle = new JLabel(title);
         labelTitle.setFont(new Font("Serif", Font.ITALIC, 25));
@@ -41,6 +42,14 @@ public class LeftScreenPanel extends JPanel{
 
         backButton.setBackground(Color.PINK);
         backButton.setLocation(10, 10);
+        backButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contFrame.changeFrame(3);
+            }
+
+        });
         add(backButton);
 
         fillMapBoxes();
