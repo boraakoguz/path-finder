@@ -27,9 +27,29 @@ public abstract class Space {
         ArrayList<Space> path = new ArrayList<Space>();
         while(temp!=null){
             path.add(temp);
-            temp = temp.parent;
+            if(temp instanceof Floor && ((Floor)temp).getFloorNumber() != 0){
+                temp = getNextFloor((Floor)temp);
+            }
+            else{
+                temp = temp.parent;
+            }
         }
         return path;
+    }
+    public Floor getNextFloor(Floor floor){
+        int currentFloorNum = floor.getFloorNumber();
+        int target = 1;
+        if(currentFloorNum<0){
+            target = -1;
+        }
+        Space building = floor.getParent();
+        for (Space space : building.getContents()) {
+            Floor nextFloor = (Floor) space;
+            if(currentFloorNum - nextFloor.getFloorNumber()==target){
+                return nextFloor;
+            }
+        }
+        return null;
     }
     public String getDirectionsAsString(){
         Space temp = this;

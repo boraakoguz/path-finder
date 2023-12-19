@@ -5,23 +5,19 @@ import java.awt.Color;
 public class Building extends Space{
     public int maxFloor = 0;
     public int minFloor = 0;
-    public int numberOfFloors = 1;
+    public int numberOfFloors = 0;
     public final static int FLOOR_GROUND = 0;
     public final static int FLOOR_UP = 1;
     public final static int FLOOR_DOWN = 2;
     public Building(String name) {
         super(name);
-        //this.contents.add(new Floor("Ground Floor",0));
-        //addFloor(FLOOR_GROUND);
-        this.maxFloor = 1;
-        this.numberOfFloors = 1;
-        this.minFloor = -1;
-        
     }
     public void addFloor(int floorType){
         Floor floor;
         if(floorType == FLOOR_GROUND){
-            floor = new Floor(""+ maxFloor, maxFloor);
+            floor = new Floor("Ground Floor", maxFloor);
+            this.maxFloor++;
+            this.minFloor--;
             this.addSpace(floor);
         }
         else if(floorType == FLOOR_UP){
@@ -30,7 +26,7 @@ public class Building extends Space{
             this.addSpace(floor);
         }
         else {
-            floor = new Floor(""+maxFloor, minFloor);
+            floor = new Floor(""+minFloor, minFloor);
             this.minFloor--;
             this.addSpace(floor);    
         }
@@ -38,10 +34,10 @@ public class Building extends Space{
         floor.setY(getY());
         floor.setWidth(getWidth());
         floor.setHeight(getHeight());
-        //TODO ARRANGE COLOR
         floor.setColor(Color.BLACK);
         floor.setEntranceX(getEntranceX());
         floor.setEntranceY(getEntranceY());
+<<<<<<< HEAD
         floor.setUpStairsX(getX() + 10);
         floor.setUpStairsY(getY() +getHeight()/2);
         floor.setDownStairsX(getWidth() + getX() - 10);
@@ -52,6 +48,12 @@ public class Building extends Space{
         System.out.println(floor.getUpStairX());
         System.out.println(floor.getUpStairY ());
         System.out.println("aasasdjlsasddsfsdlkfjsdflkhjlfkjsdflkjsdlfçjsdlfkçsdjflsdkçfjsdlkfçjsdlfkm");
+=======
+        floor.setUpStairX(getX() + 10);
+        floor.setUpStairY(getY() +getHeight()/2);
+        floor.setDownStairX(getWidth() + getX() - 10);
+        floor.setDownStairY(getY() +getHeight()/2);
+>>>>>>> c09034625828ede33fa8a0c6f32952ed014702de
         numberOfFloors++;
     }
     public boolean deleteFloor(Floor floor){

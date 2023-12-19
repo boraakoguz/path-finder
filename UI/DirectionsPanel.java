@@ -5,19 +5,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import Building.Building;
 import Building.Space;
 
 public class DirectionsPanel extends JPanel {
-    final int ZOOMIN = 4;
-    final int XCORRECTION = 20;
-    final int YCORRECTION = 100;
+    final double ZOOMIN = 3;
+    final int XCORRECTION = 10;
+    final int YCORRECTION = 10;
     final int  COLLISION_DETECTION_SIZE = 20;
     JButton nextStep = new JButton("Next");
     JButton previousStep = new JButton("Previous");
@@ -30,16 +31,10 @@ public class DirectionsPanel extends JPanel {
     int changeDirectionTypeIndex;
     boolean exitDirectionType;
     Space currentStep;
-    Polygon arrowHead;
 
     public DirectionsPanel(Controller backendController){
         this.backendController = backendController;
         this.setBackground(Color.WHITE);
-        this.arrowHead = new Polygon();
-        this.arrowHead.addPoint( 0,5);
-        this.arrowHead.addPoint( -5, -5);
-        this.arrowHead.addPoint( 5,-5);
-
         this.nextStep.addActionListener(new ActionListener() {
 
             @Override
@@ -109,6 +104,7 @@ public class DirectionsPanel extends JPanel {
         repaint();
     }
     public int zoomIn(double d){
+        System.out.println("input:" + d + "output" + (int) (d*ZOOMIN));
         return (int) (d*ZOOMIN);
     }
     public int getMean(int data, int offset){
@@ -203,21 +199,26 @@ public class DirectionsPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayList<Point> entrances = new ArrayList<Point>();
-        for (Space space : currentStep.getContents()){
-            if(directions.contains(space)){
-                entrances.add(new Point(space.getEntranceX(),space.getEntranceY()));
-                if(exitDirectionType){
-                    g.setColor(Color.RED);
-                }
-                else{
-                    g.setColor(Color.GREEN);
-                }
-                g.fillOval(zoomIn(space.getEntranceX())+XCORRECTION, zoomIn(space.getEntranceY())+YCORRECTION, 10, 10);
+        
+        g.setColor(currentStep.getColor());
+        g.drawRect(zoomIn(currentStep.getX())+XCORRECTION,zoomIn(currentStep.getY())+YCORRECTION, zoomIn(currentStep.getWidth()), zoomIn(currentStep.getHeight())); 
+        g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));
+        if(!(currentStep instanceof Building)){
+            for (Space space : currentStep.getContents()){
+                if(directions.contains(space)){
+                    entrances.add(new Point(space.getEntranceX(),space.getEntranceY()));
+                    if(exitDirectionType){
+                        g.setColor(Color.RED);
+                    }
+                    else{
+                        g.setColor(Color.GREEN);
+                    }
+                    g.fillOval(zoomIn(space.getEntranceX())+XCORRECTION, zoomIn(space.getEntranceY())+YCORRECTION, 10, 10);
+                }  
+                g.setColor(space.getColor());
+                g.drawRect(zoomIn(space.getX())+XCORRECTION,zoomIn(space.getY())+YCORRECTION, zoomIn(space.getWidth()), zoomIn(space.getHeight())); 
+                g.drawString(space.getName(), getMean(zoomIn(space.getX())+XCORRECTION, space.getWidth()), getMean(zoomIn(space.getY())+YCORRECTION, space.getY()));
             }
-            
-            g.setColor(space.getColor());
-            g.drawRect(zoomIn(space.getX())+XCORRECTION,zoomIn(space.getY())+YCORRECTION, zoomIn(space.getWidth()), zoomIn(space.getHeight())); 
-            g.drawString(space.getName(), getMean(zoomIn(space.getX())+XCORRECTION, space.getWidth()), getMean(zoomIn(space.getY())+YCORRECTION, space.getY()));
         }
         g.setColor(Color.BLACK);
         g.setFont(new Font("Serif", Font.BOLD, 20));
@@ -230,8 +231,6 @@ public class DirectionsPanel extends JPanel {
                 zoomIn(entrances.get(1).getX())+XCORRECTION,
                 zoomIn(entrances.get(1).getY())+YCORRECTION,
                 g);
-        }
-        
-          
+        }  
     }
 }
