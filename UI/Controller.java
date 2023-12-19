@@ -3,6 +3,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import Building.Building;
+import Building.Floor;
 import Building.Map;
 import Building.Search;
 import Building.Space;
@@ -283,5 +285,32 @@ public class Controller {
     public void addSpace(Space parent, Space space){
         parent.addSpace(space);
         setCurrentMap(this.currentMap.getName());
+    }
+
+    /**
+     * adds the given map to the maplist
+     * @param map
+     */
+    public void addMap(Space map){
+        Map newMap = (Map) map;
+        this.maps.add(newMap);
+        loadSave.save(newMap);
+    }
+    /**
+     * adds a floor to the given building. Specify addToTop to add to bottom or top.
+     * @param building
+     * @param floorName
+     * @param addToTop
+     */
+    public void addFloor(Building building, String floorName, boolean addToTop){
+        building.addFloor(floorName, addToTop); 
+    }
+    /**
+     * deletes the given floor. Returns false if it failed.
+     * @param building
+     * @param floor
+     */
+    public boolean deleteFloor(Building building, Floor floor){
+        return building.deleteFloor(floor);
     }
 }
