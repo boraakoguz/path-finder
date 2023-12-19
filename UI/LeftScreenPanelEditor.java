@@ -9,7 +9,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import javax.swing.JLabel;
 
 public class LeftScreenPanelEditor extends JPanel{
     private Controller backendController;
-
+    private Path_Finder_Frame contFrame;
     private JLabel labelTitle;
     private JLabel labelMap = new JLabel("Select Map");
     private JLabel labelBuilding = new JLabel("Select Building");
@@ -34,14 +35,23 @@ public class LeftScreenPanelEditor extends JPanel{
     GridBagConstraints c = new GridBagConstraints();
     
 
-    public LeftScreenPanelEditor(String title, Controller controller) {
+    public LeftScreenPanelEditor(String title, Controller controller, Path_Finder_Frame m) {
         this.backendController = controller;
+        contFrame=m;
         labelTitle = new JLabel(title);
         labelTitle.setFont(new Font("Serif", Font.ITALIC, 25));
         setBackground(Color.decode("#dd96b8"));
 
         backButton.setBackground(Color.PINK);
         backButton.setLocation(10, 10);
+        backButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contFrame.changeFrame(4);
+            }
+
+        });
         add(backButton);
 
         fillMapBoxes();
