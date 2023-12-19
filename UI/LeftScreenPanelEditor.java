@@ -8,10 +8,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-public class LeftScreenPanel extends JPanel{
+public class LeftScreenPanelEditor extends JPanel{
     private Controller backendController;
 
     private JLabel labelTitle;
@@ -36,7 +34,7 @@ public class LeftScreenPanel extends JPanel{
     GridBagConstraints c = new GridBagConstraints();
     
 
-    public LeftScreenPanel(String title, Controller controller) {
+    public LeftScreenPanelEditor(String title, Controller controller) {
         this.backendController = controller;
         labelTitle = new JLabel(title);
         labelTitle.setFont(new Font("Serif", Font.ITALIC, 25));

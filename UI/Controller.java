@@ -26,7 +26,9 @@ public class Controller {
     Map currentMap;
     Login login;
     Space currentDrawContext;
+    Space currentDrawContextEditor;
     DrawPanel drawPanel;
+    DrawPanelEditor drawPanelEditor;
     public Controller(){
         this.loadSave = new LoadSave();
         this.search = new Search();
@@ -84,12 +86,23 @@ public class Controller {
     public Space getCurrentDrawContext(){
         return currentDrawContext;
     }
+    public void setCurrentDrawContextEditor(Space space){
+        this.currentDrawContextEditor = space;
+        this.drawPanelEditor.setActiveSpace(space);
+    }
+
+    public Space getCurrentDrawContextEditor(){
+        return currentDrawContextEditor;
+    }
     /**
      * sets the drawpanel object
      * @param panel
      */
     public void setDrawPanel(DrawPanel panel){
         this.drawPanel = panel;
+    }
+    public void setDrawPanelEditor(DrawPanelEditor panel){
+        this.drawPanelEditor = panel;
     }
     /**
      * returns the feedback list of the selected map

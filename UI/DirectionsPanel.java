@@ -33,6 +33,7 @@ public class DirectionsPanel extends JPanel {
     int changeDirectionTypeIndex;
     boolean exitDirectionType;
     Space currentStep;
+    int[][] euclidean = new int[200][200];
 
     public DirectionsPanel(Controller backendController){
         this.backendController = backendController;
@@ -124,20 +125,12 @@ public class DirectionsPanel extends JPanel {
         repaint();
     }
     public int zoomIn(double d){
-        System.out.println("input:" + d + "output" + (int) (d*ZOOMIN));
         return (int) (d*ZOOMIN);
     }
     public int getMean(int data, int offset){
         return (data+data+offset)/2;
     }
-    /* 
-    public ArrayList<Polygon> drawLineBetweenEntrances(int startX, int startY, int targetX, int targetY){
-        if(startX - targetX < 0){ // to the left
 
-        }
-        return null;
-    }
-    */
     public void drawLineBetweenEntrances(int startX, int startY, int targetX, int targetY, Graphics g){
         int dx = targetX - startX;
         int dy = targetY - startY;
@@ -215,11 +208,63 @@ public class DirectionsPanel extends JPanel {
         }
         return false;
     }
+    
+    public void fillOccupiedSpaces(){
+        for (Space space : currentStep.getContents()) {
+            for(int row = space.getY();row<=space.getY()+space.getHeight();row++){  
+                for(int col = space.getX(); col<= space.getX() + space.getWidth(); col ++){
+                    euclidean[row][col] = -1;
+                }
+            } 
+        }
+        calculateEuclidean(3, 3, 159, 159);
+        printEuclidean();
+    }
+    public void calculateEuclidean(int startX, int startY, int targetX, int targetY){
+        euclidean[startY][startX] = -2;
+        euclidean[targetY][targetX] = -3;
+        fillPixel(startX, startY);
+    }
+    public void fillPixel(int x, int y){
+        if(x<1 || x>198||y<1||y>198||(euclidean[y][x]!=0&&euclidean[y][x]!=-2)){
+            return;
+        }
+        int result = min(euclidean[y+1][x],euclidean[y-1][x],euclidean[y][x+1],euclidean[y][x-1]);
+        euclidean[y][x] = result+1;
+        fillPixel(x-1, y);
+        fillPixel(x+1, y);
+        fillPixel(x, y+1);
+        fillPixel(x, y-1);
+    }
+    public static int min(int a, int b, int c, int d) {
+
+        int min = 2000;
+        if (a != 0 && a!= -1 && a < min)
+            min = a;
+        if (b != 0 && b!= -1 && b < min)
+            min = b;
+        if (c != 0 && c!= -1 && c < min)
+            min = c;
+        if (d != 0 && d!= -1 && d < min)
+            min = d;
+        if(min==2000){
+            return 0;
+        }
+        return min;
+    }
+    public void printEuclidean(){
+        for (int[] row : euclidean) {
+            for (int i : row) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayList<Point> entrances = new ArrayList<Point>();
-        
+        fillOccupiedSpaces();
         g.setColor(currentStep.getColor());
         g.drawRect(zoomIn(currentStep.getX())+XCORRECTION,zoomIn(currentStep.getY())+YCORRECTION, zoomIn(currentStep.getWidth()), zoomIn(currentStep.getHeight())); 
         g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));

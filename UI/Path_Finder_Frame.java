@@ -15,6 +15,7 @@ public class Path_Finder_Frame{
     Editor_SeeFeedback_Frame seefeed;
     Editor_DeatiledFeedback_Frame detailFeed;
     AdminMapTools adminMapTools;
+    EditorMapTools editorMapTools;
 
     public Path_Finder_Frame(){
         backendController = new Controller();
@@ -29,6 +30,7 @@ public class Path_Finder_Frame{
         Feedback dummyFeedback = new Feedback("","","","",   "", "", "", false);
         detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
         adminMapTools = new AdminMapTools(this.backendController);
+        editorMapTools = new EditorMapTools(this.backendController);
         user.setVisible(true);
 
         //TODO: DELETE IT TEST
@@ -63,6 +65,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going back to main page
         }
         else if(i==1){
@@ -76,6 +79,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going to login page
         }
         else if(i==2){
@@ -89,6 +93,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going to create feedback page
         }
         else if(i==3){
@@ -102,6 +107,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             // goint to admin welcome page
         }
         else if(i==4){
@@ -115,6 +121,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             // going to editor welcome page
         }
         else if(i==5){
@@ -128,6 +135,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(true);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going to add user page
         }
         else if(i==6){
@@ -143,6 +151,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going to userlist page
         }
         else if(i==7){
@@ -156,6 +165,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(true);
+            editorMapTools.setVisible(false);
             //going to admin map tools page 
         }
         else if(i==8){
@@ -170,6 +180,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
+            editorMapTools.setVisible(false);
             //going to editors' seefeedback page
         }
         else if(i==9){
@@ -183,8 +194,7 @@ public class Path_Finder_Frame{
             adduser.setVisible(false);
             detailFeed.setVisible(false);
             adminMapTools.setVisible(false);
-            //going to editor map tools page
-            //Editor Maptools should be added
+            editorMapTools.setVisible(true);
         }
         
     }

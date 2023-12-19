@@ -1,22 +1,20 @@
 package UI;
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class AdminMapTools extends JFrame {
+public class EditorMapTools extends JFrame {
     Controller backendController;
 
-    public AdminMapTools(Controller backendController){
+    public EditorMapTools(Controller backendController){
         this.backendController = backendController;
         this.setSize(1200,700);
-        MainPanel mainPanel = new MainPanel(backendController);
-        LeftScreenPanel leftScreenPanel = mainPanel.getLeftScreenPanel();
-
+        MainPanelEditor mainPanel = new MainPanelEditor(backendController);
+        LeftScreenPanelEditor leftScreenPanel = mainPanel.getLeftScreenPanel();
         
-        ToolsPanel toolsPanel = mainPanel.getToolsPanel();
+        ToolsPanelEditor toolsPanel = mainPanel.getToolsPanel();
         JPanel settingsAndTools = new JPanel();
         settingsAndTools.setLayout(new BorderLayout());
         settingsAndTools.add(toolsPanel, BorderLayout.CENTER);

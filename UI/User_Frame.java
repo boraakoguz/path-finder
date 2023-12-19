@@ -359,9 +359,7 @@ public class User_Frame extends JFrame{
                     directionsPanel.setDirections(startLocation, targetLocation);
                     directionsPanel.setVisibility(true);
 
-                }
-                
-                // the path directions of space to space should be added here 
+                }              
             }
 
             else if(butType.equals("log")){
