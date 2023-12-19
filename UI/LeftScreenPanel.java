@@ -23,6 +23,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class LeftScreenPanel extends JPanel{
+    private Controller backendController;
+
     private JLabel labelTitle;
     private JLabel labelMap = new JLabel("Select Map");
     private JLabel labelBuilding = new JLabel("Select Building");
@@ -34,7 +36,6 @@ public class LeftScreenPanel extends JPanel{
     private JComboBox<Space> roomBox = new JComboBox<Space>();
     private JButton selectButton  = new JButton("Select");
     private JButton backButton = new JButton("Back");
-    private Controller backendController;
     GridBagConstraints c = new GridBagConstraints();
     
 

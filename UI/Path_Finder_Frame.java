@@ -30,6 +30,9 @@ public class Path_Finder_Frame{
         detailFeed=new Editor_DeatiledFeedback_Frame(this,dummyFeedback,null);
         adminMapTools = new AdminMapTools(this.backendController);
         user.setVisible(true);
+
+        //TODO: DELETE IT TEST
+        //changeFrame();
     }
     protected void changeFrame(int i, Feedback f){
         if(i==10){

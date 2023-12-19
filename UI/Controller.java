@@ -76,6 +76,10 @@ public class Controller {
         this.currentDrawContext = space;
         this.drawPanel.setActiveSpace(space);
     }
+
+    public Space getCurrentDrawContext(){
+        return currentDrawContext;
+    }
     /**
      * sets the drawpanel object
      * @param panel
