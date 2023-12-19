@@ -41,6 +41,7 @@ public class User_Frame extends JFrame{
     protected JButton logBut=new JButton("Login");
     protected JButton feedBut=new JButton("Create Feedback");
     protected JButton vendBut=new JButton();
+    protected JButton wcBut=new JButton();
     protected JButton watBut=new JButton();
     protected JButton backBut=new JButton();
     protected JButton menuBut=new JButton();
@@ -236,33 +237,46 @@ public class User_Frame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(butType.equals("findo1")){
-                isMenuchange[0]=true;
-                setLeftPanel(backGroundpink);
-                
-                watBut.addActionListener(new ButAction("wat"));
-                watBut.setBounds(40, 200, 200, 200);
-                watBut.setFocusable(false);
-                watBut.setBackground(backGroundpink);
-                watBut.setIcon(new ImageIcon("image (23).png"));
-                watBut.setBorder(BorderFactory.createEmptyBorder());
+                if(startLocation==null){
+                    JOptionPane.showMessageDialog(null, "Please Enter Your Location Properly");
+                }
+                else{
+                    isMenuchange[0]=true;
+                    setLeftPanel(backGroundpink);
 
-                vendBut.addActionListener(new ButAction("vend"));
-                vendBut.setBounds(60, 450, 200, 200);
-                vendBut.setFocusable(false);
-                vendBut.setBackground(backGroundpink);
-                vendBut.setIcon(new ImageIcon("image (16).png"));
-                vendBut.setBorder(BorderFactory.createEmptyBorder());
+                    watBut.addActionListener(new ButAction("wat"));
+                    watBut.setBounds(30, 200, 100, 100);
+                    watBut.setFocusable(false);
+                    watBut.setBackground(backGroundpink);
+                    watBut.setIcon(new ImageIcon("image (23).png"));
+                    watBut.setBorder(BorderFactory.createEmptyBorder());
 
-                leftPanel.add(vendBut);
-                leftPanel.add(watBut);
+                    vendBut.addActionListener(new ButAction("vend"));
+                    vendBut.setBounds(40, 350, 100, 100);
+                    vendBut.setFocusable(false);
+                    vendBut.setBackground(backGroundpink);
+                    vendBut.setIcon(new ImageIcon("image (16).png"));
+                    vendBut.setBorder(BorderFactory.createEmptyBorder());
+
+                    wcBut.addActionListener(new ButAction("wc"));
+                    wcBut.setBounds(50, 500, 100, 100);
+                    wcBut.setFocusable(false);
+                    wcBut.setBackground(backGroundpink);
+                    wcBut.setIcon(new ImageIcon("image (0).png"));
+                    wcBut.setBorder(BorderFactory.createEmptyBorder());
+
+                    leftPanel.add(wcBut);
+                    leftPanel.add(vendBut);
+                    leftPanel.add(watBut);
+                }
             }
             else if(butType.equals("back1")){
                 if(isMenuchange[0]){
-                    setLeftPanel(backGroundpink);
-                    left1();
                     startLocation=null;
                     targetLocation=null;
                     isMenuchange[0]=false;
+                    setLeftPanel(backGroundpink);
+                    left1();
                 }
                 if(isMenuchange[1]){
                     directionsPanel.setVisibility(false);
@@ -288,7 +302,7 @@ public class User_Frame extends JFrame{
                 }
             }
 
-            else if((butType.equals("wat"))||(butType.equals("vend"))){
+            else if((butType.equals("wat"))||(butType.equals("vend"))||(butType.equals("wc"))){
                 isMenuchange[1]=true;
                 directionsPanel.setVisibility(true);
                 // the path directions of objects should be added here 
