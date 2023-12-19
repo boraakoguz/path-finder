@@ -105,12 +105,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             Space floorSpace = null;
             if(this.activeSpace instanceof Map){
                 newSpace = new Building(name);
-                floorSpace = new Floor("Ground", floorNumber);
-            }
-
-            //TODO: Need to be deleted or, changed!!!!!!!!!
-            else if(this.activeSpace instanceof Building){
-                newSpace = new Floor(name,floorNumber);
+                floorSpace = newSpace.getContents().get(0);
             }
             else if(this.activeSpace instanceof Floor){
                 newSpace = new Room(name);
@@ -126,9 +121,6 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             newSpace.setEntranceX(originalX+originalWidth/2);
             newSpace.setEntranceY(originalY+originalHeight);
 
-            //TODO: DO WE NEED TO SET NAME AGAIN?
-            newSpace.setName(name);
-
             if(floorSpace != null) {
                 floorSpace.setX(originalX);
                 floorSpace.setY(originalY);
@@ -138,10 +130,6 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 floorSpace.setEntranceX(originalX+originalWidth/2);
                 floorSpace.setEntranceY(originalY+originalHeight);
                 floorSpace.setName("Ground Floor");
-                System.out.println("Floor created");
-
-                //floorSpace.addParent(newSpace);
-                newSpace.addSpace(floorSpace);
             }
 
             backendController.addSpace(this.activeSpace, newSpace);

@@ -75,8 +75,6 @@ public class boratest {
         Bfirst.addSpace(B1_102);
         Bfirst.addSpace(B1_103);
         Bsecond.addSpace(B1_201);
-        Bfirst.setUpStairs(Bsecond);
-        Bsecond.setDownStairs(Bfirst);
         Controller controller = new Controller();
         controller.addMap(map);
         controller.setCurrentMap("East Campus");
