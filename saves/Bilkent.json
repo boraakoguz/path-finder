@@ -75,9 +75,9 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 0,
-              "downStairX": 132,
+              "downStairX": 130,
               "downStairY": 200,
-              "upStairX": 130,
+              "upStairX": 100,
               "upStairY": 100,
               "xPoint": 30,
               "yPoint": 93,

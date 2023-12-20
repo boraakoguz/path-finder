@@ -106,6 +106,10 @@ public class DirectionsPanel extends JPanel {
         fillStringDirections();
         repaint();
     }
+    public void nearestObject(Space start, int type){
+        Space nearest = backendController.nearestMapObjects(start, type).get(0);
+        setDirections(start, nearest);
+    }
     public void fillStringDirections(){
         directionDescriptions = new ArrayList<String>();
         if(directionDescriptions != null){
@@ -234,6 +238,26 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
                 directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
+            }
+            else if(currentStep instanceof Floor && directions.get(stepIndex-1) instanceof Room && directions.get(stepIndex+1) instanceof Room){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
+            }
+            else if(currentStep instanceof Floor && directions.get(stepIndex-1) instanceof Room && directions.get(stepIndex+1) instanceof MapObject){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go to " + directions.get(stepIndex+1) );
             }
             else if(currentStep instanceof Floor && directions.get(stepIndex-1) instanceof Room){
                 g.setColor(Color.RED);
