@@ -52,8 +52,8 @@ public class MainPanel extends JPanel {
     public int drawPanelSize = (MAP_PANEL_DEFAULT_SIZE*(currentZoom+2));
     public int mainPanelSize = drawPanelSize + differenceSize*2;
     public Path_Finder_Frame contFrame;
-    JPanel westPanel = new JPanel();
-    JPanel northPanel = new JPanel();
+    //JPanel westPanel = new JPanel();
+    //JPanel northPanel = new JPanel();
     JPanel mainPanel = new JPanel(null);
     
     JScrollPane scrollPane;
@@ -65,12 +65,12 @@ public class MainPanel extends JPanel {
         this.toolsPanel = new ToolsPanel(this);
         this.drawPanel = new DrawPanel(this,leftScreenPanel, this.toolsPanel, backendController);
         setLayout(new BorderLayout());
-        add(westPanel, BorderLayout.WEST);
-        add(northPanel, BorderLayout.NORTH);
+        //add(westPanel, BorderLayout.WEST);
+        //add(northPanel, BorderLayout.NORTH);
         add(mainPanel, BorderLayout.CENTER);
 
-        westPanel.setBackground(Color.BLUE);
-        northPanel.setBackground(Color.ORANGE);
+        //westPanel.setBackground(Color.BLUE);
+        //northPanel.setBackground(Color.ORANGE);
         mainPanel.setBackground(Color.CYAN);
 
         mainPanel.setPreferredSize(new Dimension(mainPanelSize, mainPanelSize));
