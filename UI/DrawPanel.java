@@ -510,7 +510,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                             ) 
                             {
                                 currentFloor.setDownStairsX(newDownStairsX);
-                                currentFloor.setUpStairsX(newDownStairsY);
+                                currentFloor.setDownStairsY(newDownStairsY);
                                 System.out.println("Drawn");
                                 repaint();
                                 JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");
