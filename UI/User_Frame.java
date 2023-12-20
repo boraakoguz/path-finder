@@ -45,7 +45,6 @@ public class User_Frame extends JFrame{
 
     protected JButton logBut=new JButton("Login");
     protected JButton feedBut=new JButton("Create Feedback");
-    protected JButton vendBut=new JButton();
     protected JButton watBut=new JButton();
     protected JButton backBut=new JButton();
     protected JButton menuBut=new JButton();
@@ -289,15 +288,6 @@ public class User_Frame extends JFrame{
                     watBut.setIcon(new ImageIcon("image (23).png"));
                     watBut.setBorder(BorderFactory.createEmptyBorder());
 
-                    vendBut.addActionListener(new ButAction("vend"));
-                    vendBut.setBounds(40, 350, 100, 100);
-                    vendBut.setFocusable(false);
-                    vendBut.setBackground(backGroundpink);
-                    vendBut.setIcon(new ImageIcon("image (16).png"));
-                    vendBut.setBorder(BorderFactory.createEmptyBorder());
-
-                   
-                    leftPanel.add(vendBut);
                     leftPanel.add(watBut);
                 }
             }
