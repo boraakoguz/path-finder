@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import Building.Building;
 import Building.Floor;
 import Building.Map;
+import Building.MapObject;
+import Building.Room;
 import Building.Space;
 
 public class DirectionsPanel extends JPanel {
@@ -92,16 +95,6 @@ public class DirectionsPanel extends JPanel {
     public void setDirections(Space start, Space target){
         this.enterDirections = this.backendController.getEnterDirections(start, target);
         this.exitDirections = this.backendController.getExitDirections(start, target);
-        for (Space exit : exitDirections) {
-            if(exit instanceof Building){
-                exitDirections.remove(exit);
-            }
-        }
-        for (Space enter : enterDirections) {
-            if(enter instanceof Building){
-                enterDirections.remove(enter);
-            }
-        }
         this.directions = new ArrayList<Space>();
         this.directions.addAll(exitDirections);
         this.directions.addAll(enterDirections);
@@ -168,127 +161,28 @@ public class DirectionsPanel extends JPanel {
         g.drawLine(startX, startY, targetX, targetY);
         g.fillPolygon(xpoints, ypoints, 3);
     }
-    public boolean checkVertical(int x,int y,boolean isDown){
-         int tempY = y;
-        if(isDown){
-            tempY = y;
-            while(tempY>0){
-                tempY = tempY - COLLISION_DETECTION_SIZE;
-                if(checkCollision(x, y)){
-                    return false;
-                }
-            }
-        }
-        else{
-            while(tempY<700){
-                tempY = tempY + COLLISION_DETECTION_SIZE;
-                if(checkCollision(x, y)){
-                    return false;
-                }
-            }
-        }   
-        return true;  
-    }
-    public boolean checkHorizontal(int x,int y,boolean isRight){
-         int tempX = x;
-        if(isRight){
-            tempX = y;
-            while(tempX>0){
-                tempX = tempX - COLLISION_DETECTION_SIZE;
-                if(checkCollision(x, y)){
-                    return false;
-                }
-            }
-        }
-        else{
-            while(tempX<700){
-                tempX = tempX + COLLISION_DETECTION_SIZE;
-                if(checkCollision(x, y)){
-                    return false;
-                }
-            }
-        }   
-        return true;  
-    }
-    
-    public boolean checkCollision(int x, int y){
-        for(Space space : currentStep.getContents()){
-            if(
-                x > space.getX() &&
-                y > space.getY() &&
-                x < space.getX() + space.getWidth() &&
-                y < space.getY() + space.getHeight())
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void fillOccupiedSpaces(){
-        for (Space space : currentStep.getContents()) {
-            for(int row = space.getY();row<=space.getY()+space.getHeight();row++){  
-                for(int col = space.getX(); col<= space.getX() + space.getWidth(); col ++){
-                    euclidean[row][col] = -1;
-                }
-            } 
-        }
-        calculateEuclidean(3, 3, 159, 159);
-        printEuclidean();
-    }
-    public void calculateEuclidean(int startX, int startY, int targetX, int targetY){
-        euclidean[startY][startX] = -2;
-        euclidean[targetY][targetX] = -3;
-        fillPixel(startX, startY);
-    }
-    public void fillPixel(int x, int y){
-        if(x<1 || x>198||y<1||y>198||(euclidean[y][x]!=0&&euclidean[y][x]!=-2)){
-            return;
-        }
-        int result = min(euclidean[y+1][x],euclidean[y-1][x],euclidean[y][x+1],euclidean[y][x-1]);
-        euclidean[y][x] = result+1;
-        fillPixel(x-1, y);
-        fillPixel(x+1, y);
-        fillPixel(x, y+1);
-        fillPixel(x, y-1);
-    }
-    public static int min(int a, int b, int c, int d) {
-
-        int min = 2000;
-        if (a != 0 && a!= -1 && a < min)
-            min = a;
-        if (b != 0 && b!= -1 && b < min)
-            min = b;
-        if (c != 0 && c!= -1 && c < min)
-            min = c;
-        if (d != 0 && d!= -1 && d < min)
-            min = d;
-        if(min==2000){
-            return 0;
-        }
-        return min;
-    }
-    public void printEuclidean(){
-        for (int[] row : euclidean) {
-            for (int i : row) {
-                System.out.print(i);
-            }
-            System.out.println();
-        }
-    }
+  
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         ArrayList<Point> entrances = new ArrayList<Point>();
+        HashMap<String,Point> entrance = new HashMap<String,Point>();
+        entrance.put("down", null);
+        entrance.put("up", null);
+        entrance.put("target", null);
+        entrance.put("origin", null);
+
         g.setColor(currentStep.getColor());
         g.drawRect(zoomIn(currentStep.getX())+XCORRECTION,zoomIn(currentStep.getY())+YCORRECTION, zoomIn(currentStep.getWidth()), zoomIn(currentStep.getHeight())); 
-        g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));
+        if(currentStep instanceof Room || currentStep instanceof Building){ 
+            g.drawString(currentStep.getName(), getMean(zoomIn(currentStep.getX())+XCORRECTION, currentStep.getWidth()), getMean(zoomIn(currentStep.getY())+YCORRECTION, currentStep.getY()));
+        }
         if(!(currentStep instanceof Building)){
             if(currentStep instanceof Floor){
                 Point downPoint = new Point(((Floor)currentStep).getDownStairX(),((Floor)currentStep).getDownStairY());
                 Point upPoint = new Point(((Floor)currentStep).getUpStairX(),((Floor)currentStep).getUpStairY());
-                entrances.add(downPoint);
-                entrances.add(upPoint);
+                entrance.replace("down",downPoint);
+                entrance.replace("up",upPoint);
                 g.setColor(Color.RED);
                 g.fillOval(
                     zoomIn(downPoint.getX())+XCORRECTION,
@@ -315,55 +209,118 @@ public class DirectionsPanel extends JPanel {
                 }  
                 g.setColor(space.getColor());
                 g.drawRect(zoomIn(space.getX())+XCORRECTION,zoomIn(space.getY())+YCORRECTION, zoomIn(space.getWidth()), zoomIn(space.getHeight())); 
-                g.drawString(space.getName(), getMean(zoomIn(space.getX())+XCORRECTION, space.getWidth()), getMean(zoomIn(space.getY())+YCORRECTION, space.getY()));
+                if(space instanceof Room || space instanceof Building){ 
+                    g.drawString(space.getName(), getMean(zoomIn(space.getX())+XCORRECTION, space.getWidth()), getMean(zoomIn(space.getY())+YCORRECTION, space.getY()));
+                }
+                if(space instanceof MapObject){
+                    g.drawImage(((MapObject) space).getIcon(zoomIn(space.getWidth()),zoomIn(space.getHeight())), zoomIn(space.getX())+XCORRECTION, zoomIn(space.getY())+YCORRECTION, null);
+                }
+                if(enterDirections.contains(space)){
+                    entrance.replace("target",new Point(space.getEntranceX(),space.getEntranceY()));
+                }
+                else if(exitDirections.contains(space)){
+                    entrance.replace("origin",new Point(space.getEntranceX(),space.getEntranceY()));
+                }
             }
         }
         
-        
-
-        if(stepIndex<directions.size()-1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
+        if(currentStep instanceof Map){
             if(exitDirectionType){
                 g.setColor(Color.RED);
                 drawLineBetweenEntrances(
-                    zoomIn(entrances.get(1).getX())+XCORRECTION,
-                    zoomIn(entrances.get(1).getY())+YCORRECTION,
-                    zoomIn(entrances.get(0).getX())+XCORRECTION,
-                    zoomIn(entrances.get(0).getY())+YCORRECTION,
-                    g);
-                directionDescriptions.set(stepIndex, "Go Downstairs to " + directions.get(stepIndex+1) );
-            }
-            else{
-                g.setColor(Color.GREEN);
-                drawLineBetweenEntrances(
-                    zoomIn(entrances.get(0).getX())+XCORRECTION,
-                    zoomIn(entrances.get(0).getY())+YCORRECTION,
-                    zoomIn(entrances.get(1).getX())+XCORRECTION,
-                    zoomIn(entrances.get(1).getY())+YCORRECTION,
-                    g);
-                directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
-            }
-        }
-        else if(directions.get(stepIndex) instanceof Floor){
-            if(exitDirectionType){
-                g.setColor(Color.RED);
-                drawLineBetweenEntrances(
-                    zoomIn(entrances.get(1).getX())+XCORRECTION,
-                    zoomIn(entrances.get(1).getY())+YCORRECTION,
-                    zoomIn(entrances.get(0).getX())+XCORRECTION,
-                    zoomIn(entrances.get(0).getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
                     g);
                 directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
             }
             else{
                 g.setColor(Color.GREEN);
                 drawLineBetweenEntrances(
-                    zoomIn(entrances.get(0).getX())+XCORRECTION,
-                    zoomIn(entrances.get(0).getY())+YCORRECTION,
-                    zoomIn(entrances.get(1).getX())+XCORRECTION,
-                    zoomIn(entrances.get(1).getY())+YCORRECTION,
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
                 directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex).getParent());
             }
+        }
+        else if(stepIndex<directions.size()-1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex+1) instanceof Room){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex).getParent());
+            }
+        }
+        else if(directions.size()>1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex-1) instanceof Room){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex).getParent());
+            }
+        }
+        else if(stepIndex<directions.size()-1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Downstairs to " + directions.get(stepIndex+1) );
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
+            }
+        }
+        
+        else if(currentStep instanceof Room){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+            }
+            else{
+                g.setColor(Color.GREEN);
+            }
+            g.fillOval(zoomIn(currentStep.getEntranceX())+XCORRECTION, zoomIn(currentStep.getEntranceY())+YCORRECTION, 10, 10);
         }
 
         g.setColor(Color.BLACK);
