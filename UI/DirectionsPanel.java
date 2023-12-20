@@ -223,7 +223,65 @@ public class DirectionsPanel extends JPanel {
                 }
             }
         }
-        
+
+        if(stepIndex<directions.size()-1 || stepIndex>1){
+            if(currentStep instanceof Map){
+                 g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
+            }
+            else if(currentStep instanceof Floor && directions.get(stepIndex-1) instanceof Room){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("origin").getX())+XCORRECTION,
+                    zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
+
+            }
+             else if(currentStep instanceof Floor && directions.get(stepIndex+1) instanceof Room){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    g);
+            }
+            else if(currentStep instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
+                if(exitDirectionType){
+                    g.setColor(Color.RED);
+                    drawLineBetweenEntrances(
+                        zoomIn(entrance.get("up").getX())+XCORRECTION,
+                        zoomIn(entrance.get("up").getY())+YCORRECTION,
+                        zoomIn(entrance.get("down").getX())+XCORRECTION,
+                        zoomIn(entrance.get("down").getY())+YCORRECTION,
+                        g);
+                    directionDescriptions.set(stepIndex, "Go Downstairs to " + directions.get(stepIndex+1) );
+                }
+                else{
+                    g.setColor(Color.GREEN);
+                    drawLineBetweenEntrances(
+                        zoomIn(entrance.get("down").getX())+XCORRECTION,
+                        zoomIn(entrance.get("down").getY())+YCORRECTION,
+                        zoomIn(entrance.get("up").getX())+XCORRECTION,
+                        zoomIn(entrance.get("up").getY())+YCORRECTION,
+                        g);
+                    directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
+                }
+            }
+            else{
+                System.out.println(entrance.toString());
+            }
+        }
+        /* 
         if(currentStep instanceof Map){
             if(exitDirectionType){
                 g.setColor(Color.RED);
@@ -334,8 +392,8 @@ public class DirectionsPanel extends JPanel {
                 directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
             }
         }
-        
-        else if(currentStep instanceof Room){
+        */
+        if(currentStep instanceof Room || currentStep instanceof Building){
             if(exitDirectionType){
                 g.setColor(Color.RED);
             }
