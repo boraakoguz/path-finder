@@ -148,7 +148,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         object.setEnabled(false);
         addFloor.setEnabled(false);
         delete.setEnabled(false);
-        addMap.setEnabled(false);
+        addMap.setEnabled(true);
         arrangeCurrentButton();
     }
 
@@ -311,6 +311,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
             System.out.println("Add Map");
             currentButton = addMap;
             mainPanel.addMap();
+            
         }
     }   
 }
