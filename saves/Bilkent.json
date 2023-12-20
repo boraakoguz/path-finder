@@ -1,47 +1,6 @@
 {
   "feedbackContainer": {
-    "feedBackList": [
-      {
-        "mail": "q@hotmail",
-        "name": "Bora",
-        "content": "xyz çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "room": "B102",
-        "status": true
-      },
-      {
-        "mail": "q@hotmail",
-        "name": "Bora",
-        "content": "xyz çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "room": "B102",
-        "status": true
-      },
-      {
-        "mail": "q@hotmail",
-        "name": "Bora",
-        "content": "xyz çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "room": "B102",
-        "status": true
-      },
-      {
-        "mail": "q@hotmail",
-        "name": "Bora",
-        "content": "xyz çalışmıyor",
-        "map": "Bilkent",
-        "building": "B Building",
-        "floor": "First Floor",
-        "room": "B102",
-        "status": true
-      }
-    ]
+    "feedBackList": []
   },
   "xPoint": 0,
   "yPoint": 0,
@@ -75,10 +34,10 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 0,
-              "downStairX": 132,
-              "downStairY": 200,
-              "upStairX": 130,
-              "upStairY": 100,
+              "downStairX": 135,
+              "downStairY": 130,
+              "upStairX": 135,
+              "upStairY": 120,
               "xPoint": 30,
               "yPoint": 93,
               "width": 112,
@@ -212,10 +171,10 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 1,
-              "downStairX": 132,
-              "downStairY": 129,
-              "upStairX": 40,
-              "upStairY": 129,
+              "downStairX": 135,
+              "downStairY": 130,
+              "upStairX": 135,
+              "upStairY": 120,
               "xPoint": 30,
               "yPoint": 93,
               "width": 112,
@@ -282,8 +241,8 @@
                     "yPoint": 141,
                     "width": 35,
                     "height": 25,
-                    "entranceX": 47,
-                    "entranceY": 166,
+                    "entranceX": 40,
+                    "entranceY": 141,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
@@ -298,8 +257,8 @@
                     "yPoint": 141,
                     "width": 39,
                     "height": 25,
-                    "entranceX": 84,
-                    "entranceY": 166,
+                    "entranceX": 80,
+                    "entranceY": 141,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
@@ -353,10 +312,10 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 0,
-              "downStairX": 118,
-              "downStairY": 49,
-              "upStairX": 56,
-              "upStairY": 49,
+              "downStairX": 120,
+              "downStairY": 55,
+              "upStairX": 120,
+              "upStairY": 45,
               "xPoint": 46,
               "yPoint": 23,
               "width": 82,
@@ -391,28 +350,12 @@
                     "yPoint": 58,
                     "width": 34,
                     "height": 17,
-                    "entranceX": 63,
-                    "entranceY": 75,
+                    "entranceX": 60,
+                    "entranceY": 58,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
                     "name": "GZ01",
-                    "contents": []
-                  }
-                },
-                {
-                  "type": "Building.Room",
-                  "data": {
-                    "xPoint": 80,
-                    "yPoint": 58,
-                    "width": 28,
-                    "height": 17,
-                    "entranceX": 94,
-                    "entranceY": 75,
-                    "colorR": 0,
-                    "colorG": 0,
-                    "colorB": 0,
-                    "name": "GZ02",
                     "contents": []
                   }
                 },
@@ -439,10 +382,10 @@
             "type": "Building.Floor",
             "data": {
               "floorNumber": 1,
-              "downStairX": 118,
-              "downStairY": 49,
-              "upStairX": 56,
-              "upStairY": 49,
+              "downStairX": 120,
+              "downStairY": 55,
+              "upStairX": 120,
+              "upStairY": 45,
               "xPoint": 46,
               "yPoint": 23,
               "width": 82,
@@ -494,7 +437,7 @@
                     "width": 29,
                     "height": 16,
                     "entranceX": 60,
-                    "entranceY": 75,
+                    "entranceY": 59,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
@@ -509,12 +452,31 @@
                     "yPoint": 59,
                     "width": 28,
                     "height": 16,
-                    "entranceX": 89,
-                    "entranceY": 75,
+                    "entranceX": 95,
+                    "entranceY": 59,
                     "colorR": 0,
                     "colorG": 0,
                     "colorB": 0,
                     "name": "G103",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.MapObject",
+                  "data": {
+                    "type": 1,
+                    "functional": true,
+                    "icon": "image (23).png",
+                    "xPoint": 70,
+                    "yPoint": 53,
+                    "width": 7,
+                    "height": 6,
+                    "entranceX": 73,
+                    "entranceY": 59,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "Water Dispenser",
                     "contents": []
                   }
                 }

@@ -46,7 +46,6 @@ public class User_Frame extends JFrame{
     protected JButton logBut=new JButton("Login");
     protected JButton feedBut=new JButton("Create Feedback");
     protected JButton vendBut=new JButton();
-    protected JButton wcBut=new JButton();
     protected JButton watBut=new JButton();
     protected JButton backBut=new JButton();
     protected JButton menuBut=new JButton();
@@ -297,14 +296,7 @@ public class User_Frame extends JFrame{
                     vendBut.setIcon(new ImageIcon("image (16).png"));
                     vendBut.setBorder(BorderFactory.createEmptyBorder());
 
-                    wcBut.addActionListener(new ButAction("wc"));
-                    wcBut.setBounds(50, 500, 100, 100);
-                    wcBut.setFocusable(false);
-                    wcBut.setBackground(backGroundpink);
-                    wcBut.setIcon(new ImageIcon("image (0).png"));
-                    wcBut.setBorder(BorderFactory.createEmptyBorder());
-
-                    leftPanel.add(wcBut);
+                   
                     leftPanel.add(vendBut);
                     leftPanel.add(watBut);
                 }
@@ -341,13 +333,14 @@ public class User_Frame extends JFrame{
                     left2();
                 }
             }
-
-            else if((butType.equals("wat"))||(butType.equals("vend"))||(butType.equals("wc"))){
-                isMenuchange[1]=true;
+            else if(butType.equals("wat")){
+                directionsPanel.nearestObject(startLocation, 1);
                 directionsPanel.setVisibility(true);
-                // the path directions of objects should be added here 
             }
-
+            else if(butType.equals("vend")){
+                directionsPanel.nearestObject(startLocation, 0);
+                directionsPanel.setVisibility(true);
+            }
             else if(butType.equals("go")){
                 if(targetLocation==null){
                     JOptionPane.showMessageDialog(null, "Please Enter Your Destination Properly");
