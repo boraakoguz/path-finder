@@ -247,7 +247,7 @@ public class MainPanel extends JPanel {
         //TODO: ADD SELF DESCTRUCTION METHOD
         Space currentSpace = backendController.getCurrentDrawContext(); 
         Space parentSpace = currentSpace.getParent();
-        
+       
         if(parentSpace != null) {
             if(currentSpace instanceof Floor) {
                 Building currentBuilding = (Building) parentSpace;

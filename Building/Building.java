@@ -24,11 +24,13 @@ public class Building extends Space{
             floor = new Floor(""+ maxFloor, maxFloor);
             this.maxFloor++;
             this.addSpace(floor);
+            System.out.println("add up");
         }
         else {
             floor = new Floor(""+minFloor, minFloor);
             this.minFloor--;
-            this.addSpace(floor);    
+            this.addSpace(floor);   
+            System.out.println("add down"); 
         }
         floor.setX(getX());
         floor.setY(getY());
@@ -45,19 +47,27 @@ public class Building extends Space{
     }
 
     public boolean deleteFloor(Floor floor){
+        System.out.println("Floor number: " + floor.getFloorNumber());
+        System.out.println(minFloor);
+        System.out.println(maxFloor);
         if(floor.getFloorNumber() != maxFloor-1 && floor.getFloorNumber() != minFloor+1){
+            System.out.println("İnside 1");
             return false;
+            
         }
         if(floor.getFloorNumber() == FLOOR_GROUND && numberOfFloors == 1) {
             this.getParent().getContents().remove(this);
+            System.out.println("İnside 2");
             return true;
         }
-        if(floor.getFloorNumber() == maxFloor){
+        if(floor.getFloorNumber() == maxFloor-1){
+            System.out.println("İnside 3");
             this.contents.remove(floor);
             maxFloor--;
             numberOfFloors--;
         }
-        else{
+        else if(floor.getFloorNumber() == minFloor+1){
+            System.out.println("İnside 4");
             this.contents.remove(floor);
             minFloor++;
             numberOfFloors--;
