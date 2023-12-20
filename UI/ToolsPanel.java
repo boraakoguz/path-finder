@@ -31,7 +31,8 @@ public class ToolsPanel extends JPanel implements ActionListener{
     JButton addFloor = new JButton(new ImageIcon("add-floor-icon.png"));
     JButton delete = new JButton(new ImageIcon("delete-icon.png"));
     JButton addMap = new JButton(new ImageIcon("add-map-icon.png"));
-    JButton currerntGreen;
+    JButton currentButton;
+
     
     ImageIcon blueBackIcon = new ImageIcon(((ImageIcon) blueBack.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon drawIcon = new ImageIcon(((ImageIcon) draw.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
@@ -141,6 +142,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         addFloor.setEnabled(false);
         delete.setEnabled(false);
         addMap.setEnabled(false);
+        arrangeCurrentButton();
     }
 
     public void buildingEditing() {
@@ -159,6 +161,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         addFloor.setEnabled(true);
         delete.setEnabled(true);
         addMap.setEnabled(false);
+        arrangeCurrentButton();
     }
 
     public void floorEditing() {
@@ -177,6 +180,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         addFloor.setEnabled(false);
         delete.setEnabled(true);
         addMap.setEnabled(false);
+        arrangeCurrentButton();
     }
 
     public void mapEditing() {
@@ -195,24 +199,33 @@ public class ToolsPanel extends JPanel implements ActionListener{
         addFloor.setEnabled(false);
         delete.setEnabled(true);
         addMap.setEnabled(true);
+        arrangeCurrentButton();
     }
 
+    public void arrangeCurrentButton() {
+        if(currentButton != null) {
+            if(currentButton.isEnabled() == false) {
+                mainPanel.noAction();
+                currentButton.setBackground(getBackground());
+            }
+        }        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(currerntGreen != null) {
-            currerntGreen.setBackground(getBackground());
-            currerntGreen = null;
+        if(currentButton != null) {
+            currentButton.setBackground(getBackground());
         }
+
         if(e.getSource() == blueBack) {
             System.out.println("Blue Back");
-            currerntGreen = blueBack;
+            currentButton = blueBack;
             mainPanel.blueBack();
         }
         else if(e.getSource() == draw) {
             System.out.println("Draw");
-            draw.setBackground(Color.GREEN);
-            currerntGreen = draw;
+            currentButton = draw;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.draw();
         }
         else if(e.getSource() == color) {
@@ -221,25 +234,25 @@ public class ToolsPanel extends JPanel implements ActionListener{
         }
         else if(e.getSource() == eraser) {
             System.out.println("Eraser");
-            eraser.setBackground(Color.GREEN);
-            currerntGreen = eraser;
+            currentButton = eraser;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.eraser();
         }
         else if(e.getSource() == move) {
             System.out.println("Move");
-            move.setBackground(Color.GREEN);
-            currerntGreen = move;
+            currentButton = move;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.move();
         }
         else if(e.getSource() == reset) {
             System.out.println("Reset");
-            currerntGreen = reset;
+            currentButton = reset;
             mainPanel.reset();
         }
         else if(e.getSource() == cursor) {
             System.out.println("Cursor");
-            cursor.setBackground(Color.GREEN);
-            currerntGreen = cursor;
+            currentButton = cursor;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.cursor();
         }
         else if(e.getSource() == zoomIn) {
@@ -252,35 +265,35 @@ public class ToolsPanel extends JPanel implements ActionListener{
         }
         else if(e.getSource() == path) {
             System.out.println("Path");
-            path.setBackground(Color.GREEN);
-            currerntGreen = path;
+            currentButton = path;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.path();
         }
         else if(e.getSource() == wall) {
             System.out.println("Wall");
-            wall.setBackground(Color.GREEN);
-            currerntGreen = wall;
+            currentButton = wall;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.wall();
         }
         else if(e.getSource() == object) {
             System.out.println("Object");
-            object.setBackground(Color.GREEN);
-            currerntGreen = object;
+            currentButton = object;
+            currentButton.setBackground(Color.GREEN);
             mainPanel.object();
         }
         else if(e.getSource() == addFloor) {
             System.out.println("Add Floor");
-            currerntGreen = addFloor;
+            currentButton = addFloor;
             mainPanel.addFloor();
         }
         else if(e.getSource() == delete) {
             System.out.println("Delete");
-            currerntGreen = delete;
+            currentButton = delete;
             mainPanel.delete();
         }
         else if(e.getSource() == addMap) {
             System.out.println("Add Map");
-            currerntGreen = addMap;
+            currentButton = addMap;
             mainPanel.addMap();
         }
     }   
