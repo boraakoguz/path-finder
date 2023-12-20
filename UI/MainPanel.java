@@ -22,6 +22,7 @@ public class MainPanel extends JPanel {
     ToolsPanel toolsPanel;
     Controller backendController;
 
+    final public static int NO_ACTION = -1;
     final public static int BLUE_BACK_ACTION = 0;
     final public static int DRAW_ACTION = 1;
     final public static int COLOR_ACTION = 2;
@@ -104,9 +105,6 @@ public class MainPanel extends JPanel {
         if(cursorType == DRAW_ACTION) {
             drawPanel.setCursor(new Cursor(1));
         }
-        else if(cursorType == COLOR_ACTION) {
-            drawPanel.setCursor(new Cursor(0));
-        }
         else if(cursorType == ERASER_ACTION) {
             drawPanel.setCursor((Cursors.eraserCursor()));
         }
@@ -116,17 +114,17 @@ public class MainPanel extends JPanel {
         else if(cursorType == CURSOR_ACTION) {
             drawPanel.setCursor(new Cursor(12));
         }
-        else if(cursorType == ZOOM_IN_ACTION) {
-            drawPanel.setCursor(new Cursor(0));
-        }
-        else if(cursorType == ZOOM_OUT_ACTION) {
-            drawPanel.setCursor(new Cursor(0));
-        }
         else if(cursorType == PATH_ACTION) {
             drawPanel.setCursor(Cursors.pathCursor());
         }
         else if(cursorType == WALL_ACTION) {
             drawPanel.setCursor(Cursors.wallCursor());
+        }
+        else if(cursorType == OBJECT_ACTION) {
+            drawPanel.setCursor(Cursors.objectCursor());
+        }
+        else {
+            drawPanel.setCursor(new Cursor(0));
         }
     }
 
@@ -135,8 +133,13 @@ public class MainPanel extends JPanel {
     //TODO: add method for preparing all methods, there are 2 same lines at each methods. Separate them.
     public void blueBack() {
         currenAction = BLUE_BACK_ACTION;
-        arrangeCursor(COLOR_ACTION);
+        arrangeCursor(BLUE_BACK_ACTION);
         backendController.setCurrentDrawContext(backendController.getCurrentDrawContext().getParent());
+    }
+
+    public void noAction() {
+        currenAction = NO_ACTION;
+        arrangeCursor(NO_ACTION);
     }
 
     public void draw() {
@@ -163,7 +166,7 @@ public class MainPanel extends JPanel {
     public void reset() {
         currenAction = RESET_ACTION;
         //TODO: ARRANGE CURSOR
-        arrangeCursor(MOVE_ACTION);
+        arrangeCursor(RESET_ACTION);
         drawPanel.setLocation(differenceSize, differenceSize);
         System.out.println("sadsfdsfds");
     }
@@ -203,12 +206,12 @@ public class MainPanel extends JPanel {
     
     public void object() {
         currenAction = OBJECT_ACTION;
-        arrangeCursor(DRAW_ACTION);
+        arrangeCursor(OBJECT_ACTION);
     }
     
     public void addFloor() {
         currenAction = ADD_FLOOR_ACTION;
-        arrangeCursor(DRAW_ACTION);
+        arrangeCursor(ADD_FLOOR_ACTION);
         Building currentBuilding = (Building)backendController.getCurrentDrawContext();
         JButton up = new JButton("UP");
         JButton down = new JButton("DOWN");
@@ -238,7 +241,7 @@ public class MainPanel extends JPanel {
     public void delete() {
         System.out.println("Inside main panel delete");
         currenAction = DELETE_ACTION;
-        arrangeCursor(DRAW_ACTION);
+        arrangeCursor(DELETE_ACTION);
         
         //TODO: ADD SELF DESCTRUCTION METHOD
         Space parentSpace = backendController.getCurrentDrawContext().getParent();
@@ -255,10 +258,9 @@ public class MainPanel extends JPanel {
 
         }
     }
-
     public void addMap() {
         currenAction = ADD_MAP_ACTION;
-        arrangeCursor(COLOR_ACTION);
+        arrangeCursor(ADD_MAP_ACTION);
     }
 
     public void setPanelSize() {

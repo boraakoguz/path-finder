@@ -9,6 +9,7 @@ public class Cursors {
     private static Image eraser = toolkit.getImage("eraser-icon.png");
     private static Image path = toolkit.getImage("path-icon.png");
     private static Image wall = toolkit.getImage("wall-icon.png");
+    private static Image object = toolkit.getImage("object-icon.png");
     
     public static Cursor eraserCursor() {
         return toolkit.createCustomCursor(eraser , new Point(0, 47), "img");
@@ -18,5 +19,8 @@ public class Cursors {
     }
     public static Cursor wallCursor() {
         return toolkit.createCustomCursor(wall , new Point(0, 47), "img");
+    }
+    public static Cursor objectCursor() {
+        return toolkit.createCustomCursor(object , new Point(0, 47), "img");
     }
 }
