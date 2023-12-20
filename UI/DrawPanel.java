@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -200,7 +202,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             }
         }
     }
-
+    
     //TODO Combine edit and delete methods there are several same codes.
     public void editSpace(int x, int y) {
         int editX = resizeDefaultVaules(x);
@@ -231,7 +233,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             System.out.println("İnside also?");
         }
         JButton selectSpaceButton = new JButton("Select Space");
-        JButton locationButton = new JButton("Change Location and Size");
+        JButton locationButton = new JButton("Change Location");
         JButton colorButton = new JButton(" Change Color");
         JButton nameButton = new JButton("Change Name");
         JButton enteranceButton = new JButton("Change Enterance");
@@ -251,52 +253,56 @@ public class DrawPanel extends JPanel implements MouseInputListener{
 
                 JTextField field1 = new JTextField();
                 JTextField field2 = new JTextField();
-                JTextField field3 = new JTextField();
-                JTextField field4 = new JTextField();
+
+                int maxX = editedSpace.getParent().getX() + editedSpace.getParent().getWidth() - editedSpace.getWidth();
+                int minX = editedSpace.getParent().getX();
+                int maxY = editedSpace.getParent().getY() + editedSpace.getParent().getHeight() - editedSpace.getHeight();
+                int minY = editedSpace.getParent().getY();
+
+                String newXRange = "New X-Cor Range (" + minX + " - " + maxX + ")";
+                String newYRange = "New Y-Cor Range(" + minY + " - " + maxY + ")";
+
                 String text1 = "Information about the space '" + editedSpace.getName() + "'";
                 String text2 =  "X-Cor: " + editedSpace.getX() + "\n" +
-                                "Y-Cor: " + editedSpace.getY() + "\n" +
-                                "Width: " + editedSpace.getWidth() + "\n" +
-                                "Height: " + editedSpace.getHeight() + "\n\n";
+                                "Y-Cor: " + editedSpace.getY() + "\n\n";
+                                
                 Object [] fields = {
                 text1, text2,
-                "New X-Cor", field1,
-                "New Y-Cor", field2,
-                "New Width", field3,
-                "New Height", field4,
+                newXRange, field1,
+                newYRange, field2                
                 };
 
                 //TODO: add All conditions, entering letter, not entering, entering to big number, entering zero or negative etc
-                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Edit Space",JOptionPane.OK_CANCEL_OPTION);
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Location",JOptionPane.OK_CANCEL_OPTION);
                 if(
                     chooice == JOptionPane.OK_OPTION &&
                     !field1.getText().equals("") &&
-                    !field2.getText().equals("") &&
-                    !field3.getText().equals("") &&
-                    !field4.getText().equals("")                 
+                    !field2.getText().equals("")      
                     ) 
                     {
                         try {
                             int newX = Integer.parseInt(field1.getText());
                             int newY = Integer.parseInt(field2.getText());
-                            int newWidth = Integer.parseInt(field3.getText());
-                            int newHeight = Integer.parseInt(field4.getText());
 
-                            if(newX > 0 && newY > 0 && newWidth > 0 && newHeight > 0) {
+                            if(newX <= maxX && newX >= minX && newY <= maxY && newY >= minY) {
+                                editedSpace.setEntranceX(editedSpace.getEntranceX() + newX - editedSpace.getX());
+                                editedSpace.setEntranceY(editedSpace.getEntranceY() + newY - editedSpace.getY());
                                 editedSpace.setX(newX);
                                 editedSpace.setY(newY);
-                                editedSpace.setWidth(newWidth);
-                                editedSpace.setHeight(newHeight);
+                                repaint();
+                                JOptionPane.showMessageDialog(mainPanel, "Location of the " + editedSpace + " is changed successfully",
+                                "Invalid", JOptionPane.DEFAULT_OPTION);
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(mainPanel, "You should enter the values within the range", "Invalid", JOptionPane.DEFAULT_OPTION);
                             }
                         } catch (Exception e2) {
-                            System.out.println("String");   
+                            JOptionPane.showMessageDialog(mainPanel, "You should enter number!");
                         }
                 }
-                else {
-                    System.out.println("outside");
-                }
-                System.out.println(field1.getText());
-                repaint();
+                else if(chooice == JOptionPane.OK_OPTION){
+                    JOptionPane.showMessageDialog(mainPanel, "You should enter number!");
+                }                
             }
         });
 
@@ -306,7 +312,8 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, editedSpace.getColor());                                        
                 if(newColor != null) {
                     editedSpace.setColor(newColor);
-                    repaint();
+                    //repaint();
+                    
                 }           
             }
         });
@@ -484,7 +491,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         if(editedSpace instanceof Room) {
             editMessage = "Edit Room: ";
         }
-        if(editedSpace instanceof Floor) {
+        else if(editedSpace instanceof Floor) {
             editMessage = "Edit Floor: ";
             buttons = new Object[]{
                 colorButton, nameButton, stairsEnterenceButton
@@ -493,10 +500,27 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         else if(editedSpace instanceof Building) {
             editMessage = "Edit Building: ";
         }
-        JOptionPane.showConfirmDialog(mainPanel,buttons, editMessage + editedSpace ,JOptionPane.CANCEL_OPTION);
-        backendController.save();              
+        else if(editedSpace instanceof Map) {
+            editMessage = "Edit Map: ";
+            buttons = new Object[]{
+                nameButton
+            };
+        }
+        JOptionPane optionPane = new JOptionPane(editMessage + editedSpace, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+
+        JDialog dialog;
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(buttons.length,1));
+        for (int i = 0; i < buttons.length; i++)
+        {
+            panel.add((JButton)buttons[i]);
+        }
+        optionPane.add(panel);
+        dialog = optionPane.createDialog(mainPanel, "Edit");
+        dialog.setVisible(true);
         
-    }
+        backendController.save();  
+        }
 
     @Override
     public void paintComponent(Graphics g){
