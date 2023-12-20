@@ -278,6 +278,7 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("target").getX())+XCORRECTION,
                     zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
             }
             else if(currentStep instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
                 if(exitDirectionType){
