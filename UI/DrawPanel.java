@@ -26,7 +26,7 @@ import Building.MapObject;
 import Building.Room;
 import Building.Space;
 
-public class DrawPanel extends JPanel implements MouseInputListener, ComponentListener{
+public class DrawPanel extends JPanel implements MouseInputListener{
     MainPanel mainPanel;
     LeftScreenPanel leftScreenPanel;
     ToolsPanel toolsPanel;
@@ -74,7 +74,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
         setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
-        addComponentListener(this);
+        
     }
     public void setActiveSpace(Space space){
         this.activeSpace = space;
@@ -474,15 +474,26 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
                 }   
             }    
         });
+
         Object [] buttons = {
             selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton
         };
-        if(editedSpace instanceof Floor) {
-            buttons = new Object[]{
-                selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton, stairsEnterenceButton
-            };  
+        String editMessage = "Edit: ";
+        System.out.println(editedSpace);
+        //TODO: No need to add map, map cannot be edited!!
+        if(editedSpace instanceof Room) {
+            editMessage = "Edit Room: ";
         }
-        JOptionPane.showConfirmDialog(mainPanel,buttons,"Edit: " + editedSpace ,JOptionPane.CANCEL_OPTION);
+        if(editedSpace instanceof Floor) {
+            editMessage = "Edit Floor: ";
+            buttons = new Object[]{
+                colorButton, nameButton, stairsEnterenceButton
+            };
+        }
+        else if(editedSpace instanceof Building) {
+            editMessage = "Edit Building: ";
+        }
+        JOptionPane.showConfirmDialog(mainPanel,buttons, editMessage + editedSpace ,JOptionPane.CANCEL_OPTION);
         backendController.save();              
         
     }
@@ -801,8 +812,7 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
             previousY = getY();
             System.out.println(e.getX());
             System.out.println(moveFirstX);
-        }
-        
+        }        
     }
 
 
@@ -812,23 +822,6 @@ public class DrawPanel extends JPanel implements MouseInputListener, ComponentLi
     }
 
     
-
-    //TODO: These methods can be deleted. Maybe?
-    @Override
-    public void componentResized(ComponentEvent e) {
-        //paintComponent(getGraphics());
-    }
-
-    @Override
-    public void componentMoved(ComponentEvent e) {}
-
-
-    @Override
-    public void componentShown(ComponentEvent e) {}
-
-
-    @Override
-    public void componentHidden(ComponentEvent e) {}
 
     
 }
