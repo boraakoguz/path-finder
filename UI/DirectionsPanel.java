@@ -277,7 +277,7 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("down").getX())+XCORRECTION,
                     zoomIn(entrance.get("down").getY())+YCORRECTION,
                     g);
-                directionDescriptions.set(stepIndex, "Go downstair to " + directions.get(stepIndex));
+                directionDescriptions.set(stepIndex, "Go to " + directions.get(stepIndex));
             }
             else{
                 g.setColor(Color.GREEN);
