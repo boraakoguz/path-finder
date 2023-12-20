@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import Building.Building;
+import Building.Floor;
 import Building.Map;
 import Building.Space;
 
@@ -30,14 +31,15 @@ public class MainPanel extends JPanel {
     final public static int MOVE_ACTION = 4;
     final public static int RESET_ACTION = 5;
     final public static int CURSOR_ACTION = 6;
-    final public static int ZOOM_IN_ACTION = 7;
-    final public static int ZOOM_OUT_ACTION = 8;
-    final public static int PATH_ACTION = 9;
-    final public static int WALL_ACTION = 10;
-    final public static int OBJECT_ACTION = 11;
-    final public static int ADD_FLOOR_ACTION = 12;
-    final public static int DELETE_ACTION = 13;
-    final public static int ADD_MAP_ACTION = 14;
+    final public static int EDIT_ACTION = 7;
+    final public static int ZOOM_IN_ACTION = 8;
+    final public static int ZOOM_OUT_ACTION = 9;
+    final public static int PATH_ACTION = 10;
+    final public static int WALL_ACTION = 11;
+    final public static int OBJECT_ACTION = 12;
+    final public static int ADD_FLOOR_ACTION = 13;
+    final public static int DELETE_ACTION = 14;
+    final public static int ADD_MAP_ACTION = 15;
     public int currenAction = -1;
     public Color currentColor = Color.BLACK;
 
@@ -79,10 +81,6 @@ public class MainPanel extends JPanel {
         mainPanel.add(drawPanel);
         JScrollPane scrollPane = new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);;
         add(scrollPane);
-    }
-
-    public void changeMainPanelColor(Color color) {
-        mainPanel.setBackground(color);
     }
 
     public ToolsPanel getToolsPanel() {
@@ -156,8 +154,12 @@ public class MainPanel extends JPanel {
         Color newColor = JColorChooser.showDialog(this, JColorChooser.SELECTION_MODEL_PROPERTY, currentColor);
         if(newColor != null) {
             currentColor = newColor;
+            backendController.getCurrentDrawContext().setColor(newColor);
             if(backendController.getCurrentDrawContext() instanceof Map) {
                 mainPanel.setBackground(newColor);
+            }
+            else {
+                drawPanel.repaint();
             }
         }
     }
@@ -180,6 +182,11 @@ public class MainPanel extends JPanel {
     public void cursor() {
         currenAction = CURSOR_ACTION;
         arrangeCursor(CURSOR_ACTION);
+    }
+
+    public void edit() {
+        currenAction = EDIT_ACTION;
+        arrangeCursor(EDIT_ACTION);
     }
 
     public void zoomIn() {

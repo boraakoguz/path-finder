@@ -23,6 +23,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
     JButton move = new JButton(new ImageIcon("move-icon.png"));
     JButton reset = new JButton(new ImageIcon("reset-icon.png"));
     JButton cursor = new JButton(new ImageIcon("cursor-icon.png"));
+    JButton edit = new JButton(new ImageIcon("edit-icon.png"));
     JButton zoomIn = new JButton(new ImageIcon("zoomIn-icon.png"));
     JButton zoomOut = new JButton(new ImageIcon("zoomOut-icon.png"));
     JButton path = new JButton(new ImageIcon("path-icon.png"));
@@ -41,6 +42,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
     ImageIcon moveIcon = new ImageIcon(((ImageIcon) move.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon resetIcon = new ImageIcon(((ImageIcon) reset.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon cursorIcon = new ImageIcon(((ImageIcon) cursor.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
+    ImageIcon editIcon = new ImageIcon(((ImageIcon) edit.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon zoomInIcon = new ImageIcon(((ImageIcon) zoomIn.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon zoomOutIcon = new ImageIcon(((ImageIcon) zoomOut.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
     ImageIcon pathIcon = new ImageIcon(((ImageIcon) path.getIcon()).getImage().getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH));
@@ -59,6 +61,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         move.setIcon(moveIcon);
         reset.setIcon(resetIcon);
         cursor.setIcon(cursorIcon);
+        edit.setIcon(editIcon);
         zoomIn.setIcon(zoomInIcon);
         zoomOut.setIcon(zoomOutIcon);
         path.setIcon(pathIcon);
@@ -75,6 +78,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         move.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         reset.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         cursor.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
+        edit.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         zoomIn.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         zoomOut.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
         path.setPreferredSize(new Dimension(ICON_WIDTH, ICON_HEIGHT));
@@ -92,6 +96,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         tempPanel.add(move);
         tempPanel.add(reset);
         tempPanel.add(cursor);
+        tempPanel.add(edit);
         tempPanel.add(zoomIn);
         tempPanel.add(zoomOut);
         tempPanel.add(path);
@@ -108,6 +113,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         move.addActionListener(this);
         reset.addActionListener(this);
         cursor.addActionListener(this);
+        edit.addActionListener(this);
         zoomIn.addActionListener(this);
         zoomOut.addActionListener(this);
         path.addActionListener(this);
@@ -134,6 +140,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         move.setEnabled(true);
         reset.setEnabled(true);
         cursor.setEnabled(false);
+        edit.setEnabled(false);
         zoomIn.setEnabled(true);
         zoomOut.setEnabled(true);
         path.setEnabled(false);
@@ -148,11 +155,12 @@ public class ToolsPanel extends JPanel implements ActionListener{
     public void buildingEditing() {
         blueBack.setEnabled(true);
         draw.setEnabled(false);
-        color.setEnabled(false);
+        color.setEnabled(true);
         eraser.setEnabled(false);
         move.setEnabled(true);
         reset.setEnabled(true);
         cursor.setEnabled(false);
+        edit.setEnabled(false);
         zoomIn.setEnabled(true);
         zoomOut.setEnabled(true);
         path.setEnabled(false);
@@ -167,11 +175,12 @@ public class ToolsPanel extends JPanel implements ActionListener{
     public void floorEditing() {
         blueBack.setEnabled(true);
         draw.setEnabled(true);
-        color.setEnabled(true);
+        color.setEnabled(false);
         eraser.setEnabled(true);
         move.setEnabled(true);
         reset.setEnabled(true);
         cursor.setEnabled(true);
+        edit.setEnabled(true);
         zoomIn.setEnabled(true);
         zoomOut.setEnabled(true);
         path.setEnabled(true);
@@ -191,6 +200,7 @@ public class ToolsPanel extends JPanel implements ActionListener{
         move.setEnabled(true);
         reset.setEnabled(true);
         cursor.setEnabled(true);
+        edit.setEnabled(true);
         zoomIn.setEnabled(true);
         zoomOut.setEnabled(true);
         path.setEnabled(true);
@@ -254,6 +264,12 @@ public class ToolsPanel extends JPanel implements ActionListener{
             currentButton = cursor;
             currentButton.setBackground(Color.GREEN);
             mainPanel.cursor();
+        }
+        else if(e.getSource() == edit) {
+            System.out.println("Edit");
+            currentButton = edit;
+            currentButton.setBackground(Color.GREEN);
+            mainPanel.edit();
         }
         else if(e.getSource() == zoomIn) {
             System.out.println("Zoom In");
