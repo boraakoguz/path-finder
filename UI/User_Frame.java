@@ -326,6 +326,7 @@ public class User_Frame extends JFrame{
             else if(butType.equals("wat")){
                 directionsPanel.nearestObject(startLocation, 1);
                 directionsPanel.setVisibility(true);
+                isMenuchange[1]=true;
             }
             else if(butType.equals("vend")){
                 directionsPanel.nearestObject(startLocation, 0);

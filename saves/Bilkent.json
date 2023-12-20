@@ -19,9 +19,9 @@
   "height": 200,
   "entranceX": 200,
   "entranceY": 200,
-  "colorR": 255,
-  "colorG": 255,
-  "colorB": 255,
+  "colorR": 0,
+  "colorG": 0,
+  "colorB": 0,
   "name": "Bilkent",
   "contents": [
     {
@@ -492,47 +492,6 @@
                   }
                 }
               ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Building.Building",
-      "data": {
-        "maxFloor": 1,
-        "minFloor": -1,
-        "numberOfFloors": 1,
-        "xPoint": 153,
-        "yPoint": 63,
-        "width": 31,
-        "height": 38,
-        "entranceX": 168,
-        "entranceY": 101,
-        "colorR": 0,
-        "colorG": 0,
-        "colorB": 0,
-        "name": "test",
-        "contents": [
-          {
-            "type": "Building.Floor",
-            "data": {
-              "floorNumber": 0,
-              "downStairX": 174,
-              "downStairY": 82,
-              "upStairX": 163,
-              "upStairY": 82,
-              "xPoint": 153,
-              "yPoint": 63,
-              "width": 31,
-              "height": 38,
-              "entranceX": 168,
-              "entranceY": 101,
-              "colorR": 0,
-              "colorG": 0,
-              "colorB": 0,
-              "name": "Ground Floor",
-              "contents": []
             }
           }
         ]

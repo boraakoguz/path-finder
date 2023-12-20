@@ -99,12 +99,12 @@ public class ToolsPanel extends JPanel implements ActionListener{
         tempPanel.add(edit);
         tempPanel.add(zoomIn);
         tempPanel.add(zoomOut);
-        tempPanel.add(path);
-        tempPanel.add(wall);
+        //tempPanel.add(path);
+        //tempPanel.add(wall);
         tempPanel.add(object);
         tempPanel.add(addFloor);
         tempPanel.add(delete);
-        tempPanel.add(addMap);
+        //tempPanel.add(addMap);
 
         blueBack.addActionListener(this);
         draw.addActionListener(this);
