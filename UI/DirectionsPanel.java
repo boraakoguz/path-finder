@@ -228,12 +228,12 @@ public class DirectionsPanel extends JPanel {
             if(exitDirectionType){
                 g.setColor(Color.RED);
                 drawLineBetweenEntrances(
-                    zoomIn(entrance.get("target").getX())+XCORRECTION,
-                    zoomIn(entrance.get("target").getY())+YCORRECTION,
                     zoomIn(entrance.get("origin").getX())+XCORRECTION,
                     zoomIn(entrance.get("origin").getY())+YCORRECTION,
+                    zoomIn(entrance.get("target").getX())+XCORRECTION,
+                    zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
-                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1));
             }
             else{
                 g.setColor(Color.GREEN);
@@ -255,17 +255,17 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("target").getX())+XCORRECTION,
                     zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
-                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex+1));
             }
             else{
                 g.setColor(Color.GREEN);
                 drawLineBetweenEntrances(
-                    zoomIn(entrance.get("target").getX())+XCORRECTION,
-                    zoomIn(entrance.get("target").getY())+YCORRECTION,
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
                     zoomIn(entrance.get("target").getX())+XCORRECTION,
                     zoomIn(entrance.get("target").getY())+YCORRECTION,
                     g);
-                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex).getParent());
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1));
             }
         }
         else if(directions.size()>1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex-1) instanceof Room){
@@ -277,7 +277,7 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("down").getX())+XCORRECTION,
                     zoomIn(entrance.get("down").getY())+YCORRECTION,
                     g);
-                directionDescriptions.set(stepIndex, "Exit " + directions.get(stepIndex).getParent());
+                directionDescriptions.set(stepIndex, "Go downstair to " + directions.get(stepIndex));
             }
             else{
                 g.setColor(Color.GREEN);
@@ -291,6 +291,28 @@ public class DirectionsPanel extends JPanel {
             }
         }
         else if(stepIndex<directions.size()-1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex+1) instanceof Floor){
+            if(exitDirectionType){
+                g.setColor(Color.RED);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Downstairs to " + directions.get(stepIndex+1) );
+            }
+            else{
+                g.setColor(Color.GREEN);
+                drawLineBetweenEntrances(
+                    zoomIn(entrance.get("down").getX())+XCORRECTION,
+                    zoomIn(entrance.get("down").getY())+YCORRECTION,
+                    zoomIn(entrance.get("up").getX())+XCORRECTION,
+                    zoomIn(entrance.get("up").getY())+YCORRECTION,
+                    g);
+                directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
+            }
+        }
+        else if(stepIndex>1 && directions.get(stepIndex) instanceof Floor && directions.get(stepIndex-1) instanceof Floor){
             if(exitDirectionType){
                 g.setColor(Color.RED);
                 drawLineBetweenEntrances(
