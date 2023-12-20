@@ -12,6 +12,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.text.AttributedCharacterIterator;
+import java.util.Currency;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -248,7 +249,8 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         JButton colorButton = new JButton(" Change Color");
         JButton nameButton = new JButton("Change Name");
         JButton enteranceButton = new JButton("Change Enterance");
-        JButton stairsEnterenceButton = new JButton("Change Stairs' Enterence");
+        JButton upStairsEnterenceButton = new JButton("Change Up Stairs' Enterence");
+        JButton downStairsEnterenceButton = new JButton("Change Down Stairs' Enterence");
 
         locationButton.addActionListener(new ActionListener() {
             @Override
@@ -427,61 +429,102 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             }       
         });
 
-        stairsEnterenceButton.addActionListener(new ActionListener() {
+        upStairsEnterenceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Floor currentFloor = (Floor)editedSpace;
                 JTextField field1 = new JTextField();
                 JTextField field2 = new JTextField();
-                JTextField field3 = new JTextField();
-                JTextField field4 = new JTextField();
+
                 String text1 = "Information about the space '" + currentFloor.getCustomString() + "'";
-                String text2 =  "Down Stairs X: " + currentFloor.getDownStairX() + "\n" +
-                                "Down Stairs Y: " + currentFloor.getDownStairY() + "\n" +
-                                "Up Stairs X: " + currentFloor.getUpStairX() + "\n" +
+                String text2 =  "Up Stairs X: " + currentFloor.getUpStairX() + "\n" +
                                 "Up Stairs Y: " + currentFloor.getUpStairY() + "\n\n";
+
+                String newXRange = "New Up Stairs X-Range (" + currentFloor.getX() + " - " + (currentFloor.getX() + currentFloor.getWidth()) + ")";
+                String newYRange = "New Up Stairs Y-Range(" + currentFloor.getY() + " - " + (currentFloor.getY() + currentFloor.getHeight()) + ")";
+                
                 Object [] fields = {
                 text1, text2,
-                "New Down Stairs X", field1,
-                "New Down Stairs Y", field2,
-                "New Up Stairs X", field3,
-                "New Up Stairs Y", field4,
+                newXRange, field1,
+                newYRange, field2,
                 };
 
-                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
-                if(chooice == JOptionPane.OK_OPTION){
-                    boolean isField1 = true;
-                    boolean isField2 = true;
-                    boolean isField3 = true;
-                    boolean isField4 = true;
-                    try {
-                            int newDownStairsX = Integer.parseInt(field1.getText());
-                            if(newDownStairsX > currentFloor.getX() && newDownStairsX > currentFloor.getX() + currentFloor.getWidth()) {
-                                currentFloor.setDownStairsX(newDownStairsX);
-                            }
-                        } catch (Exception e2) {isField1 = false;}
-                    try {
-                            int newDownStairsY = Integer.parseInt(field2.getText());
-                            if(newDownStairsY > currentFloor.getY() && newDownStairsY > currentFloor.getY() + currentFloor.getHeight()) {
-                                currentFloor.setDownStairsY(newDownStairsY);
-                            }
-                        } catch (Exception e2) {isField2 = false;}
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Up Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
+                if(chooice == JOptionPane.OK_OPTION){                    
                     try {   
-                            int newUpStairsX = Integer.parseInt(field3.getText());
-                            if(newUpStairsX > currentFloor.getX() && newUpStairsX > currentFloor.getX() + currentFloor.getWidth()) {
-                                currentFloor.setUpStairsX(newUpStairsX);
+                            int newUpStairsX = Integer.parseInt(field1.getText());
+                            int newUpStairsY = Integer.parseInt(field2.getText());
+                            if(
+                                newUpStairsX >= currentFloor.getX() && 
+                                newUpStairsX <= currentFloor.getX() + currentFloor.getWidth() &&
+                                newUpStairsY >= currentFloor.getY() &&
+                                newUpStairsY <= currentFloor.getY() + currentFloor.getHeight()
+                                ) 
+                                {
+                                    currentFloor.setUpStairsX(newUpStairsX);
+                                    currentFloor.setUpStairsY(newUpStairsY);
+                                    System.out.println("Drawn");
+                                    repaint();
+                                    JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");
                             }
-                        } catch (Exception e2) {isField3 = false;}
-                    try {
-                            int newUpStairsY = Integer.parseInt(field4.getText());
-                            if(newUpStairsY > currentFloor.getY() && newUpStairsY > currentFloor.getY() + currentFloor.getHeight()) {
-                                currentFloor.setUpStairsY(newUpStairsY);
+                            else {
+                                JOptionPane.showMessageDialog(mainPanel, "You should enter values, in range!");
                             }
-                        } catch (Exception e2) {isField4 = false;}
-                    repaint();
+                        } catch (Exception e2) {
+                            JOptionPane.showMessageDialog(mainPanel, "You should enter number");
+                    }                    
                 }   
             }    
         });
+
+        downStairsEnterenceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Floor currentFloor = (Floor)editedSpace;
+                JTextField field1 = new JTextField();
+                JTextField field2 = new JTextField();
+
+                String text1 = "Information about the space '" + currentFloor.getCustomString() + "'";
+                String text2 =  "Down Stairs X: " + currentFloor.getDownStairX() + "\n" +
+                                "Down Stairs Y: " + currentFloor.getDownStairY() + "\n\n";
+
+                String newXRange = "New Down Stairs X-Range (" + currentFloor.getX() + " - " + (currentFloor.getX() + currentFloor.getWidth()) + ")";
+                String newYRange = "New Down Stairs Y-Range(" + currentFloor.getY() + " - " + (currentFloor.getY() + currentFloor.getHeight()) + ")";
+                
+                Object [] fields = {
+                text1, text2,
+                newXRange, field1,
+                newYRange, field2,
+                };
+
+                int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Down Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
+                if(chooice == JOptionPane.OK_OPTION){                    
+                    try {   
+                        int newDownStairsX = Integer.parseInt(field1.getText());
+                        int newDownStairsY = Integer.parseInt(field2.getText());
+                        if(
+                            newDownStairsX >= currentFloor.getX() && 
+                            newDownStairsX <= currentFloor.getX() + currentFloor.getWidth() &&
+                            newDownStairsY >= currentFloor.getY() &&
+                            newDownStairsY <= currentFloor.getY() + currentFloor.getHeight()
+                            ) 
+                            {
+                                currentFloor.setUpStairsX(newDownStairsX);
+                                currentFloor.setUpStairsY(newDownStairsY);
+                                System.out.println("Drawn");
+                                repaint();
+                                JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(mainPanel, "You should enter values, in range!");
+                            }
+                        } catch (Exception e2) {
+                            JOptionPane.showMessageDialog(mainPanel, "You should enter number");
+                    }                   
+                }   
+            }    
+        });
+        
 
         Object [] buttons = {
             locationButton, colorButton, nameButton, enteranceButton
@@ -494,7 +537,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         else if(editedSpace instanceof Floor) {
             editMessage = "Edit Floor: ";
             buttons = new Object[]{
-                stairsEnterenceButton
+                upStairsEnterenceButton, downStairsEnterenceButton
             };
         }
         else if(editedSpace instanceof Building) {
