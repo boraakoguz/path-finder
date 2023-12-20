@@ -66,9 +66,11 @@ public class Building extends Space{
         return true;
     }
 
-    public void changeAllFloorsColor() {
+    @Override
+    public void setColor(Color color) {
+        super.setColor(color);
         for (Space space : getContents()) {
-            space.setColor(getColor());
+            space.setColor(color);
         }
     }
 
