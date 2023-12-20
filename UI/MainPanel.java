@@ -65,12 +65,7 @@ public class MainPanel extends JPanel {
         this.toolsPanel = new ToolsPanel(this);
         this.drawPanel = new DrawPanel(this,leftScreenPanel, this.toolsPanel, backendController);
         setLayout(new BorderLayout());
-        //add(westPanel, BorderLayout.WEST);
-        //add(northPanel, BorderLayout.NORTH);
         add(mainPanel, BorderLayout.CENTER);
-
-        //westPanel.setBackground(Color.BLUE);
-        //northPanel.setBackground(Color.ORANGE);
         mainPanel.setBackground(Color.CYAN);
 
         mainPanel.setPreferredSize(new Dimension(mainPanelSize, mainPanelSize));
@@ -130,9 +125,6 @@ public class MainPanel extends JPanel {
         }
     }
 
-
-
-    //TODO: add method for preparing all methods, there are 2 same lines at each methods. Separate them.
     public void blueBack() {
         currenAction = BLUE_BACK_ACTION;
         arrangeCursor(BLUE_BACK_ACTION);
@@ -174,10 +166,8 @@ public class MainPanel extends JPanel {
 
     public void reset() {
         currenAction = RESET_ACTION;
-        //TODO: ARRANGE CURSOR
         arrangeCursor(RESET_ACTION);
         drawPanel.setLocation(differenceSize, differenceSize);
-        System.out.println("sadsfdsfds");
     }
     public void cursor() {
         currenAction = CURSOR_ACTION;
@@ -196,7 +186,6 @@ public class MainPanel extends JPanel {
             currentZoom++;
             setPanelSize();            
         }
-        System.out.println(currentZoom);
     }
 
     public void zoomOut() {
@@ -231,8 +220,6 @@ public class MainPanel extends JPanel {
         JButton down = new JButton("DOWN");
         Object [] buttons = {"Where do you want to add a floor?", up, down};
         
-        System.out.println("Testt");
-        
         up.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -258,18 +245,60 @@ public class MainPanel extends JPanel {
         arrangeCursor(DELETE_ACTION);
         
         //TODO: ADD SELF DESCTRUCTION METHOD
-        Space parentSpace = backendController.getCurrentDrawContext().getParent();
+        Space currentSpace = backendController.getCurrentDrawContext(); 
+        Space parentSpace = currentSpace.getParent();
+        
         if(parentSpace != null) {
-            int chooice = JOptionPane.showConfirmDialog (this, "Would You Like to Save your Previous Note First?","Warning", JOptionPane.YES_NO_OPTION);
-            if(chooice == JOptionPane.YES_OPTION) {
-                backendController.deleteSpace(backendController.getCurrentDrawContext());
-                backendController.setCurrentDrawContext(parentSpace);
+            if(currentSpace instanceof Floor) {
+                Building currentBuilding = (Building) parentSpace;
+                Floor currentFloor = (Floor) currentSpace;
+                String floorNumber = currentFloor.getFloorNumber() +"";
+                if(currentBuilding.floorCanBeDeleted(currentFloor)) {
+                    if(currentFloor.getFloorNumber() != Building.FLOOR_GROUND) {
+                        int chooice = JOptionPane.showConfirmDialog (this, "Are you sure deleting " + backendController.getCurrentDrawContext() + 
+                        " ?\nEverything inside will also be deleted" ,"Warning", JOptionPane.YES_NO_OPTION);
+                        if(chooice == JOptionPane.YES_OPTION) {
+                            currentBuilding.deleteFloor(currentFloor);
+                            drawPanel.repaint();
+                            JOptionPane.showMessageDialog(mainPanel, "Floor successfully deleted",
+                            "Invalid", JOptionPane.DEFAULT_OPTION);  
+                        }                        
+                    }
+                    else{
+                        if(currentBuilding.getNumberOfFloors() == 1) {
+                            int chooice = JOptionPane.showConfirmDialog (this, "Are you sure deleting " + backendController.getCurrentDrawContext() + 
+                            " ?\nEverything inside will also be deleted" ,"Warning", JOptionPane.YES_NO_OPTION);
+                            if(chooice == JOptionPane.YES_OPTION) {
+                                currentBuilding.deleteFloor(currentFloor);
+                                drawPanel.repaint();
+                                JOptionPane.showMessageDialog(mainPanel, "Floor successfully deleted",
+                                "Invalid", JOptionPane.DEFAULT_OPTION);    
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(mainPanel, "You can't delete the ground floor without deleting all the other floors.",
+                            "Invalid", JOptionPane.DEFAULT_OPTION);
+                        }
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(mainPanel, "You can only delete the top or bottom Floor!" +
+                    "\nYour current floor number is: " + floorNumber + "\nTop floor: " + (currentBuilding.getMaxFloor()-1) + 
+                    "\nBottem floor: " + (currentBuilding.getMinFloor()+1),
+                    "Invalid", JOptionPane.DEFAULT_OPTION);
+                }   
             }
-            //TODO: NEED REPAINT?
-            drawPanel.repaint();
+            else {
+                int chooice = JOptionPane.showConfirmDialog (this, "Are you sure deleting " + backendController.getCurrentDrawContext() + 
+                    " ?\nEverything inside will also be deleted" ,"Warning", JOptionPane.YES_NO_OPTION);
+                if(chooice == JOptionPane.YES_OPTION) {
+                    backendController.deleteSpace(backendController.getCurrentDrawContext());
+                    backendController.setCurrentDrawContext(parentSpace);
+                }
+            }
         }
-        else if(parentSpace instanceof Map) {
-
+        else if(currentSpace instanceof Map) {
+            System.out.println("INSIDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         }
     }
     public void addMap() {

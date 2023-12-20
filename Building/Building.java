@@ -43,15 +43,14 @@ public class Building extends Space{
         floor.setDownStairsY(getY() +getHeight()/2);
         numberOfFloors++;
     }
+
     public boolean deleteFloor(Floor floor){
         if(floor.getFloorNumber() != maxFloor-1 && floor.getFloorNumber() != minFloor+1){
             return false;
         }
-        if(floor.getFloorNumber() == 0 && numberOfFloors == 1){
-            this.contents.remove(floor);
-            maxFloor--;
-            numberOfFloors--;
+        if(floor.getFloorNumber() == FLOOR_GROUND && numberOfFloors == 1) {
             this.getParent().getContents().remove(this);
+            return true;
         }
         if(floor.getFloorNumber() == maxFloor){
             this.contents.remove(floor);
@@ -64,6 +63,25 @@ public class Building extends Space{
             numberOfFloors--;
         }
         return true;
+    }
+
+    public boolean floorCanBeDeleted(Floor floor) {
+        if(floor.getFloorNumber() != maxFloor-1 && floor.getFloorNumber() != minFloor+1){
+            return false;
+        }
+        return true;
+    }
+
+    public int getMaxFloor() {
+        return maxFloor;
+    }
+
+    public int getMinFloor() {
+        return minFloor;
+    }
+
+    public int getNumberOfFloors() {
+        return numberOfFloors;
     }
 
     @Override
