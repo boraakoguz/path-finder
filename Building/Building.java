@@ -66,6 +66,12 @@ public class Building extends Space{
         return true;
     }
 
+    public void changeAllFloorsColor() {
+        for (Space space : getContents()) {
+            space.setColor(getColor());
+        }
+    }
+
     
     public String getCustomString() {
         return "Building " + name;
