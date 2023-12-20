@@ -243,7 +243,8 @@ public class DirectionsPanel extends JPanel {
                     zoomIn(entrance.get("down").getX())+XCORRECTION,
                     zoomIn(entrance.get("down").getY())+YCORRECTION,
                     g);
-                    
+                directionDescriptions.set(stepIndex, "Enter " + directions.get(stepIndex+1) );
+
             }
              else if(currentStep instanceof Floor && directions.get(stepIndex+1) instanceof Room){
                 g.setColor(Color.RED);
@@ -275,6 +276,9 @@ public class DirectionsPanel extends JPanel {
                         g);
                     directionDescriptions.set(stepIndex, "Go Upstairs to " + directions.get(stepIndex+1));
                 }
+            }
+            else{
+                System.out.println(entrance.toString());
             }
         }
         /* 
