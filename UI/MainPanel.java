@@ -81,6 +81,10 @@ public class MainPanel extends JPanel {
         add(scrollPane);
     }
 
+    public void changeMainPanelColor(Color color) {
+        mainPanel.setBackground(color);
+    }
+
     public ToolsPanel getToolsPanel() {
         return toolsPanel;
     }
@@ -152,6 +156,9 @@ public class MainPanel extends JPanel {
         Color newColor = JColorChooser.showDialog(this, JColorChooser.SELECTION_MODEL_PROPERTY, currentColor);
         if(newColor != null) {
             currentColor = newColor;
+            if(backendController.getCurrentDrawContext() instanceof Map) {
+                mainPanel.setBackground(newColor);
+            }
         }
     }
     public void eraser() {
