@@ -2,6 +2,7 @@ package Building;
 
 
 public class Floor extends Space{
+    final public static int GROUND_FLOOR = 0;
     protected int floorNumber;
     protected int downStairX;
     protected int downStairY;

@@ -420,9 +420,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                             repaint();
                         }
 
-                    } catch (Exception e2) {
-                        // TODO: handle exception
-                    }
+                    } catch (Exception e2) {}
                     
                 }      
                 directionChooice = 0;
@@ -489,19 +487,19 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             locationButton, colorButton, nameButton, enteranceButton
         };
         String editMessage = "Edit: ";
-        System.out.println(editedSpace);
-        //TODO: No need to add map, map cannot be edited!!
+
         if(editedSpace instanceof Room) {
             editMessage = "Edit Room: ";
         }
         else if(editedSpace instanceof Floor) {
             editMessage = "Edit Floor: ";
             buttons = new Object[]{
-                colorButton, nameButton, stairsEnterenceButton
+                stairsEnterenceButton
             };
         }
         else if(editedSpace instanceof Building) {
             editMessage = "Edit Building: ";
+
         }
         else if(editedSpace instanceof Map) {
             editMessage = "Edit Map: ";
@@ -627,6 +625,15 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                         resizeNormalValues(currentFloor.getUpStairY())-5,
                         10,
                         10);
+                
+                if(currentFloor.getFloorNumber() == Floor.GROUND_FLOOR) {
+                    g.setColor(Color.GREEN);
+                        g.fillRect(
+                        resizeNormalValues(currentFloor.getParent().getEntranceX())-5,
+                        resizeNormalValues(currentFloor.getParent().getEntranceY())-5,
+                        10,
+                        10);
+                }
             }        
         }
     } 
