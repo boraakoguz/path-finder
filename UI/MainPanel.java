@@ -259,6 +259,7 @@ public class MainPanel extends JPanel {
                         " ?\nEverything inside will also be deleted" ,"Warning", JOptionPane.YES_NO_OPTION);
                         if(chooice == JOptionPane.YES_OPTION) {
                             currentBuilding.deleteFloor(currentFloor);
+                            drawPanel.setActiveSpace(parentSpace);
                             drawPanel.repaint();
                             JOptionPane.showMessageDialog(mainPanel, "Floor successfully deleted",
                             "Invalid", JOptionPane.DEFAULT_OPTION);  
@@ -270,6 +271,7 @@ public class MainPanel extends JPanel {
                             " ?\nEverything inside will also be deleted" ,"Warning", JOptionPane.YES_NO_OPTION);
                             if(chooice == JOptionPane.YES_OPTION) {
                                 currentBuilding.deleteFloor(currentFloor);
+                                //TODO: How does it work? How does it arrange current space correctly????
                                 drawPanel.repaint();
                                 JOptionPane.showMessageDialog(mainPanel, "Floor successfully deleted",
                                 "Invalid", JOptionPane.DEFAULT_OPTION);    
