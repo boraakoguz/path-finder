@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.text.AttributedCharacterIterator;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -202,6 +203,22 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             }
         }
     }
+    public void selectSpace(int x, int y) {
+        int editX = resizeDefaultVaules(x);
+        int editY = resizeDefaultVaules(y);
+        for(Space space : this.activeSpace.getContents()){
+            if(
+                editX > space.getX() &&
+                editY > space.getY() &&
+                editX < space.getX() + space.getWidth() &&
+                editY < space.getY() + space.getHeight()                
+            ) {
+                backendController.setCurrentDrawContext(space);
+                repaint();
+                break;
+            }
+        } 
+    }
     
     //TODO Combine edit and delete methods there are several same codes.
     public void editSpace(int x, int y) {
@@ -219,12 +236,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             ) { 
                 isClickedOn = true;
                 editedSpace = space;
-                System.out.println(editX + " > " + space.getX());
-                System.out.println(editY + " > " + space.getY());
-                System.out.println(editX + " < " + (space.getX() + space.getWidth()));
-                System.out.println(editY + " < " +  (space.getY() + space.getHeight()));
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                System.out.println(editedSpace);
                 break;
             }
         }
@@ -232,21 +243,13 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             editedSpace = activeSpace;
             System.out.println("İnside also?");
         }
-        JButton selectSpaceButton = new JButton("Select Space");
+
         JButton locationButton = new JButton("Change Location");
         JButton colorButton = new JButton(" Change Color");
         JButton nameButton = new JButton("Change Name");
         JButton enteranceButton = new JButton("Change Enterance");
         JButton stairsEnterenceButton = new JButton("Change Stairs' Enterence");
 
-        selectSpaceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                backendController.setCurrentDrawContext(editedSpace);
-                repaint();
-            }
-            
-        });
         locationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -290,7 +293,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                                 editedSpace.setX(newX);
                                 editedSpace.setY(newY);
                                 repaint();
-                                JOptionPane.showMessageDialog(mainPanel, "Location of the " + editedSpace + " is changed successfully",
+                                JOptionPane.showMessageDialog(mainPanel, "Location of the " + editedSpace + " changed successfully",
                                 "Invalid", JOptionPane.DEFAULT_OPTION);
                             }
                             else {
@@ -312,8 +315,8 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 Color newColor = JColorChooser.showDialog(mainPanel, JColorChooser.SELECTION_MODEL_PROPERTY, editedSpace.getColor());                                        
                 if(newColor != null) {
                     editedSpace.setColor(newColor);
-                    //repaint();
-                    
+                    repaint();
+                    JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");             
                 }           
             }
         });
@@ -483,7 +486,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         });
 
         Object [] buttons = {
-            selectSpaceButton ,locationButton, colorButton, nameButton, enteranceButton
+            locationButton, colorButton, nameButton, enteranceButton
         };
         String editMessage = "Edit: ";
         System.out.println(editedSpace);
@@ -525,16 +528,17 @@ public class DrawPanel extends JPanel implements MouseInputListener{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.DARK_GRAY);
-        //g.fillRect(20, 40, 10, 30);
         if(activeSpace == null) {
+            g.setColor(Color.DARK_GRAY);
             toolsPanel.disableEditing();
             g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
             g.drawString("To use the map tools, you should select a map from the left panel.",
                     resizeNormalValues(20),
                     resizeNormalValues(20));
+                
         }
         else if(activeSpace instanceof Room) {
+            g.setColor(Color.DARK_GRAY);
             toolsPanel.disableEditing();
             g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
             g.drawString("Inside of the room",
@@ -543,18 +547,26 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         }
         else if(activeSpace instanceof Building) {
             toolsPanel.buildingEditing();
-            g.setFont(new Font("Courier New", 1, resizeNormalValues(4)));
-            g.drawString("You can't see the building directly, you have to choose a floor.",
-                    resizeNormalValues(20),
-                    resizeNormalValues(20));
+            g.setColor(Color.DARK_GRAY);
+            g.setFont(new Font("Courier New", 1, resizeNormalValues(3)));
+            for(int i = 0; i < 200; i +=100) {
+                for(int j = 3; j < 200; j+=4) {
+                    g.drawString("You can't see the building. You have to choose a floor.",
+                    resizeNormalValues(activeSpace.getX() + i),
+                    resizeNormalValues(activeSpace.getY() + j));
+                }                            
+            }
         }
-        else {  
-            if(activeSpace instanceof Map) {
-                toolsPanel.mapEditing();
+        else if(activeSpace instanceof Map) {
+            toolsPanel.mapEditing();
             }
-            else if(activeSpace instanceof Floor) {
-                toolsPanel.floorEditing();
-            }
+
+        else if(activeSpace instanceof Floor) {
+            toolsPanel.floorEditing();
+        }
+
+        if(activeSpace instanceof Building || activeSpace instanceof Floor) {
+            g.setColor(activeSpace.getColor());
             g.fillRect(
             0,
             0,
@@ -575,11 +587,14 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 resizeNormalValues(activeSpace.getY() + activeSpace.getHeight()),
                 getWidth(),
                 resizeNormalValues(getHeight() - activeSpace.getY() - activeSpace.getHeight()));
-
+        }
+        
+        if(activeSpace instanceof Map || activeSpace instanceof Floor) {
             for (Space space : this.activeSpace.getContents()) {
-                if(space instanceof MapObject){
-                    g.drawImage(resize(((MapObject) space).getIcon(),resizeNormalValues(space.getWidth()),resizeNormalValues(space.getHeight())), resizeNormalValues(space.getX()), resizeNormalValues(space.getY()), null);
-                }
+            if(space instanceof MapObject){
+                g.drawImage(resize(((MapObject) space).getIcon(),resizeNormalValues(space.getWidth()),resizeNormalValues(space.getHeight())), resizeNormalValues(space.getX()), resizeNormalValues(space.getY()), null);
+            }
+            else if(space instanceof Building || space instanceof Room) {
                 g.setColor(space.getColor());
                 g.drawRect(
                     resizeNormalValues(space.getX()),
@@ -596,6 +611,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 g.drawString(space.getName(),
                     resizeNormalValues(space.getX()),
                     resizeNormalValues(space.getY()+5));
+            }       
             }
             if(activeSpace instanceof Floor){
                 Floor currentFloor = (Floor)activeSpace;
@@ -611,10 +627,10 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                         resizeNormalValues(currentFloor.getUpStairY())-5,
                         10,
                         10);
-            }
-            
-        } 
-    }
+            }        
+        }
+    } 
+
     
     public void paintPath(Graphics g, int x, int y){
         g.fillRect(x, y, 3, 3);
@@ -678,8 +694,11 @@ public class DrawPanel extends JPanel implements MouseInputListener{
             deleteSpace(e.getX(), e.getY());
         }
 
-        else if(mainPanel.getCurrentAction() == MainPanel.CURSOR_ACTION) {
+        else if(mainPanel.getCurrentAction() == MainPanel.EDIT_ACTION) {
             editSpace(e.getX(), e.getY());
+        }
+        else if(mainPanel.getCurrentAction() == MainPanel.CURSOR_ACTION) {
+            selectSpace(e.getX(), e.getY());
         }
 
         
