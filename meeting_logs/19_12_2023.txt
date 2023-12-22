@@ -1,0 +1,4 @@
+final meeting before the demo. Talked about how we are going to show the
+application and how we are going to do the presentation. Created the demo
+save files and fixed the major bugs that occured when connecting everything
+together. 

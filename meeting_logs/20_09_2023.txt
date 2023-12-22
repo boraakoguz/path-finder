@@ -1,0 +1,2 @@
+Discussion about the topic of the project.
+Suggestions: Fitness app, Style app, Pathfinding app

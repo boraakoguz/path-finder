@@ -1,0 +1,3 @@
+Discussion about how the UI is going to look like.
+Finished writing requirements stage report.
+Our requirements: a database, a save system, an algorithm to do pathfinding

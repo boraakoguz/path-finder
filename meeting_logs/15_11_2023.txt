@@ -1,0 +1,4 @@
+Started to write the detailed design report. Discussed the overall
+structure of the project. Determined the requirements for the project 
+as: a pathfinding algorithm, a database, a save system (preferably JSON),
+a paint like drawing system to create the maps.

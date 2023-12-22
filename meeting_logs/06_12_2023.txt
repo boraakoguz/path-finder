@@ -1,0 +1,2 @@
+Discussion about the overall progress of the project, how we are going to commit to
+github.

@@ -1,0 +1,9 @@
+Created the github (https://github.com/boraakoguz/path-finder). Started the implementation
+of the project. Did the task division as: 
+Sami Bora Akoğuz -> model classes, search and pathfinding algorithms, a controller class
+to serve the communication between UI and model classes, a direction display panel for UI.
+Ahmet Kenan Ataman -> the UI classes for different user types, the necessary parts to 
+link the model classes.
+Ertuğrul Malkoç -> the paint like drawing panels to create the maps and modify the rooms, 
+floors etc. The necessary parts to link UI classes to controller.
+Mehmet Emre Şahin -> Feedback class. Report writing.
