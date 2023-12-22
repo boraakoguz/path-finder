@@ -33,7 +33,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,700);
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
+        this.setIconImage(new ImageIcon("source/image (18).png").getImage()); //seting icon of the app
 
         setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -44,14 +44,14 @@ public class Editor_SeeFeedback_Frame extends JFrame {
 		lblNewLabel.setBounds(130, 84, 268, 73);
 		contentPane.add(lblNewLabel);
 
-        ImageIcon image=new ImageIcon("image (8).png");
+        ImageIcon image=new ImageIcon("source/image (8).png");
         JLabel imageLab=new JLabel();
         imageLab.setIcon(image);
         imageLab.setBounds(930, 10, 40, 40);
         contentPane.add(imageLab);
 
         
-        ImageIcon image4=new ImageIcon("image (7).png");
+        ImageIcon image4=new ImageIcon("source/image (7).png");
         JLabel imageLab4=new JLabel();
         imageLab4.setIcon(image4);
         imageLab4.setBounds(70, 90, 50, 50);
@@ -61,7 +61,7 @@ public class Editor_SeeFeedback_Frame extends JFrame {
         backBut.setBounds(20, 20, 50, 45);
         backBut.setFocusable(false);
         backBut.setBackground(backGroundpink);
-        backBut.setIcon(new ImageIcon("image (11).png"));
+        backBut.setIcon(new ImageIcon("source/image (11).png"));
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         contentPane.add(backBut);
 		

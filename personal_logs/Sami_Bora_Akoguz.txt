@@ -1,0 +1,17 @@
+1 November 2023 - 1 December 2023
+Planned the structure of the code, created key classes, designed the overall structure
+of the classes.
+
+1 December 2023 - 15 December 2023
+Started the project, created the search and direction giver methods. Created the 
+building classes and implemented a Trie graph for seearch algorithms.
+
+15 December 2023 - 20 December 2023
+Created the Controller class to manage the communication between UI classes and Model 
+classes. Helped connecting the model classes to UI classes. Created the Editor Map Tools,
+the panel that shows the directions, all the building classes and MapObjects add/delete
+methods, implemented the Firebase Database for login functions,implemented a saving 
+system using JSON to save the map, created the Feedback classes and implemented the 
+necessary methods to show them in UI, finished the search Graph Tree, implemented the
+necessary methods to add/delete/modify data on the database, fixed many bugs on UI
+classes, helped my friends build the UI. 

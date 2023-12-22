@@ -16,14 +16,14 @@ public class ToolsPanelEditor extends JPanel implements ActionListener{
     final private int ICON_WIDTH = 40;
     final private int ICON_HEIGHT = 40;
 
-    JButton blueBack = new JButton(new ImageIcon("blue-back-icon.png"));
-    JButton eraser = new JButton(new ImageIcon("eraser-icon.png"));
-    JButton move = new JButton(new ImageIcon("move-icon.png"));
-    JButton reset = new JButton(new ImageIcon("reset-icon.png"));
-    JButton cursor = new JButton(new ImageIcon("cursor-icon.png"));
-    JButton zoomIn = new JButton(new ImageIcon("zoomIn-icon.png"));
-    JButton zoomOut = new JButton(new ImageIcon("zoomOut-icon.png"));
-    JButton object = new JButton(new ImageIcon("object-icon.png"));
+    JButton blueBack = new JButton(new ImageIcon("source/blue-back-icon.png"));
+    JButton eraser = new JButton(new ImageIcon("source/eraser-icon.png"));
+    JButton move = new JButton(new ImageIcon("source/move-icon.png"));
+    JButton reset = new JButton(new ImageIcon("source/reset-icon.png"));
+    JButton cursor = new JButton(new ImageIcon("source/cursor-icon.png"));
+    JButton zoomIn = new JButton(new ImageIcon("source/zoomIn-icon.png"));
+    JButton zoomOut = new JButton(new ImageIcon("source/zoomOut-icon.png"));
+    JButton object = new JButton(new ImageIcon("source/object-icon.png"));
 
     JButton currerntGreen;
     

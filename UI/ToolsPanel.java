@@ -16,22 +16,22 @@ public class ToolsPanel extends JPanel implements ActionListener{
     final private int ICON_WIDTH = 40;
     final private int ICON_HEIGHT = 40;
 
-    JButton blueBack = new JButton(new ImageIcon("blue-back-icon.png"));
-    JButton draw = new JButton(new ImageIcon("draw-icon.png"));
-    JButton color = new JButton(new ImageIcon("color-icon.png"));
-    JButton eraser = new JButton(new ImageIcon("eraser-icon.png"));
-    JButton move = new JButton(new ImageIcon("move-icon.png"));
-    JButton reset = new JButton(new ImageIcon("reset-icon.png"));
-    JButton cursor = new JButton(new ImageIcon("cursor-icon.png"));
-    JButton edit = new JButton(new ImageIcon("edit-icon.png"));
-    JButton zoomIn = new JButton(new ImageIcon("zoomIn-icon.png"));
-    JButton zoomOut = new JButton(new ImageIcon("zoomOut-icon.png"));
-    JButton path = new JButton(new ImageIcon("path-icon.png"));
-    JButton wall = new JButton(new ImageIcon("wall-icon.png"));
-    JButton object = new JButton(new ImageIcon("object-icon.png"));
-    JButton addFloor = new JButton(new ImageIcon("add-floor-icon.png"));
-    JButton delete = new JButton(new ImageIcon("delete-icon.png"));
-    JButton addMap = new JButton(new ImageIcon("add-map-icon.png"));
+    JButton blueBack = new JButton(new ImageIcon("source/blue-back-icon.png"));
+    JButton draw = new JButton(new ImageIcon("source/draw-icon.png"));
+    JButton color = new JButton(new ImageIcon("source/color-icon.png"));
+    JButton eraser = new JButton(new ImageIcon("source/eraser-icon.png"));
+    JButton move = new JButton(new ImageIcon("source/move-icon.png"));
+    JButton reset = new JButton(new ImageIcon("source/reset-icon.png"));
+    JButton cursor = new JButton(new ImageIcon("source/cursor-icon.png"));
+    JButton edit = new JButton(new ImageIcon("source/edit-icon.png"));
+    JButton zoomIn = new JButton(new ImageIcon("source/zoomIn-icon.png"));
+    JButton zoomOut = new JButton(new ImageIcon("source/zoomOut-icon.png"));
+    JButton path = new JButton(new ImageIcon("source/path-icon.png"));
+    JButton wall = new JButton(new ImageIcon("source/wall-icon.png"));
+    JButton object = new JButton(new ImageIcon("source/object-icon.png"));
+    JButton addFloor = new JButton(new ImageIcon("source/add-floor-icon.png"));
+    JButton delete = new JButton(new ImageIcon("source/delete-icon.png"));
+    JButton addMap = new JButton(new ImageIcon("source/add-map-icon.png"));
     JButton currentButton;
 
     

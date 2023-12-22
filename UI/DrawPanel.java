@@ -7,12 +7,10 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.text.AttributedCharacterIterator;
-import java.util.Currency;
+
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -21,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
-import javax.swing.text.StyledEditorKit.FontSizeAction;
+
 
 import Building.Building;
 import Building.Floor;
@@ -335,7 +333,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
         });
 
         enteranceButton.addActionListener(new ActionListener() {
-            String newSide;
             boolean isOnX;
             int maxCor;
             int minCor;
@@ -352,7 +349,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 eastButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        newSide = "EAST";
                         maxCor = editedSpace.getY() + editedSpace.getHeight();
                         minCor = editedSpace.getY();
                         corOtherComp = editedSpace.getX() + editedSpace.getWidth();
@@ -363,7 +359,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 westButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        newSide = "WEST";
                         maxCor = editedSpace.getY() + editedSpace.getHeight();
                         minCor = editedSpace.getY();
                         corOtherComp = editedSpace.getX();
@@ -374,7 +369,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 northButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        newSide = "NORTH";
                         maxCor = editedSpace.getX() + editedSpace.getWidth();
                         minCor = editedSpace.getX();
                         corOtherComp = editedSpace.getY();
@@ -385,7 +379,6 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                 southButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        newSide = "SOUTH";
                         maxCor = editedSpace.getX() + editedSpace.getWidth();
                         minCor = editedSpace.getX();
                         corOtherComp =  editedSpace.getY()+ editedSpace.getHeight();
@@ -416,8 +409,8 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                                 editedSpace.setEntranceY(corOtherComp);
                             }
                             else {
-                                editedSpace.setX(corOtherComp);
-                                editedSpace.setY(newValue);
+                                editedSpace.setEntranceX(corOtherComp);
+                                editedSpace.setEntranceY(newValue);
                             }
                             repaint();
                         }
@@ -465,7 +458,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                                     currentFloor.setUpStairsY(newUpStairsY);
                                     System.out.println("Drawn");
                                     repaint();
-                                    JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");
+                                    JOptionPane.showMessageDialog(mainPanel, "Stair Location changed successfully!");
                             }
                             else {
                                 JOptionPane.showMessageDialog(mainPanel, "You should enter values, in range!");
@@ -513,7 +506,7 @@ public class DrawPanel extends JPanel implements MouseInputListener{
                                 currentFloor.setDownStairsY(newDownStairsY);
                                 System.out.println("Drawn");
                                 repaint();
-                                JOptionPane.showMessageDialog(mainPanel, "Color changed successfully!");
+                                JOptionPane.showMessageDialog(mainPanel, "Stair Location changed successfully!");
                             }
                             else {
                                 JOptionPane.showMessageDialog(mainPanel, "You should enter values, in range!");

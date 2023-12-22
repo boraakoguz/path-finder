@@ -35,7 +35,7 @@ public class CFeedback_Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setSize(1200,700); 
         this.setLocationRelativeTo(null); 
-        this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app 
+        this.setIconImage(new ImageIcon("source/image (18).png").getImage()); //seting icon of the app 
         setContentPane(contentPane); 
 		contentPane.setLayout(null); 
 		contentPane.setBackground(backGroundpink); 
@@ -50,7 +50,7 @@ public class CFeedback_Frame extends JFrame {
 		lblNewLabel_1.setBounds(31, 109, 220, 21); 
 		contentPane.add(lblNewLabel_1); 
  
-		ImageIcon image=new ImageIcon("image (9).png"); 
+		ImageIcon image=new ImageIcon("source/image (9).png"); 
         JLabel imageLab=new JLabel(); 
         imageLab.setIcon(image); 
         imageLab.setBounds(20, 60, 40, 40); 
@@ -88,7 +88,7 @@ public class CFeedback_Frame extends JFrame {
         backBut.setBounds(20, 10, 50, 45);
         backBut.setFocusable(false);
         backBut.setBackground(backGroundpink);
-        backBut.setIcon(new ImageIcon("image (11).png"));
+        backBut.setIcon(new ImageIcon("source/image (11).png"));
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         contentPane.add(backBut);
 		 

@@ -48,7 +48,7 @@ public class Login_Frame extends JFrame{
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-        ImageIcon image=new ImageIcon("image (17).png");
+        ImageIcon image=new ImageIcon("source/image (17).png");
         JLabel imageLab=new JLabel();
         imageLab.setIcon(image);
         imageLab.setBounds(80, 220, 200, 200);

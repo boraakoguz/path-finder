@@ -84,7 +84,7 @@ public class User_Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,735);
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
+        this.setIconImage(new ImageIcon("source/image (18).png").getImage()); //seting icon of the app
         setContentPane(contentPanel);
         contentPanel.setLayout(null);
 
@@ -92,7 +92,7 @@ public class User_Frame extends JFrame{
         menuBut.setBounds(1140, 20, 35, 35);
         menuBut.setFocusable(false);
 
-        menuBut.setIcon(new ImageIcon("image (10).png"));
+        menuBut.setIcon(new ImageIcon("source/image (10).png"));
         menuBut.setBorder(BorderFactory.createEmptyBorder());
         contentPanel.add(menuBut);
 
@@ -114,7 +114,7 @@ public class User_Frame extends JFrame{
         backBut.setBounds(20, 20, 50, 45);
         backBut.setFocusable(false);
         backBut.setBackground(c);
-        backBut.setIcon(new ImageIcon("image (11).png"));
+        backBut.setIcon(new ImageIcon("source/image (11).png"));
         backBut.setBorder(BorderFactory.createEmptyBorder()); //setting borders of buttons 
         leftPanel.add(backBut);
         repaint();
@@ -134,14 +134,14 @@ public class User_Frame extends JFrame{
         logBut.setBounds(0, 60, 100, 40);
         logBut.setFocusable(false);
         logBut.setBackground(backGroundpink);
-        logBut.setIcon(new ImageIcon("image (22).png"));
+        logBut.setIcon(new ImageIcon("source/image (22).png"));
         logBut.setBorder(BorderFactory.createEmptyBorder());
 
         feedBut.addActionListener(new ButAction("feed"));
         feedBut.setBounds(10, 120, 150, 40);
         feedBut.setFocusable(false);
         feedBut.setBackground(backGroundpink);
-        feedBut.setIcon(new ImageIcon("image (9).png"));
+        feedBut.setIcon(new ImageIcon("source/image (9).png"));
         feedBut.setBorder(BorderFactory.createEmptyBorder());
 
         rightPanel.add(logBut);
@@ -240,7 +240,7 @@ public class User_Frame extends JFrame{
             setOpaque(true);
             try
             {
-                image = ImageIO.read(new File("image (30).png"));
+                image = ImageIO.read(new File("source/image (30).png"));
             }
             catch(IOException ioe)
             {
@@ -285,7 +285,7 @@ public class User_Frame extends JFrame{
                     watBut.setBounds(30, 200, 100, 100);
                     watBut.setFocusable(false);
                     watBut.setBackground(backGroundpink);
-                    watBut.setIcon(new ImageIcon("image (23).png"));
+                    watBut.setIcon(new ImageIcon("source/image (23).png"));
                     watBut.setBorder(BorderFactory.createEmptyBorder());
 
                     leftPanel.add(watBut);

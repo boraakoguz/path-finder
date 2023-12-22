@@ -34,7 +34,7 @@ public class Admin_AddUser_Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,700);
         this.setLocationRelativeTo(null);
-        this.setIconImage(new ImageIcon("image (18).png").getImage()); //seting icon of the app
+        this.setIconImage(new ImageIcon("source/image (18).png").getImage()); //seting icon of the app
 
         setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -50,13 +50,13 @@ public class Admin_AddUser_Frame extends JFrame{
 		lblNewLabel_3.setBounds(981, 10, 195, 46);
 		contentPane.add(lblNewLabel_3);
 
-        ImageIcon image=new ImageIcon("image (8).png");
+        ImageIcon image=new ImageIcon("source/image (8).png");
         JLabel imageLab=new JLabel();
         imageLab.setIcon(image);
         imageLab.setBounds(930, 10, 40, 40);
         contentPane.add(imageLab);
 
-        ImageIcon image1=new ImageIcon("image (17).png");
+        ImageIcon image1=new ImageIcon("source/image (17).png");
         JLabel imageLab1=new JLabel();
         imageLab1.setIcon(image1);
         imageLab1.setBounds(700, 270, 200, 200);
@@ -68,7 +68,7 @@ public class Admin_AddUser_Frame extends JFrame{
 		lblNewLabel_15.setBounds(730, 470, 330, 52);
 		contentPane.add(lblNewLabel_15);
 
-        ImageIcon image3=new ImageIcon("image (24).png");
+        ImageIcon image3=new ImageIcon("source/image (24).png");
         JLabel imageLab3=new JLabel();
         imageLab3.setIcon(image3);
         imageLab3.setBounds(120, 105, 50, 50);

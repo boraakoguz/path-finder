@@ -10,6 +10,16 @@
         "floor": "First floor",
         "room": "",
         "status": true
+      },
+      {
+        "mail": "remzi@gmail.com",
+        "name": "Remzi",
+        "content": "Class is out of new boardmarkers",
+        "map": "Bilkent",
+        "building": "G Building",
+        "floor": "First Floor",
+        "room": "G101",
+        "status": true
       }
     ]
   },
@@ -27,9 +37,9 @@
     {
       "type": "Building.Building",
       "data": {
-        "maxFloor": 2,
+        "maxFloor": 3,
         "minFloor": -1,
-        "numberOfFloors": 2,
+        "numberOfFloors": 3,
         "xPoint": 30,
         "yPoint": 93,
         "width": 112,
@@ -298,6 +308,44 @@
                 }
               ]
             }
+          },
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 2,
+              "downStairX": 132,
+              "downStairY": 129,
+              "upStairX": 40,
+              "upStairY": 129,
+              "xPoint": 30,
+              "yPoint": 93,
+              "width": 112,
+              "height": 73,
+              "entranceX": 130,
+              "entranceY": 93,
+              "colorR": 0,
+              "colorG": 0,
+              "colorB": 0,
+              "name": "2",
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 34,
+                    "yPoint": 95,
+                    "width": 38,
+                    "height": 25,
+                    "entranceX": 53,
+                    "entranceY": 120,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "room22",
+                    "contents": []
+                  }
+                }
+              ]
+            }
           }
         ]
       }
@@ -488,6 +536,83 @@
                     "colorG": 0,
                     "colorB": 0,
                     "name": "Water Dispenser",
+                    "contents": []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Building.Building",
+      "data": {
+        "maxFloor": 1,
+        "minFloor": -1,
+        "numberOfFloors": 1,
+        "xPoint": 150,
+        "yPoint": 16,
+        "width": 29,
+        "height": 55,
+        "entranceX": 160,
+        "entranceY": 71,
+        "colorR": 255,
+        "colorG": 102,
+        "colorB": 102,
+        "name": "Test3",
+        "contents": [
+          {
+            "type": "Building.Floor",
+            "data": {
+              "floorNumber": 0,
+              "downStairX": 169,
+              "downStairY": 43,
+              "upStairX": 160,
+              "upStairY": 32,
+              "xPoint": 150,
+              "yPoint": 16,
+              "width": 29,
+              "height": 55,
+              "entranceX": 164,
+              "entranceY": 71,
+              "colorR": 255,
+              "colorG": 102,
+              "colorB": 102,
+              "name": "Ground Floor",
+              "contents": [
+                {
+                  "type": "Building.Room",
+                  "data": {
+                    "xPoint": 161,
+                    "yPoint": 17,
+                    "width": 14,
+                    "height": 11,
+                    "entranceX": 168,
+                    "entranceY": 28,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "Test Room",
+                    "contents": []
+                  }
+                },
+                {
+                  "type": "Building.MapObject",
+                  "data": {
+                    "type": 1,
+                    "functional": true,
+                    "icon": "image (23).png",
+                    "xPoint": 171,
+                    "yPoint": 63,
+                    "width": 4,
+                    "height": 4,
+                    "entranceX": 173,
+                    "entranceY": 67,
+                    "colorR": 0,
+                    "colorG": 0,
+                    "colorB": 0,
+                    "name": "wATER",
                     "contents": []
                   }
                 }

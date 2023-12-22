@@ -274,7 +274,6 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
             });
 
             enteranceButton.addActionListener(new ActionListener() {
-                String newSide;
                 boolean isOnX;
                 int maxCor;
                 int minCor;
@@ -291,7 +290,6 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
                     eastButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            newSide = "EAST";
                             maxCor = space.getY() + space.getHeight();
                             minCor = space.getY();
                             corOtherComp = space.getX() + space.getWidth();
@@ -302,7 +300,6 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
                     westButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            newSide = "WEST";
                             maxCor = space.getY() + space.getHeight();
                             minCor = space.getY();
                             corOtherComp = space.getX();
@@ -313,7 +310,6 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
                     northButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            newSide = "NORTH";
                             maxCor = space.getX() + space.getWidth();
                             minCor = space.getX();
                             corOtherComp = space.getY();
@@ -324,7 +320,6 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
                     southButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            newSide = "SOUTH";
                             maxCor = space.getX() + space.getWidth();
                             minCor = space.getX();
                             corOtherComp =  space.getY()+ space.getHeight();
@@ -396,34 +391,30 @@ public class DrawPanelEditor extends JPanel implements MouseInputListener, Compo
 
                     int chooice = JOptionPane.showConfirmDialog(mainPanel,fields,"Change Stairs' Enterance",JOptionPane.OK_CANCEL_OPTION);
                     if(chooice == JOptionPane.OK_OPTION){
-                        boolean isField1 = true;
-                        boolean isField2 = true;
-                        boolean isField3 = true;
-                        boolean isField4 = true;
                         try {
                                 int newDownStairsX = Integer.parseInt(field1.getText());
                                 if(newDownStairsX > currentFloor.getX() && newDownStairsX > currentFloor.getX() + currentFloor.getWidth()) {
                                     currentFloor.setDownStairsX(newDownStairsX);
                                 }
-                            } catch (Exception e2) {isField1 = false;}
+                            } catch (Exception e2) {}
                         try {
                                 int newDownStairsY = Integer.parseInt(field2.getText());
                                 if(newDownStairsY > currentFloor.getY() && newDownStairsY > currentFloor.getY() + currentFloor.getHeight()) {
                                     currentFloor.setDownStairsY(newDownStairsY);
                                 }
-                            } catch (Exception e2) {isField2 = false;}
+                            } catch (Exception e2) {}
                         try {   
                                 int newUpStairsX = Integer.parseInt(field3.getText());
                                 if(newUpStairsX > currentFloor.getX() && newUpStairsX > currentFloor.getX() + currentFloor.getWidth()) {
                                     currentFloor.setUpStairsX(newUpStairsX);
                                 }
-                            } catch (Exception e2) {isField3 = false;}
+                            } catch (Exception e2) {}
                         try {
                                 int newUpStairsY = Integer.parseInt(field4.getText());
                                 if(newUpStairsY > currentFloor.getY() && newUpStairsY > currentFloor.getY() + currentFloor.getHeight()) {
                                     currentFloor.setUpStairsY(newUpStairsY);
                                 }
-                            } catch (Exception e2) {isField4 = false;}
+                            } catch (Exception e2) {}
                         repaint();
                     }   
                 }    

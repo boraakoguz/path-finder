@@ -300,7 +300,6 @@ public class MainPanel extends JPanel {
             }
         }
         else if(currentSpace instanceof Map) {
-            System.out.println("INSIDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         }
     }
     public void addMap() {
@@ -314,7 +313,6 @@ public class MainPanel extends JPanel {
         //TODO: This might be unneccesray
         mainPanelSize = drawPanelSize + differenceSize*2;
         drawPanel.setSize(drawPanelSize, drawPanelSize);
-        System.out.println("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
         mainPanel.setPreferredSize(new Dimension(mainPanelSize, mainPanelSize));
         mainPanel.setSize(mainPanelSize, mainPanelSize);
     }
