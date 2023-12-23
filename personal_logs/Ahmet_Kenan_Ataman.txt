@@ -1,0 +1,13 @@
+Ahmet Kenan Ataman
+22203434
+Group 1L
+
+Weeks 1-3: We created our team. We talked about our project's details.
+
+Weeks 4-5: I helped my friends with preparing the requirement report and first presentation.  
+
+Weeks 6-8: I helped my friends with writing the UI report.
+
+Weeks 8-10: I helped my friends to prepare the UI report(V2). I studied for the GUI of our project and learned swing library details.
+
+Weeks 11-14: I implemented most part of GUI of our projects. And I helped my friends at the final presentation and demo. 

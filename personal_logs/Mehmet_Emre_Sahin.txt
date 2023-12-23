@@ -1,0 +1,16 @@
+Mehmet Emre Şahin
+22201765
+Group 1L
+
+Week 1-3: We made our team. We specified our project. I also worked on Project Selection
+stage report.
+
+Week 4-5: I helped my teammates for requirements stage presentation and report.
+
+Week 6-8: I help my teammates about UI report and presentation. I also studied GUI and
+read about databases for the project.
+
+Week 8-10: I prepared UI report V2.
+
+Week 11-14: I implemented some parts of the project like GUI and databases. I prepared
+the demo presentation and Detailed Design Report V2.
