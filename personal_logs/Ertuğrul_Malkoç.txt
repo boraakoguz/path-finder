@@ -1,0 +1,13 @@
+Ertuğrul Malkoç
+22102737
+Group 1L
+
+Weeks 1-3: We created our team. We talked about our project's details. And we decided on a path-finding application. 
+
+Weeks 4-5: I helped my friends with preparing the requirement report and first presentation. I was responsible for preparing PowerPoint presentations.
+
+Weeks 6-8: I helped my friends with writing the UI report. I was responsible for UI images to visualize our report.
+
+Weeks 8-10: I helped my friends to prepare the UI report(V2). I created new images according to feedback on the UI report(v2). I studied for the GUI of our project and learned swing library details.
+
+Weeks 11-14: I was responsible for "Map Tools" in our project. I implemented the front-end of the MapTools (Bora was responsible for the back-hand). Besides that, I worked on bugs in our project before the demo presentation.
