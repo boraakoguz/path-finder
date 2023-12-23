@@ -171,7 +171,7 @@
                   "data": {
                     "type": 1,
                     "functional": true,
-                    "icon": "image (23).png",
+                    "icon": "source/image (23).png",
                     "xPoint": 66,
                     "yPoint": 135,
                     "width": 7,
@@ -292,7 +292,7 @@
                   "data": {
                     "type": 1,
                     "functional": true,
-                    "icon": "image (23).png",
+                    "icon": "source/image (23).png",
                     "xPoint": 104,
                     "yPoint": 157,
                     "width": 8,
@@ -525,7 +525,7 @@
                   "data": {
                     "type": 1,
                     "functional": true,
-                    "icon": "image (23).png",
+                    "icon": "source/image (23).png",
                     "xPoint": 70,
                     "yPoint": 53,
                     "width": 7,
@@ -602,7 +602,7 @@
                   "data": {
                     "type": 1,
                     "functional": true,
-                    "icon": "image (23).png",
+                    "icon": "source/image (23).png",
                     "xPoint": 171,
                     "yPoint": 63,
                     "width": 4,

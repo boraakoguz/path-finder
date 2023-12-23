@@ -13,9 +13,9 @@ public class Floor extends Space{
         this.floorNumber = floorNumber;
     }
     public void addMapObject(MapObject mapObject){
-        String icon = "image (23).png";
+        String icon = "source/image (23).png";
         if(mapObject.getType() == 0){
-            icon = "image (16).png";
+            icon = "source/image (16).png";
         }
         mapObject.setIcon(icon);
         this.addSpace(mapObject);
